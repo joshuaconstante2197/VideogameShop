@@ -1,0 +1,9 @@
+C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Library\bin\Debug\netcoreapp3.1\VideogameShop.Library.deps.json
+C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Library\bin\Debug\netcoreapp3.1\VideogameShop.Library.dll
+C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.csprojAssemblyReference.cache
+C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.AssemblyInfoInputs.cache
+C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.AssemblyInfo.cs
+C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.csproj.CoreCompileInputs.cache
+C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Library\bin\Debug\netcoreapp3.1\VideogameShop.Library.pdb
+C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.dll
+C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.pdb
