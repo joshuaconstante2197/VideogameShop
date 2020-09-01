@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadinCsv", "ReadinCsv.csproj", "{D2D5F204-0F2B-432B-AEC3-ABC031030AEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideogameShop.Library", "..\VideogameShop.Library\VideogameShop.Library.csproj", "{B860628C-F104-40FC-BB4C-3FE43056E38E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideogameShop.Library", "..\VideogameShop.Library\VideogameShop.Library.csproj", "{B860628C-F104-40FC-BB4C-3FE43056E38E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideogameShop.Web", "..\VideogameShop.Web\VideogameShop.Web.csproj", "{C67015AC-20D7-465A-A50D-2363AF5019A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B860628C-F104-40FC-BB4C-3FE43056E38E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B860628C-F104-40FC-BB4C-3FE43056E38E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B860628C-F104-40FC-BB4C-3FE43056E38E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C67015AC-20D7-465A-A50D-2363AF5019A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67015AC-20D7-465A-A50D-2363AF5019A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C67015AC-20D7-465A-A50D-2363AF5019A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C67015AC-20D7-465A-A50D-2363AF5019A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

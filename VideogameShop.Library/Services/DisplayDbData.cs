@@ -2,12 +2,22 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using VideogameShopLibrary.CVS_Models;
 
 namespace VideogameShopLibrary.Services
 {
     public class DisplayDbData
     {
-        public static void displayAllData()
+        public StringBuilder DisplayAllData { get; private set; }
+
+        public DisplayDbData(StringBuilder displayAllData)
+        {
+            DisplayAllData = displayAllData;
+        }
+
+
+
+        public static StringBuilder displayAllData(StringBuilder DisplayAllData)
         {
             using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
             {
@@ -20,10 +30,10 @@ namespace VideogameShopLibrary.Services
                         {
                             for (int i = 0; i < reader.FieldCount; i++)
                             {
-                                Console.WriteLine(reader.GetName(i) + " : " + reader.GetValue(i));
-                                
+                                 DisplayAllData.Append(reader.GetName(i) + " : " + reader.GetValue(i));
+                                DisplayAllData.Append("\n");
                             }
-                            Console.WriteLine();
+                            DisplayAllData.Append("\n");
                         }
                     }
                 }
@@ -35,14 +45,15 @@ namespace VideogameShopLibrary.Services
                         {
                             for (int i = 0; i < reader.FieldCount; i++)
                             {
-                                Console.WriteLine(reader.GetName(i) + " : " + reader.GetValue(i));
-
+                                DisplayAllData.Append(reader.GetName(i) + " : " + reader.GetValue(i));
+                                DisplayAllData.Append("\n");
                             }
-                            Console.WriteLine();
+                            DisplayAllData.Append("\n");
                         }
                     }
                 }
             }
+            return DisplayAllData;
         }
         
     }

@@ -1,0 +1,16 @@
+8/31/2020 10:11:30 AM ==> Violation of PRIMARY KEY constraint 'PsalesKey'. Cannot insert duplicate key in object 'dbo.Sales'. The duplicate key value is (1).
+The statement has been terminated.
+8/31/2020 10:12:10 AM ==> Violation of PRIMARY KEY constraint 'PKeyMyId'. Cannot insert duplicate key in object 'dbo.Inventory'. The duplicate key value is (1).
+The statement has been terminated.
+8/31/2020 10:17:20 AM ==> CAST or CONVERT: invalid attributes specified for type 'money'
+CAST or CONVERT: invalid attributes specified for type 'money'
+8/31/2020 10:31:36 AM ==> Cannot convert a char value to money. The char value has incorrect syntax.
+8/31/2020 10:33:35 AM ==> Incorrect syntax near 'VideogameShopLibrary.CVS_Models.Product'.
+8/31/2020 10:36:41 AM ==> Incorrect syntax near 'VideogameShopLibrary.CVS_Models.Product'.
+8/31/2020 11:14:43 AM ==> Invalid column name 'C'.
+Invalid column name 'C'.
+8/31/2020 11:55:08 AM ==> Incorrect syntax near '('.
+8/31/2020 11:56:42 AM ==> Violation of PRIMARY KEY constraint 'PKeyMyId'. Cannot insert duplicate key in object 'dbo.Inventory'. The duplicate key value is (1).
+The statement has been terminated.
+8/31/2020 12:02:38 PM ==> Incorrect syntax near '('.
+8/31/2020 12:04:46 PM ==> Incorrect syntax near 'Bros'.

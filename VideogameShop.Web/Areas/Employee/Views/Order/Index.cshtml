@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Product Name</th>
+        <th>Condition</th>
+        <th>Date</th>
+        <th>Total</th>
+        <th>Customer Name</th>
+        <th>Customer Phone</th>
+        <th>Email</th>
+    </tr>
+    @for (int i = 0; i < Model.Rows.Count; i++)
+    {
+        <tr>
+            @*starting at one to not show the id column*@
+            @for (int j = 1; j < Model.Columns.Count; j++)
+            {
+                <td>@Model.Rows[i][j]</td>
+            }
+
+        </tr>
+    }
+
+</table>
+<a href="@Url.Action("Upload","Order")">Update Sales</a>
+
+<hr />
+
+

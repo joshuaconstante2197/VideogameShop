@@ -73,11 +73,16 @@ namespace VideogameShopLibrary
                 {
                     try
                     {
+                        var dropData = new InventoryManagementService();
+                        dropData.DropAllData();
+
                         var CsvInvetoryRecords = new InventoryManagementService();
                         CsvInvetoryRecords.SaveCsvInventory(Config.PathToInvetoryFile);
 
                         var CsvSalesRecords = new InventoryManagementService();
                         CsvSalesRecords.SaveCsvOrders(Config.PathToSalesFile);
+
+
                     }
                     catch (Exception ex)
                     {
@@ -91,7 +96,8 @@ namespace VideogameShopLibrary
             }
             else if(input == "retrieve")
             {
-                DisplayDbData.displayAllData();
+                StringBuilder records = new StringBuilder();
+                Console.WriteLine(DisplayDbData.displayAllData(records).ToString()); 
             }
 
 

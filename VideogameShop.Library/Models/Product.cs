@@ -28,12 +28,11 @@ namespace VideogameShopLibrary.CVS_Models
 
 
         [ChoCSVRecordField(5)]
-        public Decimal Cost { get; set; }
-
+        public decimal Cost { get; set; }
 
 
         [ChoCSVRecordField(6)]
-        public Decimal Price { get; set; }
+        public decimal Price { get; set; }
 
         [ChoCSVRecordField(7)]
         public string Condition { get; set; }
