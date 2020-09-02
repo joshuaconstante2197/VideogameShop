@@ -102,56 +102,6 @@ namespace VideogameShopLibrary
                 Console.WriteLine(DisplayDbData.displayAllData(records).ToString()); 
             }
 
-
-
-            //create inventory table
-
-
-            //try
-            //{
-            //    using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
-            //    {
-            //        sqlConnection.Open();
-            //        Console.WriteLine("Connection to database succesful");
-            //        var sql = "CREATE TABLE Inventory (productId INTEGER CONSTRAINT PKeyMyId PRIMARY KEY," +
-            //        "[Game Title] varchar(50), Category varchar(50), Platform varchar(50), [Available Units] int," +
-            //        "Cost money, Price money, Condition varchar(50), [Product Type] varchar(50))";
-            //        var cmd = new SqlCommand(sql, sqlConnection);
-            //        cmd.ExecuteNonQuery();
-            //    }
-
-            //}
-            //catch (SqlException ex)
-            //{
-            //    var Err = new CreateLogFiles();
-            //    Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
-            //    Console.WriteLine("Fatal error : " + ex.Message + ", please find a complete error at ErrorLog file");
-            //    throw;
-            //}
-
-            ////create sales table
-            ///
-            //try
-            //{
-            //    using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
-            //    {
-            //        sqlConnection.Open();
-            //        Console.WriteLine("Connection to database succesful");
-            //        var sql = "CREATE TABLE Sales (orderId INTEGER CONSTRAINT PsalesKey PRIMARY KEY," +
-            //            "Product varchar(50), Condition varchar(50), Date date, Total money, [Customer Name] varchar(50), [Customer Phone] varchar(30), Email varchar(50))";
-            //        var cmd = new SqlCommand(sql, sqlConnection);
-            //        cmd.ExecuteNonQuery();
-            //    }
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    var Err = new CreateLogFiles();
-            //    Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
-            //    Console.WriteLine("Fatal error : " + ex.Message + ", please find a complete error at ErrorLog file");
-            //    throw;
-            //}
-
         }
 
 

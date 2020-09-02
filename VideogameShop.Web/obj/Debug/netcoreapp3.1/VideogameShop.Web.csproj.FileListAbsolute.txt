@@ -440,5 +440,4 @@ C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Web\obj\Debug\netc
 C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Product\Create.cshtml.g.cs
 C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Product\Edit.cshtml.g.cs
 C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Order\Index.cshtml.g.cs
-C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Order\Upload.cshtml.g.cs
 C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Web\bin\Debug\netcoreapp3.1\VideogameShop.Web.dll.config
