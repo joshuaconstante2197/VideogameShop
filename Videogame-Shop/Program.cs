@@ -68,6 +68,7 @@ namespace VideogameShopLibrary
                         Console.WriteLine("Fatal error : " + ex.Message + ", please find a complete error at ErrorLog file");
                         throw;
                     }
+                    Console.WriteLine("Updated database succesfully");
                 }
                 else if (input.ToLower() == "sql")
                 {
@@ -91,6 +92,7 @@ namespace VideogameShopLibrary
                         Console.WriteLine("Fatal error : " + ex.Message + ", please find a complete error at ErrorLog file");
                         throw;
                     }
+                    Console.WriteLine("Updated database succesfully");
                 }
 
             }

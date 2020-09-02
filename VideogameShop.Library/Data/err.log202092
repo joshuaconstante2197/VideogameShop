@@ -1,0 +1,6 @@
+9/2/2020 6:28:40 AM ==> Violation of PRIMARY KEY constraint 'PsalesKey'. Cannot insert duplicate key in object 'dbo.Sales'. The duplicate key value is (1).
+The statement has been terminated.
+9/2/2020 6:30:07 AM ==> Violation of PRIMARY KEY constraint 'PsalesKey'. Cannot insert duplicate key in object 'dbo.Sales'. The duplicate key value is (1).
+The statement has been terminated.
+9/2/2020 6:31:16 AM ==> Violation of PRIMARY KEY constraint 'PsalesKey'. Cannot insert duplicate key in object 'dbo.Sales'. The duplicate key value is (1).
+The statement has been terminated.

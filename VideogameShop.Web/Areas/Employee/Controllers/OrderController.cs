@@ -42,7 +42,6 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Order order)
         {
-           
             return RedirectToAction(nameof(Index));
             
         }

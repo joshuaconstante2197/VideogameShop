@@ -1,6 +1,7 @@
 ﻿using ChoETL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -22,8 +23,8 @@ namespace VideogameShopLibrary.CVS_Models
 
 
         [ChoCSVRecordField(3)]
-        [ChoTypeConverter(typeof(ChoDateTimeConverter))]
-        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
 
