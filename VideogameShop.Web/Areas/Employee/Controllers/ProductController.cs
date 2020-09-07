@@ -18,6 +18,7 @@ namespace VideogameShop.Web.Controllers
         // GET: ProductController
         public ActionResult Index()
         {
+            //Todo: This Logic should be placed in th Class Library and only be invoked from here
             DataTable dtblProduct = new DataTable();
             using(SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
             {
@@ -25,6 +26,8 @@ namespace VideogameShop.Web.Controllers
                 SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Inventory", sqlCon);
                 sqlDa.Fill(dtblProduct);
             }
+
+            //Todo: Best practice, avoid dealing with datatables in the UI, work with collections instead e.g. List<Product>
             return View(dtblProduct);
         }
 
@@ -41,6 +44,7 @@ namespace VideogameShop.Web.Controllers
         public ActionResult Create(Product product)
         {
             
+               //Todo: This Logic should be placed in th Class Library and only be invoked from here
                 int productId;
                 string getMax = @"SELECT COALESCE(MAX(productId), 0) + 1 AS maxPlusOne FROM Inventory";
                 using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
@@ -70,7 +74,10 @@ namespace VideogameShop.Web.Controllers
         // GET: ProductController/Edit/5
         public ActionResult Edit(int Id)
         {
+            
             Product product = new Product();
+
+            //Todo: This Logic should be placed in th Class Library and only be invoked from here
             DataTable dtblProduct = new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
             {
@@ -82,6 +89,7 @@ namespace VideogameShop.Web.Controllers
             }
             if(dtblProduct.Rows.Count == 1)
             {
+                //TODO: Avoid relying on indexes, use the Column Value name instead e.g. dtblProduct.Rows[0]["GameTitle"]
                 product.GameTitle = dtblProduct.Rows[0][1].ToString();
                 product.Category = dtblProduct.Rows[0][2].ToString();
                 product.Platform = dtblProduct.Rows[0][3].ToString();
