@@ -41,22 +41,12 @@ namespace VideogameShop.Web.Controllers
         public ActionResult Create(Product product)
         {
             
-                int productId;
-                string getMax = @"SELECT COALESCE(MAX(productId), 0) + 1 AS maxPlusOne FROM Inventory";
-                using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
-                {
-                    using (SqlCommand sqlCmd = new SqlCommand(getMax, sqlCon))
-                    {
-                        sqlCon.Open();
-                        productId = Convert.ToInt32(sqlCmd.ExecuteScalar());
-                    }
-                }
                 using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
                 {
                     sqlCon.Open();
 
-                    var sql = "INSERT INTO Inventory(productId, [Game Title], Category, Platform, [Available Units], Cost , Price, Condition, [Product Type])" +
-                    $"VALUES({productId}, '{product.GameTitle}', '{product.Category}',  '{product.Platform}', {product.AvailableUnits}," +
+                    var sql = "INSERT INTO Inventory([Game Title], Category, Platform, [Available Units], Cost , Price, Condition, [Product Type])" +
+                    $"VALUES('{product.GameTitle}', '{product.Category}',  '{product.Platform}', {product.AvailableUnits}," +
                     $"cast({product.Cost} as money),  {product.Price},  '{product.Condition}',  '{product.ProductType}' )";
                     SqlCommand sqlCmd = new SqlCommand(sql, sqlCon);
                     sqlCmd.ExecuteNonQuery();

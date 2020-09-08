@@ -54,15 +54,14 @@ namespace VideogameShopLibrary
         public void SaveCsvInventory(string inputFileName)
         {
             SqlCommand cmd;
-            var id = 0;
 
             foreach(var product in new ChoCSVReader<Product>(inputFileName)
                 .WithFirstLineHeader()
                 )
             {
-                id++;
-                var sql = "INSERT INTO Inventory(productId, [Game Title], Category, Platform, [Available Units], Cost, Price, Condition, [Product Type])" +
-                    $"VALUES({id}, '{product.GameTitle}', '{product.Category}',  '{product.Platform}', {product.AvailableUnits}," +
+                
+                var sql = "INSERT INTO Inventory( [Game Title], Category, Platform, [Available Units], Cost, Price, Condition, [Product Type])" +
+                    $"VALUES('{product.GameTitle}', '{product.Category}',  '{product.Platform}', {product.AvailableUnits}," +
                     $"{product.Cost} , {product.Price},  '{product.Condition}',  '{product.ProductType}' )";
                 using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
                 {
@@ -80,7 +79,7 @@ namespace VideogameShopLibrary
         {
             
             SqlCommand cmd;
-            int id;
+            
             
             //insert each item to database
             foreach (var order in new ChoCSVReader<Order>(inputFileName)
@@ -88,19 +87,10 @@ namespace VideogameShopLibrary
                 )
             {
                 //Autoincrements new Id per each sale
-                var getMax = @"SELECT COALESCE(MAX(orderId), 0) + 1 AS maxPlusOne FROM Sales";
-
-                using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
-                {
-                    
-                    sqlCon.Open();
-                    cmd = new SqlCommand(getMax, sqlCon);
-                    id = Convert.ToInt32(cmd.ExecuteScalar());
-                }
 
                 //inserts each item into database
-                var sql = "INSERT INTO Sales(orderId, Product, Condition, Date, Total, [Customer Name], [Customer Phone], Email)" +
-                    $"VALUES({id}, '{order.Product}', '{order.Condition}', '{order.Date}', {order.Total}, '{order.CustomerName}', '{order.CustomerPhone}'," +
+                var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone], Email)" +
+                    $"VALUES('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}, '{order.CustomerName}', '{order.CustomerPhone}'," +
                     $"'{order.Email}')";
 
                 using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))

@@ -1,0 +1,88 @@
+﻿@model VideogameShopLibrary.CVS_Models.Order
+@using VideogameShop.Library.Services
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Product" class="control-label"></label>
+                <input asp-for="Product" class="form-control" required />
+                <span asp-validation-for="Product" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Condition" class="control-label"></label>
+                <input asp-for="Condition" class="form-control" />
+                <span asp-validation-for="Condition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Total" class="control-label"></label>
+                <input asp-for="Total" class="form-control" />
+                <span asp-validation-for="Total" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerPhone" class="control-label"></label>
+                <input asp-for="CustomerPhone" class="form-control" />
+                <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div id="creditCardFieldsView" style="display:none">
+                <partial name="CreditCardPartial" />
+            </div>
+            <div class="form-check form-check-inline">
+                @Html.RadioButtonFor(m => m.TypeOfSale, "Cash", new { @onclick ="check()" })
+                <label asp-for="TypeOfSale" class="form-check-label">Cash</label>
+                <span asp-validation-for="TypeOfSale" class="text-danger"></span>
+            </div>
+            <div class="form-check form-check-inline">
+                @Html.RadioButtonFor(m => m.TypeOfSale, "Credit", new { @id = "creditRadioButton", @onclick = "check()" })
+                <label asp-for="TypeOfSale" class="form-check-label">Credit</label>
+                <span asp-validation-for="TypeOfSale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-danger" type="submit" value="Place Order" />
+            </div>
+        </form>
+    </div>
+</div>
+@if (ViewBag.Message != null)
+{
+<script type="text/javascript">
+    window.onload = function(){
+        alert("@ViewBag.Message");
+        check();
+    }
+</script>
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="~/js/creditCardChecker.js" asp-append-version="true"></script>

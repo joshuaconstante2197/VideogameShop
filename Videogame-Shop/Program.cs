@@ -1,8 +1,7 @@
 ﻿
 using System;
 using System.Text;
-
-
+using VideogameShop.Library.Services;
 using VideogameShopLibrary.Services;
 
 namespace VideogameShopLibrary
@@ -13,6 +12,11 @@ namespace VideogameShopLibrary
 
         static void Main(string[] args)
         {
+            //check for card validation functionality
+            long card = 4003600000000014;
+            CreditCardValidationService validateCard = new CreditCardValidationService();
+            Console.WriteLine(validateCard.Validate(card));
+
             string input;
             while (true)
             {
@@ -22,7 +26,7 @@ namespace VideogameShopLibrary
                 if (input.ToLower() == "import" || input.ToLower() == "retrieve")
                     break;
             }
-            
+
 
             if (input.ToLower() == "import")
             {
@@ -33,7 +37,7 @@ namespace VideogameShopLibrary
                     if (input.ToLower() == "json" || input.ToLower() == "sql")
                         break;
                 }
-               
+
 
                 if (input.ToLower() == "json")
                 {
@@ -96,10 +100,10 @@ namespace VideogameShopLibrary
                 }
 
             }
-            else if(input == "retrieve")
+            else if (input == "retrieve")
             {
                 StringBuilder records = new StringBuilder();
-                Console.WriteLine(DisplayDbData.displayAllData(records).ToString()); 
+                Console.WriteLine(DisplayDbData.displayAllData(records).ToString());
             }
 
         }

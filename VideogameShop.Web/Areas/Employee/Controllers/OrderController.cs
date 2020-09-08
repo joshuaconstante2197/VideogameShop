@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VideogameShopLibrary;
 using VideogameShopLibrary.CVS_Models;
+using VideogameShop.Library.Services;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
@@ -37,14 +38,72 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public ActionResult Create()
+        {
+            return View(new Order());
+        }
+
         // POST: OrderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Order order)
         {
-            return RedirectToAction(nameof(Index));
             
+            if (order.TypeOfSale == "Credit")
+            {
+                CreditCardValidationService validateCard = new CreditCardValidationService();
+                
+                if(validateCard.Validate(order.CreditCardNumber))
+                {
+                    using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
+                    {
+                        sqlCon.Open();
+                        var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone] ,Email, [Type of Sale]," +
+                                   "[Name on Credit Card], [Credit Card Number], [Expiration Date], [Security Code])" +
+                                  $"VALUES ('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}," +
+                                  $"'{order.CustomerName}', '{order.CustomerPhone}', '{order.Email}','{order.TypeOfSale}'," +
+                                  $"'{order.CreditCardName}', {order.CreditCardNumber}, '{order.ExpirationDate}', {order.SecurityCode})";
+                        SqlCommand cmd = new SqlCommand(sql, sqlCon);
+                        cmd.ExecuteNonQuery();
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid Credit Card";
+                    return View();
+                    
+                }
+            }
+            else if(order.TypeOfSale == "Cash")
+            {
+                using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
+                {
+                    sqlCon.Open();
+                    var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone], Email, [Type of Sale])" +
+                   $"VALUES('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}, '{order.CustomerName}', '{order.CustomerPhone}'," +
+                   $"'{order.Email}','{order.TypeOfSale}')";
+                    SqlCommand cmd = new SqlCommand(sql, sqlCon);
+                    cmd.ExecuteNonQuery();
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return Content("<script language='javascript' type='text/javascript'>alert('Invalid Type of Sale');</script>");
+            }
+
         }
+
+        public PartialViewResult CreditCardPartial()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+       
+
 
         // GET: OrderController/Edit/5
         public ActionResult Edit(int id)
