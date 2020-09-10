@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using ChoETL;
+using VideogameShop.Library.Models;
 using VideogameShopLibrary.CVS_Models;
 
 namespace VideogameShopLibrary
@@ -47,19 +48,44 @@ namespace VideogameShopLibrary
                     f.Write(records);
             }
         }
+        /// <summary>
+        /// Save Product Characteristics first so Foreing Key relationship is possible
+        /// </summary>
+        
+        public void SaveProductChar(string inputFileName)
+        {
+            SqlCommand cmd;
+            foreach (var productChar in new ChoCSVReader<Product_Char>(inputFileName)
+                .WithFirstLineHeader()
+                )
+            {
+                Console.WriteLine(productChar.Category);
+                var sql = $"INSERT INTO P_Categories(Category) SELECT('{productChar.Category}') WHERE NOT EXISTS(SELECT * FROM P_Categories WHERE Category = '{productChar.Category}') " +
+                          $"INSERT INTO P_Platforms(Platform) SELECT('{productChar.Platform}') WHERE NOT EXISTS(SELECT * FROM P_Platforms WHERE Platform = '{productChar.Platform}') " +
+                          $"INSERT INTO P_Conditions(Condition) SELECT('{productChar.Condition}') WHERE NOT EXISTS(SELECT * FROM P_Conditions WHERE Condition = '{productChar.Condition}') " +
+                          $"INSERT INTO P_Types([Product Type]) SELECT('{productChar.ProductType}') WHERE NOT EXISTS(SELECT * FROM P_Types WHERE [Product Type] = '{productChar.ProductType}')";
+                using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
+                {
+                    sqlConnection.Open();
+                    cmd = new SqlCommand(sql, sqlConnection);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
         /// <summary>
         /// Saves Inventory CSV data into database
         /// </summary>
+
         public void SaveCsvInventory(string inputFileName)
         {
             SqlCommand cmd;
 
-            foreach(var product in new ChoCSVReader<Product>(inputFileName)
+            foreach (var product in new ChoCSVReader<Product>(inputFileName)
                 .WithFirstLineHeader()
                 )
             {
-                
+
                 var sql = "INSERT INTO Inventory( [Game Title], Category, Platform, [Available Units], Cost, Price, Condition, [Product Type])" +
                     $"VALUES('{product.GameTitle}', '{product.Category}',  '{product.Platform}', {product.AvailableUnits}," +
                     $"{product.Cost} , {product.Price},  '{product.Condition}',  '{product.ProductType}' )";
@@ -77,10 +103,10 @@ namespace VideogameShopLibrary
         /// </summary>
         public void SaveCsvOrders(string inputFileName)
         {
-            
+
             SqlCommand cmd;
-            
-            
+
+
             //insert each item to database
             foreach (var order in new ChoCSVReader<Order>(inputFileName)
                 .WithFirstLineHeader()
@@ -114,7 +140,7 @@ namespace VideogameShopLibrary
         public void DropAllData()
         {
             SqlCommand cmd;
-            var sql = "DELETE FROM Inventory; DELETE FROM Sales;";
+            var sql = "DELETE FROM Inventory; DELETE FROM Sales; DELETE FROM P_Categories; DELETE FROM P_Conditions; DELETE FROM P_Platforms; DELETE FROM P_Types;";
 
             using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
             {
@@ -122,6 +148,7 @@ namespace VideogameShopLibrary
                 cmd = new SqlCommand(sql, sqlConnection);
                 cmd.ExecuteNonQuery();
             }
+            Console.WriteLine("dropped al data");
         }
 
     }

@@ -6,16 +6,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VideogameShop.Library.Models;
 using VideogameShopLibrary;
 using VideogameShopLibrary.CVS_Models;
+
 
 namespace VideogameShop.Web.Controllers
 {
     [Area("Employee")]
     public class ProductController : Controller
     {
-        [HttpGet]
         // GET: ProductController
+        
+        [HttpGet]
         public ActionResult Index()
         {
             DataTable dtblProduct = new DataTable();
@@ -33,6 +36,10 @@ namespace VideogameShop.Web.Controllers
         public ActionResult Create()
         {
             return View(new Product());
+        }
+        public PartialViewResult P_CharPartial()
+        {
+            return PartialView();
         }
 
         // POST: ProductController/Create
@@ -53,8 +60,6 @@ namespace VideogameShop.Web.Controllers
 
                 }
                 return RedirectToAction(nameof(Index));
-            
-            
         }
 
         // GET: ProductController/Edit/5
@@ -101,6 +106,8 @@ namespace VideogameShop.Web.Controllers
                 return View();
             }
         }
+
+        
 
         // GET: ProductController/Delete/5
         public ActionResult Delete(int id)

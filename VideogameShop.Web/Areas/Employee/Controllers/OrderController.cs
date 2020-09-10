@@ -30,7 +30,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         }
 
      
-        // GET: OrderController/Create
+        // GET: OrderController/Upload
         public ActionResult Upload()
         {
             var uploadOrder = new InventoryManagementService();

@@ -81,6 +81,9 @@ namespace VideogameShopLibrary
                         var dropData = new InventoryManagementService();
                         dropData.DropAllData();
 
+                        var CsvProductCharRecords = new InventoryManagementService();
+                        CsvProductCharRecords.SaveProductChar(Config.PathToInvetoryFile);
+
                         var CsvInvetoryRecords = new InventoryManagementService();
                         CsvInvetoryRecords.SaveCsvInventory(Config.PathToInvetoryFile);
 

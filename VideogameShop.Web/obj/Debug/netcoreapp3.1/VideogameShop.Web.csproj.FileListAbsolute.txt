@@ -443,3 +443,4 @@ C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Web\obj\Debug\netc
 C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Web\bin\Debug\netcoreapp3.1\VideogameShop.Web.dll.config
 C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Order\Create.cshtml.g.cs
 C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Order\CreditCardPartial.cshtml.g.cs
+C:\Users\joshu\Source\Repos\joshuaconstante2197\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Product\P_CharPartial.cshtml.g.cs
