@@ -20,4 +20,8 @@ namespace VideogameShopLibrary.CVS_Models
         [ChoCSVRecordField(8, FieldName = "Product Type")]
         public string ProductType { get; set; }
     }
+    public class P_Category
+    {
+        public int MyProperty { get; set; }
+    }
 }

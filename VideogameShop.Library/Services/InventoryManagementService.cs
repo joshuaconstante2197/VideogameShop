@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using ChoETL;
-using VideogameShop.Library.Models;
 using VideogameShopLibrary.CVS_Models;
 
 namespace VideogameShopLibrary
