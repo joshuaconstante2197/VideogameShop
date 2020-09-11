@@ -15,14 +15,15 @@ namespace VideogameShopLibrary
         static void Main(string[] args)
         {
             //check for card validation functionality
-            RetrieveDbData retrieveP_Characteristics = new RetrieveDbData();
-            RetrieveDbData.ProductCharacteristics productCharacteristics = new RetrieveDbData.ProductCharacteristics();
-            productCharacteristics = retrieveP_Characteristics.displayProductCharacteristics();
+            ProductCharacteristics productCharacteristics = new ProductCharacteristics();
+            DisplayDbData.DisplayProductCharacteristics(productCharacteristics);
 
-            foreach (var item in productCharacteristics.Condition)
+            foreach (var item in productCharacteristics.Category)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item); 
+
             }
+
 
 
 

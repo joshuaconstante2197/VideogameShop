@@ -6,9 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VideogameShop.Library.Services;
 using VideogameShopLibrary;
 using VideogameShopLibrary.CVS_Models;
-
+using VideogameShopLibrary.Services;
 
 namespace VideogameShop.Web.Controllers
 {
@@ -34,7 +35,9 @@ namespace VideogameShop.Web.Controllers
         // GET: ProductController/Create
         public ActionResult Create()
         {
-
+            ProductCharacteristics productCharacteristics = new ProductCharacteristics();
+            DisplayDbData.DisplayProductCharacteristics(productCharacteristics);
+            ViewBag.ProductCharacteristics = productCharacteristics;
             return View(new Product());
         }
         
@@ -44,7 +47,6 @@ namespace VideogameShop.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Product product)
         {
-            
                 using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
                 {
                     sqlCon.Open();
