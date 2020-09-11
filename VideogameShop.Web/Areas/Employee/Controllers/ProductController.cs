@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using VideogameShop.Library.Models;
 using VideogameShopLibrary;
 using VideogameShopLibrary.CVS_Models;
 
@@ -35,12 +34,10 @@ namespace VideogameShop.Web.Controllers
         // GET: ProductController/Create
         public ActionResult Create()
         {
+
             return View(new Product());
         }
-        public PartialViewResult P_CharPartial()
-        {
-            return PartialView();
-        }
+        
 
         // POST: ProductController/Create
         [HttpPost]
