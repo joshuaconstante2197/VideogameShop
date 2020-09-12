@@ -30,6 +30,7 @@
         <td >@Model.Rows[i][8]</td>
 
         <td><a href="@Url.Action("Edit","Product",new {id = Model.Rows[i][0]})">Edit Product</a></td>
+        <td><a href="@Url.Action("CreateFromProduct","Order", new {id = Model.Rows[i][0]})">Purchase Product</a></td>
     </tr>
     }
     

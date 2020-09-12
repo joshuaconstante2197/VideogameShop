@@ -48,7 +48,6 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Order order)
         {
-            
             if (order.TypeOfSale == "Credit")
             {
                 CreditCardValidationService validateCard = new CreditCardValidationService();
@@ -92,6 +91,38 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             {
                 return Content("<script language='javascript' type='text/javascript'>alert('Invalid Type of Sale');</script>");
             }
+
+        }
+        //to place order directly from a product
+        public ActionResult CreateFromProduct(int productId)
+        {
+            Product product = new Product();
+            List<string> p = new List<string>();
+            using(SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
+            {
+                sqlCon.Open();
+                using (SqlCommand cmd = new SqlCommand($"SELECT [Game Title],Condition FROM Inventory WHERE productId = 1", sqlCon))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            for (int i = 0; i < reader.FieldCount; i++)
+                            {
+                                product.GameTitle = reader.GetValue(i).ToString();
+                                product.Condition = reader.GetValue(i).ToString();
+                            }
+                            
+                        }
+                            
+                        
+                    }
+                }
+                
+            }
+            ViewBag.Product = product;
+            ViewBag.message = productId;
+            return View();
 
         }
 
