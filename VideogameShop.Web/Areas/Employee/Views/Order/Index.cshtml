@@ -1,4 +1,5 @@
-﻿
+﻿@using VideogameShopLibrary.CVS_Models
+@model List<Order>
 @{
     ViewData["Title"] = "Index";
 }
@@ -12,18 +13,32 @@
         <th>Customer Name</th>
         <th>Customer Phone</th>
         <th>Email</th>
+        <th>Type of Sale</th>
+        <th>Credit Card Name</th>
+        <th>Credit Card Number</th>
+        <th>Expiration Date</th>
+        <th>Cvv</th>
     </tr>
-    @for (int i = 0; i < Model.Rows.Count; i++)
-    {
-        <tr>
-            @*starting at one to not show the id column*@
-            @for (int j = 1; j < Model.Columns.Count; j++)
-            {
-                <td>@Model.Rows[i][j]</td>
-            }
+        @for (int i = 0; i < Model.Count; i++)
+        {
+    <tr>
+        @*starting at one to not show the id column*@
+        <td>@Model[i].Product </td>
+        <td>@Model[i].Quantity</td>
+        <td>@Model[i].Condition</td>
+        <td>@Model[i].Date</td>
+        <td>@Model[i].Total</td>
+        <td>@Model[i].CustomerName</td>
+        <td>@Model[i].CustomerPhone</td>
+        <td>@Model[i].Email</td>
+        <td>@Model[i].TypeOfSale</td>
+        <td>@Model[i].CreditCardName</td>
+        <td>@Model[i].CreditCardNumber</td>
+        <td>@Model[i].ExpirationDate</td>
+        <td>@Model[i].SecurityCode</td>
 
-        </tr>
-    }
+    </tr>
+        }
 
 </table>
 <button type="button" class="btn btn-info" href="@Url.Action("Upload","Order")">Update Sales from File</button>

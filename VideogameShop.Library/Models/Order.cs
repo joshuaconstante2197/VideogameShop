@@ -19,7 +19,7 @@ namespace VideogameShopLibrary.CVS_Models
 
         [ChoCSVRecordField(2)]
         [DefaultValue(1)]
-        public uint Quantity { get; set; }
+        public int Quantity { get; set; }
 
         [ChoCSVRecordField(3)]
         public string Condition { get; set; }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using VideogameShopLibrary;
 using VideogameShopLibrary.CVS_Models;
 using VideogameShop.Library.Services;
+using System.Reflection;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
@@ -19,14 +20,70 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         // GET: OrderController
         public ActionResult Index()
         {
-            DataTable dtblOrder = new DataTable();
+            //DataTable dtblOrder = new DataTable();
+            //using(SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
+            //{
+            //    sqlCon.Open();
+            //    SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Sales", sqlCon);
+            //    sqlDa.Fill(dtblOrder);
+            //}
+            //return View(dtblOrder);
+            List<Order> orders = new List<Order>();
+            using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
+            {
+                sqlCon.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Sales", sqlCon);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Order order = new Order();
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            PropertyInfo propertyInfo = order.GetType().GetProperty(reader.GetName(i).Trim());
+
+                            if (propertyInfo != null)
+                            {
+                                propertyInfo.SetValue(order, reader.GetValue(i), null);
+                            }
+                        }
+                        orders.Add(order);
+                    }
+                }
+
+            }
+            return View(orders);
+            
+        }
+
+        public ActionResult IndexFilteredByDate(DateTime fromDate, DateTime toDate)
+        {
+            List<Order> orders = new List<Order>();
             using(SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
             {
                 sqlCon.Open();
-                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Sales", sqlCon);
-                sqlDa.Fill(dtblOrder);
+                var sql = $"SELECT * FROM Sales WHERE (Date >= {fromDate} AND <= {toDate})";
+                SqlCommand cmd = new SqlCommand(sql,sqlCon);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        Order order = new Order();
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            PropertyInfo propertyInfo = order.GetType().GetProperty(reader.GetName(i));
+
+                            if (propertyInfo != null)
+                            {
+                                propertyInfo.SetValue(order, reader.GetValue(i), null);
+                            }
+                        }
+                        orders.Add(order);
+                    }
+                }
+
             }
-            return View(dtblOrder);
+            return View(orders);
         }
 
      
@@ -94,34 +151,26 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
 
         }
         //to place order directly from a product
-        public ActionResult CreateFromProduct(int productId)
+        public ActionResult CreateFromProduct(int Id)
         {
             Product product = new Product();
             List<string> p = new List<string>();
-            using(SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
+            using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
             {
                 sqlCon.Open();
-                using (SqlCommand cmd = new SqlCommand($"SELECT [Game Title],Condition FROM Inventory WHERE productId = 1", sqlCon))
-                {
+                SqlCommand cmd = new SqlCommand("SELECT [Game Title],Condition, Price FROM Inventory WHERE productId = @productId", sqlCon);
+                cmd.Parameters.AddWithValue("@productId", Id);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while(reader.Read())
-                        {
-                            for (int i = 0; i < reader.FieldCount; i++)
-                            {
-                                product.GameTitle = reader.GetValue(i).ToString();
-                                product.Condition = reader.GetValue(i).ToString();
-                            }
-                            
+                        while (reader.Read())
+                        { 
+                            product.GameTitle = reader.GetValue(reader.GetOrdinal("Game Title")).ToString();
+                            product.Condition = reader.GetValue(reader.GetOrdinal("Condition")).ToString();
+                            product.Price = Convert.ToDecimal(reader.GetValue(reader.GetOrdinal("Price")));
                         }
-                            
-                        
                     }
-                }
-                
             }
             ViewBag.Product = product;
-            ViewBag.message = productId;
             return View();
 
         }

@@ -58,7 +58,7 @@
                 <partial name="CreditCardPartial" />
             </div>
             <div class="form-check form-check-inline">
-                @Html.RadioButtonFor(m => m.TypeOfSale, "Cash", new { @onclick ="check()" })
+                @Html.RadioButtonFor(m => m.TypeOfSale, "Cash", new { @onclick = "check()" })
                 <label asp-for="TypeOfSale" class="form-check-label">Cash</label>
                 <span asp-validation-for="TypeOfSale" class="text-danger"></span>
             </div>
@@ -75,13 +75,14 @@
 </div>
 @if (ViewBag.Message != null)
 {
-<script type="text/javascript">
+    <script type="text/javascript">
     window.onload = function(){
         alert("@ViewBag.Message");
         check();
-    }
-</script>
+    </script>
+
 }
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

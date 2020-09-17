@@ -114,9 +114,11 @@ namespace VideogameShopLibrary
                 //Autoincrements new Id per each sale
 
                 //inserts each item into database
-                var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone], Email)" +
-                    $"VALUES('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}, '{order.CustomerName}', '{order.CustomerPhone}'," +
-                    $"'{order.Email}')";
+                var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone] ,Email, [Type of Sale]," +
+                                   "[Name on Credit Card], [Credit Card Number], [Expiration Date], [Security Code])" +
+                                  $"VALUES ('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}," +
+                                  $"'{order.CustomerName}', '{order.CustomerPhone}', '{order.Email}','{order.TypeOfSale}'," +
+                                  $"'{order.CreditCardName}', {order.CreditCardNumber}, '{order.ExpirationDate}', {order.SecurityCode})";
 
                 using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
                 {

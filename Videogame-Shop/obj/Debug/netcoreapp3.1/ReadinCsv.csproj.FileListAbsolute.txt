@@ -58,3 +58,33 @@ C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\Videogame-Shop\obj\Deb
 C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\Videogame-Shop\obj\Debug\netcoreapp3.1\ReadinCsv.dll
 C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\Videogame-Shop\obj\Debug\netcoreapp3.1\ReadinCsv.pdb
 C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\Videogame-Shop\obj\Debug\netcoreapp3.1\ReadinCsv.genruntimeconfig.cache
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\ReadinCsv.exe
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\ReadinCsv.dll.config
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\ReadinCsv.deps.json
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\ReadinCsv.runtimeconfig.json
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\ReadinCsv.runtimeconfig.dev.json
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\ReadinCsv.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\ReadinCsv.pdb
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\ChoETL.Core.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\ChoETL.JSON.Core.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netstandard2.0\System.Data.SqlClient.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Data.SqlClient.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\VideogameShop.Library.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\bin\Debug\netcoreapp3.1\VideogameShop.Library.pdb
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\obj\Debug\netcoreapp3.1\ReadinCsv.csprojAssemblyReference.cache
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\obj\Debug\netcoreapp3.1\ReadinCsv.AssemblyInfoInputs.cache
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\obj\Debug\netcoreapp3.1\ReadinCsv.AssemblyInfo.cs
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\obj\Debug\netcoreapp3.1\ReadinCsv.csproj.CoreCompileInputs.cache
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\obj\Debug\netcoreapp3.1\ReadinCsv.csproj.CopyComplete
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\obj\Debug\netcoreapp3.1\ReadinCsv.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\obj\Debug\netcoreapp3.1\ReadinCsv.pdb
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\Videogame-Shop\obj\Debug\netcoreapp3.1\ReadinCsv.genruntimeconfig.cache
