@@ -1,0 +1,4 @@
+Product,Quantity,Condition,Date,Total,Customer Name,Customer Phone,Email,Sale Type,Credit Card Name,Credit Card Number,Expiration Date,Security Code
+Smash Bros, ,New,8-Feb-20,1099,John Smith,555555,test@gmail.com,Credit,John Smith,3.71E+14,1-Jan,345
+Headsets,New, ,8-Feb-20,49,Katie Green,44444,test@gmail.com,Credit,Katie Green,5.56E+15,5-Dec,123
+Smash Bros, ,Used,8-Feb-20,800,Julian Moore,44444,test@gmail.com,Credit,Julian Moore,5.11E+15,7-Dec,476

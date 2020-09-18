@@ -42,15 +42,16 @@ namespace VideogameShopLibrary.CVS_Models
 
         [ChoCSVRecordField(8)]
         public string Email { get; set; }
-        [ChoCSVRecordField(9, FieldName ="Type of Sale")]
-        [DefaultValue("Cash")]
-        public string TypeOfSale { get; set; }
 
-        [ChoCSVRecordField(10, FieldName="Name on Credit Card")]
+        [ChoCSVRecordField(9, FieldName ="Sale Type")]
+        [DefaultValue("Cash")]
+        public string SaleType { get; set; }
+
+        [ChoCSVRecordField(10, FieldName="Credit Card Name")]
         public string CreditCardName { get; set; }
 
         [ChoCSVRecordField(11, FieldName ="Credit Card Number")]
-        public int CreditCardNumber { get; set; }
+        public long CreditCardNumber { get; set; }
 
         [ChoCSVRecordField(12,FieldName ="Expiration Date")]
         [DataType(DataType.Date)]
@@ -59,7 +60,7 @@ namespace VideogameShopLibrary.CVS_Models
 
         [ChoCSVRecordField(13, FieldName ="Security Code")]
 
-        public int SecurityCode { get; set; }
+        public string SecurityCode { get; set; }
 
 
 

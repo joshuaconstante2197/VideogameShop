@@ -40,7 +40,9 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                         Order order = new Order();
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            PropertyInfo propertyInfo = order.GetType().GetProperty(reader.GetName(i).Trim());
+                            var str = reader.GetName(i);
+                            str = str.Replace(" ", "");
+                            PropertyInfo propertyInfo = order.GetType().GetProperty(str);
 
                             if (propertyInfo != null)
                             {
@@ -71,7 +73,9 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                         Order order = new Order();
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            PropertyInfo propertyInfo = order.GetType().GetProperty(reader.GetName(i));
+                            var str = reader.GetName(i);
+                            str = str.Replace(" ", "");
+                            PropertyInfo propertyInfo = order.GetType().GetProperty(str);
 
                             if (propertyInfo != null)
                             {
@@ -105,7 +109,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Order order)
         {
-            if (order.TypeOfSale == "Credit")
+            if (order.SaleType == "Credit")
             {
                 CreditCardValidationService validateCard = new CreditCardValidationService();
                 
@@ -114,10 +118,10 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                     using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
                     {
                         sqlCon.Open();
-                        var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone] ,Email, [Type of Sale]," +
-                                   "[Name on Credit Card], [Credit Card Number], [Expiration Date], [Security Code])" +
+                        var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone] ,Email, [Sale Type]," +
+                                   "[Credit Card Name], [Credit Card Number], [Expiration Date], [Security Code])" +
                                   $"VALUES ('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}," +
-                                  $"'{order.CustomerName}', '{order.CustomerPhone}', '{order.Email}','{order.TypeOfSale}'," +
+                                  $"'{order.CustomerName}', '{order.CustomerPhone}', '{order.Email}','{order.SaleType}'," +
                                   $"'{order.CreditCardName}', {order.CreditCardNumber}, '{order.ExpirationDate}', {order.SecurityCode})";
                         SqlCommand cmd = new SqlCommand(sql, sqlCon);
                         cmd.ExecuteNonQuery();
@@ -131,14 +135,14 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                     
                 }
             }
-            else if(order.TypeOfSale == "Cash")
+            else if(order.SaleType == "Cash")
             {
                 using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
                 {
                     sqlCon.Open();
-                    var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone], Email, [Type of Sale])" +
+                    var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone], Email, [Sale Type])" +
                    $"VALUES('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}, '{order.CustomerName}', '{order.CustomerPhone}'," +
-                   $"'{order.Email}','{order.TypeOfSale}')";
+                   $"'{order.Email}','{order.SaleType}')";
                     SqlCommand cmd = new SqlCommand(sql, sqlCon);
                     cmd.ExecuteNonQuery();
                 }
@@ -146,7 +150,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             }
             else
             {
-                return Content("<script language='javascript' type='text/javascript'>alert('Invalid Type of Sale');</script>");
+                return Content("<script language='javascript' type='text/javascript'>alert('Invalid Sale Type');</script>");
             }
 
         }

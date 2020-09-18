@@ -42,6 +42,10 @@ namespace VideogameShopLibrary
                 }
 
             }
+            foreach (var item in orders)
+            {
+                Console.WriteLine(item.CreditCardNumber);
+            }
 
             string input;
             while (true)
