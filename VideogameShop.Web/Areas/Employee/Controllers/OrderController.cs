@@ -44,7 +44,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                             str = str.Replace(" ", "");
                             PropertyInfo propertyInfo = order.GetType().GetProperty(str);
 
-                            if (propertyInfo != null)
+                            if (propertyInfo != null && !reader.IsDBNull(i))
                             {
                                 propertyInfo.SetValue(order, reader.GetValue(i), null);
                             }
@@ -57,6 +57,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             return View(orders);
             
         }
+        
 
         public ActionResult IndexFilteredByDate(DateTime fromDate, DateTime toDate)
         {
@@ -77,7 +78,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                             str = str.Replace(" ", "");
                             PropertyInfo propertyInfo = order.GetType().GetProperty(str);
 
-                            if (propertyInfo != null)
+                            if (propertyInfo != null && !reader.IsDBNull(i))
                             {
                                 propertyInfo.SetValue(order, reader.GetValue(i), null);
                             }

@@ -3,6 +3,25 @@
 @{
     ViewData["Title"] = "Index";
 }
+@using(Html.BeginForm("IndexFilteredByDate","OrderController",FormMethod.Get))
+{
+    <table class="table table-borderless">
+        <tr>Filter Criteria</tr>
+        <tr>
+            <td>From Date:</td>
+            <td><input type="date" name="fromDate"/></td>
+        </tr>
+        <tr>
+            <td>To Date:</td>
+            <td><input type="date" name="toDate"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" /></td>
+        </tr>
+    </table>
+}
+    
+
 <table class="table table-bordered table-striped">
     <tr>
         <th>Product Name</th>

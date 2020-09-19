@@ -32,7 +32,7 @@ namespace VideogameShopLibrary
                             str = str.Replace(" ", "");
                             PropertyInfo propertyInfo = order.GetType().GetProperty(str);
                             Console.WriteLine(propertyInfo);
-                            if (propertyInfo != null)
+                            if (propertyInfo != null && !reader.IsDBNull(i))
                             {
                                 propertyInfo.SetValue(order, reader.GetValue(i), null);
                             }

@@ -48,6 +48,8 @@ namespace VideogameShopLibrary.CVS_Models
         public string SaleType { get; set; }
 
         [ChoCSVRecordField(10, FieldName="Credit Card Name")]
+        [DefaultValue("-")]
+
         public string CreditCardName { get; set; }
 
         [ChoCSVRecordField(11, FieldName ="Credit Card Number")]

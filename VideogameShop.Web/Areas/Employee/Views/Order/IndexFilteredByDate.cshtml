@@ -1,0 +1,68 @@
+﻿@using VideogameShopLibrary.CVS_Models
+@model List<Order>
+
+@{
+    ViewData["Title"] = "IndexFilteredByDate";
+}
+
+@using (Html.BeginForm("IndexFilteredByDate", "OrderController", FormMethod.Get))
+{
+    <table class="table table-borderless">
+        <tr>Filter Criteria</tr>
+        <tr>
+            <td>From Date:</td>
+            <td><input type="date" name="fromDate" /></td>
+        </tr>
+        <tr>
+            <td>To Date:</td>
+            <td><input type="date" name="toDate" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" /></td>
+        </tr>
+    </table>
+}
+
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Condition</th>
+        <th>Date</th>
+        <th>Total</th>
+        <th>Customer Name</th>
+        <th>Customer Phone</th>
+        <th>Email</th>
+        <th>Type of Sale</th>
+        <th>Credit Card Name</th>
+        <th>Credit Card Number</th>
+        <th>Expiration Date</th>
+        <th>Cvv</th>
+    </tr>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <tr>
+            @*starting at one to not show the id column*@
+            <td>@Model[i].Product </td>
+            <td>@Model[i].Quantity</td>
+            <td>@Model[i].Condition</td>
+            <td style="display:inline-block">@Model[i].Date.ToString("dd-MM-yyyy")</td>
+            <td>@Model[i].Total</td>
+            <td>@Model[i].CustomerName</td>
+            <td>@Model[i].CustomerPhone</td>
+            <td>@Model[i].Email</td>
+            <td>@Model[i].SaleType</td>
+            <td>@Model[i].CreditCardName</td>
+            <td>@Model[i].CreditCardNumber</td>
+            <td>@Model[i].ExpirationDate</td>
+            <td>@Model[i].SecurityCode</td>
+
+        </tr>
+    }
+
+</table>
+<button type="button" class="btn btn-info" href="@Url.Action("Upload","Order")">Update Sales from File</button>
+<a href="@Url.Action("Create","Order")">Add a new order</a>
+
+<hr />

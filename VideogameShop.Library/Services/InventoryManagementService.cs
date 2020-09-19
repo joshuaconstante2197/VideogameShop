@@ -111,14 +111,26 @@ namespace VideogameShopLibrary
                 .WithFirstLineHeader()
                 )
             {
-                //Autoincrements new Id per each sale
 
                 //inserts each item into database
-                var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone] ,Email, [Sale Type]," +
+                string sql;
+                //check if its credit to insert credit card fields
+                if(order.SaleType == "Credit")
+                {
+                     sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone] ,Email, [Sale Type]," +
                                    "[Credit Card Name], [Credit Card Number], [Expiration Date], [Security Code])" +
                                   $"VALUES ('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}," +
                                   $"'{order.CustomerName}', '{order.CustomerPhone}', '{order.Email}','{order.SaleType}'," +
                                   $"'{order.CreditCardName}', {order.CreditCardNumber}, '{order.ExpirationDate}', {order.SecurityCode})";
+                }
+                //if not credit then insert only order information
+                else
+                {
+                     sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone] ,Email, [Sale Type])" +
+                                                      $"VALUES ('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}," +
+                                                      $"'{order.CustomerName}', '{order.CustomerPhone}', '{order.Email}','{order.SaleType}')";
+                }
+                
 
                 using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
                 {
