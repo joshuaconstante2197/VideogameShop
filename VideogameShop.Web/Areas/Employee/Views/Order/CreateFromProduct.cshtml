@@ -76,12 +76,15 @@
     </script>
 }
 <script>
-    
+    const numberFormatter = new Intl.NumberFormat('en-Us', {
+        style: 'currency',
+        currency: 'USD',
+    });
     function total() {
         var quantity = document.getElementById("Quantity");
         var total = document.getElementById("Total");
         var result = (@ViewBag.Product.Price * quantity.value);
-        total.value = result;
+        total.value = numberFormatter.format(result);
         console.log(total.value)
     }
 </script>
