@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using ChoETL;
+using VideogameShop.Library.Services;
 using VideogameShopLibrary.CVS_Models;
 
 namespace VideogameShopLibrary
@@ -98,7 +100,7 @@ namespace VideogameShopLibrary
         }
 
         /// <summary>
-        /// Saves Sales CSV data into database, autocreates new Id per each sale, removes 1 item from inventory where Game Title matches
+        /// Saves Sales CSV data into database, removes 1 item from inventory where Game Title matches
         /// </summary>
         public void SaveCsvOrders(string inputFileName)
         {
@@ -150,6 +152,167 @@ namespace VideogameShopLibrary
                 }
             }
         }
+
+        //method to create a new product
+        public bool InsertNewProduct(Product product)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                sqlCon.Open();
+
+                var sql = "INSERT INTO Inventory([Game Title], Category, Platform, [Available Units], Cost , Price, Condition, [Product Type])" +
+                $"VALUES('{product.GameTitle}', '{product.Category}',  '{product.Platform}', {product.AvailableUnits}," +
+                $"cast({product.Cost} as money),  {product.Price},  '{product.Condition}',  '{product.ProductType}' )";
+                try
+                {
+                    SqlCommand sqlCmd = new SqlCommand(sql, sqlCon);
+                    sqlCmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    var Err = new CreateLogFiles();
+                    Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
+                    return false;
+                    throw;
+                }
+                
+            }
+        }
+        public bool UpdateProductById(Product product )
+        {
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                sqlCon.Open();
+                {
+                    var sql = $"UPDATE Inventory SET ([Game Title] = '{product.GameTitle}'," +
+                            $"Category = '{product.Category}'," +
+                            $"Platform = '{product.Platform}', " +
+                            $"[Available Units] = {product.AvailableUnits}, " +
+                            $"Cost = {product.Cost}, " +
+                            $"Price = {product.Price}, " +
+                            $"Condition = '{product.Condition}', " +
+                            $"[Product Type] = '{product.ProductType}'" +
+                            $"WHERE productId = {product.productId})";
+                    try
+                    {
+                        SqlCommand sqlCmd = new SqlCommand(sql, sqlCon);
+                        sqlCmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        var Err = new CreateLogFiles();
+                        Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
+                        return false;
+                        throw;
+                    }
+
+                }
+
+
+            }
+        }
+        //method to add credit card orders
+        public bool CreateCreditCardOrder(Order order)
+        {
+            CreditCardValidationService card = new CreditCardValidationService();
+            
+            if(card.Validate(order.CreditCardNumber))
+            {
+                using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+                {
+                    sqlCon.Open();
+                    try
+                    {
+                        SqlCommand cmd = new SqlCommand("spCreateCreditCardOrder", sqlCon);
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Product", order.Product);
+                        cmd.Parameters.AddWithValue("@Quantity", order.Quantity);
+                        cmd.Parameters.AddWithValue("@Condition", order.Condition);
+                        cmd.Parameters.AddWithValue("@Date", order.Date);
+                        cmd.Parameters.AddWithValue("@Total", order.Total);
+                        cmd.Parameters.AddWithValue("@CustomerName", order.CustomerName);
+                        cmd.Parameters.AddWithValue("@CustomerPhone", order.CustomerPhone);
+                        cmd.Parameters.AddWithValue("@Email", order.Email);
+                        cmd.Parameters.AddWithValue("@SaleType", order.SaleType);
+                        cmd.Parameters.AddWithValue("@CreditCardName", order.CreditCardName);
+                        cmd.Parameters.AddWithValue("@CreditCardNumber", order.CreditCardNumber);
+                        cmd.Parameters.AddWithValue("@ExpirationDate", order.ExpirationDate);
+                        cmd.Parameters.AddWithValue("@SecurityCode", order.SecurityCode);
+
+                        cmd.ExecuteNonQuery();
+
+                        var sql2 = $"UPDATE Inventory SET [Available Units] = [Available Units] - {order.Quantity} WHERE [Game Title] = '{order.Product}'";
+
+                        using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
+                        {
+                            sqlConnection.Open();
+                            cmd = new SqlCommand(sql2, sqlConnection);
+                            cmd.ExecuteNonQuery();
+                        }
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        var Err = new CreateLogFiles();
+                        Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
+                        return false;
+                        throw;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //method to add cash orders
+        public bool CreateCashOrder(Order order)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                sqlCon.Open();
+                try
+                {
+                    //selecting stored procedure and adding all parameters
+                    SqlCommand cmd = new SqlCommand("spCreateCashOrder", sqlCon);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@Product", order.Product));
+                    cmd.Parameters.Add(new SqlParameter("@Quantity", order.Quantity));
+                    cmd.Parameters.Add(new SqlParameter("@Condition", order.Condition));
+                    cmd.Parameters.Add(new SqlParameter("@Date", order.Date));
+                    cmd.Parameters.Add(new SqlParameter("@Total", order.Total));
+                    cmd.Parameters.Add(new SqlParameter("@CustomerName", order.CustomerName));
+                    cmd.Parameters.Add(new SqlParameter("@CustomerPhone", order.CustomerPhone));
+                    cmd.Parameters.Add(new SqlParameter("@Email", order.Email));
+                    cmd.Parameters.Add(new SqlParameter("@SaleType", order.SaleType));
+
+                    cmd.ExecuteNonQuery();
+                    //removing items from inventory
+                    var sql2 = $"UPDATE Inventory SET [Available Units] = [Available Units] - {order.Quantity} WHERE [Game Title] = '{order.Product}'";
+
+                    using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
+                    {
+                        sqlConnection.Open();
+                        cmd = new SqlCommand(sql2, sqlConnection);
+                        cmd.ExecuteNonQuery();
+                    }
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    var Err = new CreateLogFiles();
+                    Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
+                    return false;
+                    throw;
+                }
+            }
+        }
+
+
         public void DropAllData()
         {
             SqlCommand cmd;

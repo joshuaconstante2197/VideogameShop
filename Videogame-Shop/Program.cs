@@ -13,39 +13,10 @@ namespace VideogameShopLibrary
 
     class Program
     {
-
+        
         static void Main(string[] args)
         {
-            List<Order> orders = new List<Order>();
-            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
-            {
-                sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Sales", sqlCon);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Order order = new Order();
-                        for (int i = 0; i < reader.FieldCount; i++)
-                        {
-                            var str = reader.GetName(i);
-                            str = str.Replace(" ", "");
-                            PropertyInfo propertyInfo = order.GetType().GetProperty(str);
-                            Console.WriteLine(propertyInfo);
-                            if (propertyInfo != null && !reader.IsDBNull(i))
-                            {
-                                propertyInfo.SetValue(order, reader.GetValue(i), null);
-                            }
-                        }
-                        orders.Add(order);
-                    }
-                }
-
-            }
-            foreach (var item in orders)
-            {
-                Console.WriteLine(item.CreditCardNumber);
-            }
+            
 
             string input;
             while (true)

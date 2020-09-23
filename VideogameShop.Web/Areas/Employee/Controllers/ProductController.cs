@@ -21,20 +21,15 @@ namespace VideogameShop.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            DataTable dtblProduct = new DataTable();
-            using(SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
-            {
-                sqlCon.Open();
-                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Inventory", sqlCon);
-                sqlDa.Fill(dtblProduct);
-            }
-            return View(dtblProduct);
+            var Products = DisplayDbData.DisplayInventory(new List<Product>());
+            return View(Products);
         }
 
 
         // GET: ProductController/Create
         public ActionResult Create()
         {
+            //passing all the product characteristics to view to create dropdown menus
             ProductCharacteristics productCharacteristics = new ProductCharacteristics();
             DisplayDbData.DisplayProductCharacteristics(productCharacteristics);
             ViewBag.ProductCharacteristics = productCharacteristics;
@@ -47,63 +42,54 @@ namespace VideogameShop.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Product product)
         {
-                using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
-                {
-                    sqlCon.Open();
+            var Insert = new InventoryManagementService();
 
-                    var sql = "INSERT INTO Inventory([Game Title], Category, Platform, [Available Units], Cost , Price, Condition, [Product Type])" +
-                    $"VALUES('{product.GameTitle}', '{product.Category}',  '{product.Platform}', {product.AvailableUnits}," +
-                    $"cast({product.Cost} as money),  {product.Price},  '{product.Condition}',  '{product.ProductType}' )";
-                    SqlCommand sqlCmd = new SqlCommand(sql, sqlCon);
-                    sqlCmd.ExecuteNonQuery();
-
-                }
+            if(!Insert.InsertNewProduct(product))
+            {
+                ViewBag.Message = "Failed to insert Product";
                 return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+
         }
 
-        // GET: ProductController/Edit/5
+        // GET: ProductController/Edit/
         public ActionResult Edit(int Id)
         {
-            Product product = new Product();
-            DataTable dtblProduct = new DataTable();
-            using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
+            try
             {
-                sqlCon.Open();
-                string cmd = $"SELECT * FROM Inventory Where productId = @productId";
-                SqlDataAdapter sqlDa = new SqlDataAdapter(cmd,sqlCon);
-                sqlDa.SelectCommand.Parameters.AddWithValue("@productId", Id);
-                sqlDa.Fill(dtblProduct);
-            }
-            if(dtblProduct.Rows.Count == 1)
-            {
-                product.GameTitle = dtblProduct.Rows[0][1].ToString();
-                product.Category = dtblProduct.Rows[0][2].ToString();
-                product.Platform = dtblProduct.Rows[0][3].ToString();
-                product.AvailableUnits = Convert.ToInt32(dtblProduct.Rows[0][4].ToString());
-                product.Cost = Convert.ToDecimal(dtblProduct.Rows[0][5].ToString());
-                product.Price = Convert.ToDecimal(dtblProduct.Rows[0][6].ToString());
-                product.Condition = dtblProduct.Rows[0][7].ToString();
-                product.ProductType = dtblProduct.Rows[0][8].ToString();
+                var product = DisplayDbData.GetProductById(new Product(), Id);
+                ProductCharacteristics productCharacteristics = new ProductCharacteristics();
+                DisplayDbData.DisplayProductCharacteristics(productCharacteristics);
+                ViewBag.ProductCharacteristics = productCharacteristics;
                 return View(product);
-
             }
-            else
-                return View();
+            catch (Exception)
+            {
+                ViewBag.Message = "Product not found";
+                return RedirectToAction(nameof(Index));
+                throw;
+            }
+            
         }
 
         // POST: ProductController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Product product)
         {
-            try
+
+            var Update = new InventoryManagementService();
+
+            if (!Update.UpdateProductById(product))
             {
+                ViewBag.Message = "Update Unsusccesfull";
                 return RedirectToAction(nameof(Index));
+
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction(nameof(Index));
+
         }
 
         

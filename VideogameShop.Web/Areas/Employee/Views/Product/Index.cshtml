@@ -1,38 +1,46 @@
-﻿@model System.Data.DataTable
+﻿@using VideogameShopLibrary.CVS_Models
+@model List<Product>
 @{
     ViewData["Title"] = "Index";
 }
 
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>Product Name</th>
-        <th>Category</th>
-        <th>Platoform</th>
-        <th>Available Units</th>
-        <th>Cost</th>
-        <th>Price</th>
-        <th>Condition</th>
-        <th>Type</th>
-       
-    </tr>
-    @for (int i = 0; i < Model.Rows.Count; i++)
-    {
-    <tr class="productRows">
-        @*starting at one to not show the id column*@
+<table class="table table-bordered " id="dataTable">
+    <thead>
+        <tr >
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Platform</th>
+            <th>Available Units</th>
+            <th>Cost</th>
+            <th>Price</th>
+            <th>Condition</th>
+            <th>Type</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr class="productRows">
+                @*starting at one to not show the id column*@
 
-        <td >@Model.Rows[i][1]</td>
-        <td >@Model.Rows[i][2]</td>
-        <td >@Model.Rows[i][3]</td>
-        <td class="productQty">@Model.Rows[i][4]</td>
-        <td >@Model.Rows[i][5]</td>
-        <td >@Model.Rows[i][6]</td>
-        <td >@Model.Rows[i][7]</td>
-        <td >@Model.Rows[i][8]</td>
+                <td>@Model[i].GameTitle</td>
+                <td>@Model[i].Category</td>
+                <td>@Model[i].Platform</td>
+                <td class="productQty">@Model[i].AvailableUnits</td>
+                <td>@Model[i].Cost</td>
+                <td>@Model[i].Price</td>
+                <td>@Model[i].Condition</td>
+                <td>@Model[i].ProductType</td>
 
-        <td><a href="@Url.Action("Edit","Product",new {id = Model.Rows[i][0]})">Edit Product</a></td>
-        <td><a href="@Url.Action("CreateFromProduct","Order", new {id = Model.Rows[i][0]})">Purchase Product</a></td>
-    </tr>
-    }
+                <td>
+                    <a href="@Url.Action("Edit","Product",new {id = Model[i].productId})">Edit </a>
+                    <span>|</span>
+                    <a href="@Url.Action("CreateFromProduct","Order", new {id =  Model[i].productId})">Purchase </a>
+                </td>
+            </tr>
+        }
+    </tbody>
     
 </table>
     <a class="btn btn-success" href="@Url.Action("Create","Product")">Add a New Product</a>

@@ -19,12 +19,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
+                <select asp-for="Category" class="form-control" required>
+                    @foreach (var item in ViewBag.ProductCharacteristics.Category)
+                    {
+                        <option>@item</option>
+                    }
+                </select>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Platform" class="control-label"></label>
-                <input asp-for="Platform" class="form-control" />
+                <select asp-for="Platform" class="form-control" required>
+                    @foreach (var item in ViewBag.ProductCharacteristics.Platform)
+                    {
+                        <option>@item</option>
+                    }
+                </select>
                 <span asp-validation-for="Platform" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -44,16 +54,26 @@
             </div>
             <div class="form-group">
                 <label asp-for="Condition" class="control-label"></label>
-                <input asp-for="Condition" class="form-control" />
+                <select asp-for="Condition" class="form-control" required>
+                    @foreach (var item in ViewBag.ProductCharacteristics.Condition)
+                    {
+                        <option>@item</option>
+                    }
+                </select>
                 <span asp-validation-for="Condition" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductType" class="control-label"></label>
-                <input asp-for="ProductType" class="form-control" />
+                <label asp-for="ProductType" class="control-label">Product Type</label>
+                <select asp-for="ProductType" class="form-control" required>
+                    @foreach (var item in ViewBag.ProductCharacteristics.ProductType)
+                    {
+                        <option>@item</option>
+                    }
+                </select>
                 <span asp-validation-for="ProductType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Edit" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -62,4 +82,12 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+    window.onload = function(){
+        alert("@ViewBag.Message");
+    </script>
+
+}
 

@@ -10,6 +10,7 @@ using VideogameShopLibrary;
 using VideogameShopLibrary.CVS_Models;
 using VideogameShop.Library.Services;
 using System.Reflection;
+using VideogameShopLibrary.Services;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
@@ -18,78 +19,35 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
     {
         
         // GET: OrderController
-        public ActionResult Index()
+        public ActionResult Index(DateTime fromDate, DateTime toDate)
         {
-            //DataTable dtblOrder = new DataTable();
-            //using(SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
-            //{
-            //    sqlCon.Open();
-            //    SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Sales", sqlCon);
-            //    sqlDa.Fill(dtblOrder);
-            //}
-            //return View(dtblOrder);
-            List<Order> orders = new List<Order>();
-            using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
+            string sql;
+            
+            //checking if the fromDate hasn't been initialized
+            if (fromDate == Convert.ToDateTime("January 1, 0001"))
             {
-                sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Sales", sqlCon);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Order order = new Order();
-                        for (int i = 0; i < reader.FieldCount; i++)
-                        {
-                            var str = reader.GetName(i);
-                            str = str.Replace(" ", "");
-                            PropertyInfo propertyInfo = order.GetType().GetProperty(str);
-
-                            if (propertyInfo != null && !reader.IsDBNull(i))
-                            {
-                                propertyInfo.SetValue(order, reader.GetValue(i), null);
-                            }
-                        }
-                        orders.Add(order);
-                    }
-                }
-
+                sql = "SELECT * FROM Sales";
             }
+
+            else
+            {
+                //checking if fromDate is not higher than toDate
+                if (fromDate > toDate)
+                {
+                    ViewBag.Message = "Invalid Date";
+                    sql = "SELECT * FROM Sales";
+                }
+                else
+                {
+                    sql = $"SELECT * FROM Sales WHERE (Date >= '{fromDate}' AND Date <= '{toDate}')";
+                }
+            }
+            List<Order> orders = DisplayDbData.DisplayOrders(new List<Order>(), sql);
             return View(orders);
             
         }
+
         
-
-        public ActionResult IndexFilteredByDate(DateTime fromDate, DateTime toDate)
-        {
-            List<Order> orders = new List<Order>();
-            using(SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
-            {
-                sqlCon.Open();
-                var sql = $"SELECT * FROM Sales WHERE (Date >= {fromDate} AND <= {toDate})";
-                SqlCommand cmd = new SqlCommand(sql,sqlCon);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while(reader.Read())
-                    {
-                        Order order = new Order();
-                        for (int i = 0; i < reader.FieldCount; i++)
-                        {
-                            var str = reader.GetName(i);
-                            str = str.Replace(" ", "");
-                            PropertyInfo propertyInfo = order.GetType().GetProperty(str);
-
-                            if (propertyInfo != null && !reader.IsDBNull(i))
-                            {
-                                propertyInfo.SetValue(order, reader.GetValue(i), null);
-                            }
-                        }
-                        orders.Add(order);
-                    }
-                }
-
-            }
-            return View(orders);
-        }
 
      
         // GET: OrderController/Upload
@@ -110,48 +68,40 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Order order)
         {
+            var insert = new InventoryManagementService();
+
             if (order.SaleType == "Credit")
             {
-                CreditCardValidationService validateCard = new CreditCardValidationService();
-                
-                if(validateCard.Validate(order.CreditCardNumber))
+
+                if (insert.CreateCreditCardOrder(order))
                 {
-                    using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
-                    {
-                        sqlCon.Open();
-                        var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone] ,Email, [Sale Type]," +
-                                   "[Credit Card Name], [Credit Card Number], [Expiration Date], [Security Code])" +
-                                  $"VALUES ('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}," +
-                                  $"'{order.CustomerName}', '{order.CustomerPhone}', '{order.Email}','{order.SaleType}'," +
-                                  $"'{order.CreditCardName}', {order.CreditCardNumber}, '{order.ExpirationDate}', {order.SecurityCode})";
-                        SqlCommand cmd = new SqlCommand(sql, sqlCon);
-                        cmd.ExecuteNonQuery();
-                    }
                     return RedirectToAction(nameof(Index));
                 }
                 else
                 {
                     ViewBag.Message = "Invalid Credit Card";
                     return View();
-                    
                 }
+
             }
+            
             else if(order.SaleType == "Cash")
             {
-                using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
+                if (insert.CreateCashOrder(order))
                 {
-                    sqlCon.Open();
-                    var sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, [Customer Name], [Customer Phone], Email, [Sale Type])" +
-                   $"VALUES('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}, '{order.CustomerName}', '{order.CustomerPhone}'," +
-                   $"'{order.Email}','{order.SaleType}')";
-                    SqlCommand cmd = new SqlCommand(sql, sqlCon);
-                    cmd.ExecuteNonQuery();
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                else
+                {
+                    ViewBag.Message = "Problem Inserting order";
+                    return View();
+                }
             }
+
             else
             {
-                return Content("<script language='javascript' type='text/javascript'>alert('Invalid Sale Type');</script>");
+                ViewBag.Message = "Invalid type of sale";
+                return View();
             }
 
         }

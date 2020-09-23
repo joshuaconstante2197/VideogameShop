@@ -75,7 +75,7 @@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
-            
+
         </form>
     </div>
 </div>
@@ -83,4 +83,12 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+    window.onload = function(){
+        alert("@ViewBag.Message");
+    </script>
+
+}
 
