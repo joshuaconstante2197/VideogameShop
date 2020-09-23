@@ -14,7 +14,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
+                <input asp-for="Quantity" onchange="total()" class="form-control" id="Quantity"/>
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Total" class="control-label"></label>
-                <input asp-for="Total" class="form-control" value="@ViewBag.Product.Price"/>
+                <input asp-for="Total"  class="form-control" id="Total"/>
                 <span asp-validation-for="Total" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -69,11 +69,22 @@
 @if (ViewBag.Message != null)
 {
     <script type="text/javascript">
-    window.onload = function(){
-        alert("@ViewBag.Message");
-        check();
+        window.onload = function () {
+            alert("@ViewBag.Message");
+            check();
+        }
     </script>
 }
+<script>
+    
+    function total() {
+        var quantity = document.getElementById("Quantity");
+        var total = document.getElementById("Total");
+        var result = (@ViewBag.Product.Price * quantity.value);
+        total.value = result;
+        console.log(total.value)
+    }
+</script>
 
 <script src="~/js/creditCardChecker.js" asp-append-version="true"></script>
 

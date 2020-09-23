@@ -228,19 +228,19 @@ namespace VideogameShopLibrary
                         SqlCommand cmd = new SqlCommand("spCreateCreditCardOrder", sqlCon);
 
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Product", order.Product);
-                        cmd.Parameters.AddWithValue("@Quantity", order.Quantity);
-                        cmd.Parameters.AddWithValue("@Condition", order.Condition);
-                        cmd.Parameters.AddWithValue("@Date", order.Date);
-                        cmd.Parameters.AddWithValue("@Total", order.Total);
-                        cmd.Parameters.AddWithValue("@CustomerName", order.CustomerName);
-                        cmd.Parameters.AddWithValue("@CustomerPhone", order.CustomerPhone);
-                        cmd.Parameters.AddWithValue("@Email", order.Email);
-                        cmd.Parameters.AddWithValue("@SaleType", order.SaleType);
-                        cmd.Parameters.AddWithValue("@CreditCardName", order.CreditCardName);
-                        cmd.Parameters.AddWithValue("@CreditCardNumber", order.CreditCardNumber);
-                        cmd.Parameters.AddWithValue("@ExpirationDate", order.ExpirationDate);
-                        cmd.Parameters.AddWithValue("@SecurityCode", order.SecurityCode);
+                        cmd.Parameters.Add(new SqlParameter("@Product", order.Product));
+                        cmd.Parameters.Add(new SqlParameter("@Quantity", order.Quantity));
+                        cmd.Parameters.Add(new SqlParameter("@Condition", order.Condition));
+                        cmd.Parameters.Add(new SqlParameter("@Date", order.Date));
+                        cmd.Parameters.Add(new SqlParameter("@Total", order.Total));
+                        cmd.Parameters.Add(new SqlParameter("@CustomerName", order.CustomerName));
+                        cmd.Parameters.Add(new SqlParameter("@CustomerPhone", order.CustomerPhone));
+                        cmd.Parameters.Add(new SqlParameter("@Email", order.Email));
+                        cmd.Parameters.Add(new SqlParameter("@SaleType", order.SaleType));
+                        cmd.Parameters.Add(new SqlParameter("@CreditCardName", order.CreditCardName));
+                        cmd.Parameters.Add(new SqlParameter("@CreditCardNumber", order.CreditCardNumber));
+                        cmd.Parameters.Add(new SqlParameter("@ExpirationDate", order.ExpirationDate));
+                        cmd.Parameters.Add(new SqlParameter("@SecurityCode", order.SecurityCode));
 
                         cmd.ExecuteNonQuery();
 
