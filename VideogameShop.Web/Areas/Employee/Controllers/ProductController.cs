@@ -30,7 +30,9 @@ namespace VideogameShop.Web.Controllers
         {
             try
             {
+
                 var uploadProduct = new InventoryManagementService();
+                uploadProduct.SaveProductChar(Config.PathToInvetoryFile);
                 uploadProduct.SaveCsvInventory(Config.PathToInvetoryFile);
                 return RedirectToAction(nameof(Index));
             }
