@@ -1,3 +1,6 @@
+USE [Videogame_Shop]
+GO
+
 create procedure dbo.spCreateCashOrder
 		@Product varchar(50), 
 		@Quantity int, 

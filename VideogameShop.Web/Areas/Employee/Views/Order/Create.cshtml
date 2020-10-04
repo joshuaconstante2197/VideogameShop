@@ -82,15 +82,7 @@
     </script>
 
 }
-<script>
-    function total() {
-        var quantity = document.getElementById("Quantity");
-        var total = document.getElementById("Total");
-        var result = (@ViewBag.Product.Price * quantity.value);
-        total.value = numberFormatter.format(result);
-        console.log(total.value)
-    }
-</script>
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
