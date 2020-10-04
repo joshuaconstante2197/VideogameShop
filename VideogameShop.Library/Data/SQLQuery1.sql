@@ -32,11 +32,28 @@ USE VideoGame_Shop
 	END
 END
 
+IF EXISTS ( SELECT * 
+            FROM   sysobjects 
+            WHERE  id = object_id(N'dbo.spCreateCashOrder') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+	DROP PROCEDURE dbo.spCreateCashOrder;
+END
+
+IF EXISTS ( SELECT * 
+            FROM   sysobjects 
+            WHERE  id = object_id(N'dbo.spCreateCreditCardOrder') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+	DROP PROCEDURE dbo.spCreateCreditCardOrder;
+END
+
 IF DB_ID('VideoGame_Shop') IS NULL
 
 	BEGIN
 		CREATE DATABASE VideoGame_Shop
 	END
+
 
 USE Videogame_Shop
 GO
