@@ -25,6 +25,25 @@ namespace VideogameShop.Web.Controllers
             return View(Products);
         }
 
+        //ProductController/Upload
+        public ActionResult Upload()
+        {
+            try
+            {
+                var uploadProduct = new InventoryManagementService();
+                uploadProduct.SaveCsvInventory(Config.PathToInvetoryFile);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                var Err = new CreateLogFiles();
+                Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
+                Console.WriteLine("Fatal error : " + ex.Message + ", please find a complete error at ErrorLog file");
+                throw;
+            }
+            
+        }
+
 
         // GET: ProductController/Create
         public ActionResult Create()

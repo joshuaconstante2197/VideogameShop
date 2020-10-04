@@ -53,9 +53,20 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         // GET: OrderController/Upload
         public ActionResult Upload()
         {
-            var uploadOrder = new InventoryManagementService();
-            uploadOrder.SaveCsvOrders(Config.PathToSalesFile);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var uploadOrder = new InventoryManagementService();
+                uploadOrder.SaveCsvOrders(Config.PathToSalesFile);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                var Err = new CreateLogFiles();
+                Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
+                Console.WriteLine("Fatal error : " + ex.Message + ", please find a complete error at ErrorLog file");
+                throw;
+            }
+
         }
 
         public ActionResult Create()

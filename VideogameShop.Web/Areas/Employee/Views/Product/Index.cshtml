@@ -6,7 +6,7 @@
 
 <table class="table table-bordered " id="dataTable">
     <thead>
-        <tr >
+        <tr>
             <th>Product Name</th>
             <th>Category</th>
             <th>Platform</th>
@@ -41,9 +41,11 @@
             </tr>
         }
     </tbody>
-    
+
 </table>
-    <a class="btn btn-success" href="@Url.Action("Create","Product")">Add a New Product</a>
+<a type="button" class="btn btn-info" href="@Url.Action("Upload","Product")">Update Product from File</a>
+
+<a class="btn btn-success" href="@Url.Action("Create","Product")">Add a New Product</a>
 <script src="~/js/productChecker.js" asp-append-version="true"></script>
 <hr />
 
