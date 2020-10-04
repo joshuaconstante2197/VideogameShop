@@ -1,9 +1,45 @@
-DROP TABLE dbo.Inventory;
-DROP TABLE dbo.P_Platforms;
-DROP TABLE dbo.P_Categories;
-DROP TABLE dbo.P_Conditions;
-DROP TABLE dbo.P_Types;
-DROP TABLE dbo.Sales;
+IF DB_ID('VideoGame_Shop') IS NOT NULL
+BEGIN
+USE VideoGame_Shop
+	IF  OBJECT_ID('dbo.Inventory','U') IS NOT NULL 
+		BEGIN
+		   DROP TABLE dbo.Inventory;
+		END
+
+	IF OBJECT_ID('dbo.Sales','U') IS NOT NULL 
+		BEGIN
+			DROP TABLE dbo.Sales;
+		END
+
+	IF OBJECT_ID('dbo.P_Platforms','U') IS NOT NULL 
+		BEGIN
+		   DROP TABLE dbo.P_Platforms;
+		END
+
+	IF OBJECT_ID('dbo.P_Categories','U') IS NOT NULL 
+		BEGIN
+		   DROP TABLE dbo.P_Categories;
+		END
+
+	IF OBJECT_ID('dbo.P_Conditions','U') IS NOT NULL 
+	BEGIN
+		DROP TABLE dbo.P_Conditions;
+	END
+
+	IF OBJECT_ID('dbo.P_Types','U') IS NOT NULL 
+	BEGIN
+		DROP TABLE dbo.P_Types;
+	END
+END
+
+IF DB_ID('VideoGame_Shop') IS NULL
+
+	BEGIN
+		CREATE DATABASE VideoGame_Shop
+	END
+
+USE Videogame_Shop
+GO
 
 CREATE TABLE Inventory (productId INTEGER CONSTRAINT PproductKey PRIMARY KEY IDENTITY(1,1), 
 	[Game Title] varchar(50), 
@@ -20,15 +56,16 @@ CREATE TABLE Sales (orderId INTEGER CONSTRAINT PsalesKey PRIMARY KEY IDENTITY(1,
 	Product varchar(50), 
 	Quantity int, 
 	Condition varchar(50), 
-	Date date, Total money, 
+	Date date, 
+	Total money, 
 	[Customer Name] varchar(50), 
 	[Customer Phone] varchar(30), 
 	Email varchar(50),
-	[Type of Sale] varchar(10), 
-	[Name on Credit Card] varchar(50), 
-	[Credit Card Number] int, 
+	[Sale Type] varchar(10), 
+	[Credit Card Name] varchar(50), 
+	[Credit Card Number] bigint, 
 	[Expiration Date] date,
-	[Security Code] int
+	[Security Code] varchar(5)
 )
 
 CREATE TABLE P_Categories(
@@ -63,12 +100,3 @@ ALTER TABLE Inventory
 ADD FOREIGN KEY([Product Type])
 REFERENCES P_Types([Product Type])
 ON DELETE NO ACTION;
-
---INSERT INTO P_Categories(Category) VALUES('Action')
---INSERT INTO P_Categories(Category) VALUES('Adventure')
---INSERT INTO P_Platforms(Platform) VALUES('ps$')
-
-
---INSERT INTO P_Categories(Category) SELECT('Action') WHERE NOT EXISTS(SELECT * FROM P_Categories WHERE Category = 'Action')
-
-SELECT * FROM P_Categories
