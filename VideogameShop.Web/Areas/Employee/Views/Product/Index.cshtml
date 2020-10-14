@@ -46,7 +46,21 @@
 <a type="button" class="btn btn-info" href="@Url.Action("Upload","Product")">Update Product from File</a>
 
 <a class="btn btn-success" href="@Url.Action("Create","Product")">Add a New Product</a>
+
+        <div class="col-4">
+            <input type="file" enctype="file" name="files" class="form-control" />
+        </div>
+    
+
 <script src="~/js/productChecker.js" asp-append-version="true"></script>
 <hr />
+@if (ViewBag.Message != null )
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        }
+    </script>
 
+}
 

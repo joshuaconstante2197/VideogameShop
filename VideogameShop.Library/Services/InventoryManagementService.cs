@@ -78,25 +78,31 @@ namespace VideogameShopLibrary
         /// Saves Inventory CSV data into database
         /// </summary>
 
-        public void SaveCsvInventory(string inputFileName)
+        public int SaveCsvInventory(string inputFileName)
         {
             SqlCommand cmd;
+            int rowsAffected = 0;
 
             foreach (var product in new ChoCSVReader<Product>(inputFileName)
                 .WithFirstLineHeader()
                 )
             {
 
-                var sql = "INSERT INTO Inventory( [Game Title], Category, Platform, [Available Units], Cost, Price, Condition, [Product Type])" +
-                    $"VALUES('{product.GameTitle}', '{product.Category}',  '{product.Platform}', {product.AvailableUnits}," +
-                    $"{product.Cost} , {product.Price},  '{product.Condition}',  '{product.ProductType}' )";
+                var sql = $"IF NOT EXISTS(SELECT * FROM Inventory WHERE [Game Title] = '{product.GameTitle}')" +
+                    "BEGIN " +
+                        "INSERT INTO Inventory([Game Title], Category, Platform, [Available Units], Cost, Price, Condition, [Product Type])" +
+                        $"VALUES('{product.GameTitle}', '{product.Category}',  '{product.Platform}', {product.AvailableUnits}," +
+                        $"{product.Cost} , {product.Price},  '{product.Condition}',  '{product.ProductType}' ) " +
+                    "END";
                 using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
                 {
                     sqlConnection.Open();
                     cmd = new SqlCommand(sql, sqlConnection);
-                    cmd.ExecuteNonQuery();
+                    rowsAffected += cmd.ExecuteNonQuery();
                 }
             }
+            Console.WriteLine(rowsAffected + " rows were affected");
+            return rowsAffected;
         }
 
         /// <summary>
@@ -209,8 +215,6 @@ namespace VideogameShopLibrary
                     }
 
                 }
-
-
             }
         }
         //method to add credit card orders
@@ -317,14 +321,15 @@ namespace VideogameShopLibrary
         {
             SqlCommand cmd;
             var sql = "DELETE FROM Inventory; DELETE FROM Sales; DELETE FROM P_Categories; DELETE FROM P_Conditions; DELETE FROM P_Platforms; DELETE FROM P_Types;";
-
+            int rows = 0;
             using (SqlConnection sqlConnection = new SqlConnection(Config.ConnString))
             {
                 sqlConnection.Open();
                 cmd = new SqlCommand(sql, sqlConnection);
-                cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             Console.WriteLine("dropped al data");
+            Console.WriteLine("Rows Affected " + rows);
         }
 
     }

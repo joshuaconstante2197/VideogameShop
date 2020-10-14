@@ -22,6 +22,11 @@ namespace VideogameShop.Web.Controllers
         public ActionResult Index()
         {
             var Products = DisplayDbData.DisplayInventory(new List<Product>());
+            if(TempData["rowsAffected"] != null)
+            {
+                ViewBag.Message = TempData["rowsAffected"].ToString();
+            }
+
             return View(Products);
         }
 
@@ -30,10 +35,18 @@ namespace VideogameShop.Web.Controllers
         {
             try
             {
-
                 var uploadProduct = new InventoryManagementService();
                 uploadProduct.SaveProductChar(Config.PathToInvetoryFile);
-                uploadProduct.SaveCsvInventory(Config.PathToInvetoryFile);
+
+                var rowsAffected = uploadProduct.SaveCsvInventory(Config.PathToInvetoryFile);
+                if(rowsAffected > 0)
+                {
+                    TempData["rowsAffected"] = rowsAffected == 1 ? "1 row was affected" : $"{rowsAffected} rows were affected";
+                }
+                else
+                {
+                    TempData["rowsAffected"] = "0 rows were affected";
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
