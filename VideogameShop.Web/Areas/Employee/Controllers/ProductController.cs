@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VideogameShop.Library.Services;
 using VideogameShopLibrary;
 using VideogameShopLibrary.CVS_Models;
 using VideogameShopLibrary.Services;
+using System.IO;
 
 namespace VideogameShop.Web.Controllers
 {
@@ -17,7 +14,8 @@ namespace VideogameShop.Web.Controllers
     public class ProductController : Controller
     {
         // GET: ProductController
-        
+       
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -31,32 +29,49 @@ namespace VideogameShop.Web.Controllers
         }
 
         //ProductController/Upload
-        public ActionResult Upload()
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> UploadAsync(IFormFile file)
         {
-            try
-            {
-                var uploadProduct = new InventoryManagementService();
-                uploadProduct.SaveProductChar(Config.PathToInvetoryFile);
+            if (file != null && file.Length > 0)
+                try
+                {
+                    var filePath = Path.GetTempFileName();
+                    var uploadProduct = new InventoryManagementService();
+                    int rowsAffected = 0;
+                    FileStream stream = null;
 
-                var rowsAffected = uploadProduct.SaveCsvInventory(Config.PathToInvetoryFile);
-                if(rowsAffected > 0)
-                {
-                    TempData["rowsAffected"] = rowsAffected == 1 ? "1 row was affected" : $"{rowsAffected} rows were affected";
+                    using (stream = System.IO.File.Create(filePath))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    uploadProduct.SaveProductChar(stream.Name);
+                    rowsAffected = uploadProduct.SaveCsvInventory(stream.Name);
+
+                    if (rowsAffected > 0)
+                    {
+                        TempData["rowsAffected"] = rowsAffected == 1 ? "1 row was affected" : $"{rowsAffected} rows were affected";
+                    }
+                    else
+                    {
+                        TempData["rowsAffected"] = "0 rows were affected";
+                    }
+                    return RedirectToAction(nameof(Index));
                 }
-                else
+                catch (Exception ex)
                 {
-                    TempData["rowsAffected"] = "0 rows were affected";
+                    var Err = new CreateLogFiles();
+                    Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
+                    Console.WriteLine("Fatal error : " + ex.Message + ", please find a complete error at ErrorLog file");
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
+            else
             {
-                var Err = new CreateLogFiles();
-                Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
-                Console.WriteLine("Fatal error : " + ex.Message + ", please find a complete error at ErrorLog file");
-                throw;
+                ViewBag.Message = "Unable to upload file";
+                return RedirectToAction(nameof(Index));
+
             }
-            
+
         }
 
 
