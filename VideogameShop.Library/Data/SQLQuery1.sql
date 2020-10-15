@@ -30,6 +30,11 @@ USE VideoGame_Shop
 	BEGIN
 		DROP TABLE dbo.P_Types;
 	END
+
+	IF OBJECT_ID('dbo.AppUser','U') IS NOT NULL
+	BEGIN
+		DROP TABLE dbo.AppUser;
+	END
 END
 
 IF EXISTS ( SELECT * 
@@ -96,6 +101,11 @@ CREATE TABLE P_Conditions(
 )
 CREATE TABLE P_Types(
 	[Product Type] varchar(50) UNIQUE
+)
+CREATE TABLE AppUser(UserId INTEGER CONSTRAINT PappUserKey PRIMARY KEY IDENTITY(1,1),
+	UserName varchar(50) UNIQUE,
+	Password varchar(50),
+	IsAdmin bit
 )
 
 ALTER TABLE Inventory

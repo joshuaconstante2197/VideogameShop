@@ -43,40 +43,37 @@
     </tbody>
 
 </table>
-<a type="button" class="btn btn-info" href="@Url.Action("Upload", "Product")">Update Product from File</a>
-
-<a class="btn btn-success" href="@Url.Action("Create", "Product")">Add a New Product</a>
-
-
-@using (Html.BeginForm("Upload",
-                     "Product",
-                     FormMethod.Post,
-                     new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Upload", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <label for="file">Upload File:</label>
-    <input type="file" name="file" id="file" />
-    <br>
-    <br>
+    <div class="input-group w-50 mb-2">
 
-    <input type="submit" value="Upload" />
+        <div class="custom-file">
+            <label for="file" class="custom-file-label">Upload File:</label>
+            <input type="file" name="file" id="file" class="custom-file-input" />
+        </div>
+
+        <div class="input-group-append">
+            <input type="submit" value="Upload" class="input-group-text" />
+        </div>
+
+    </div>
 
 }
+<div class="input-group mb-2">
+    <a class="btn btn-success" href="@Url.Action("Create", "Product")">Add a New Product</a>
+</div>
 
 
 
-
-
-
-
-    <script src="~/js/productChecker.js" asp-append-version="true"></script>
-    <hr />
-    @if (ViewBag.Message != null)
-    {
-        <script type="text/javascript">
+<script src="~/js/productChecker.js" asp-append-version="true"></script>
+<hr />
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
         window.onload = function () {
             alert("@ViewBag.Message");
         }
-        </script>
+    </script>
 
-    }
+}
 
