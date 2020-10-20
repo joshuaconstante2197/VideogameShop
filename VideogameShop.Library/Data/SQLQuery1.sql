@@ -31,9 +31,19 @@ USE VideoGame_Shop
 		DROP TABLE dbo.P_Types;
 	END
 
-	IF OBJECT_ID('dbo.AppUser','U') IS NOT NULL
+	IF OBJECT_ID('dbo.Roles','U') IS NOT NULL
 	BEGIN
-		DROP TABLE dbo.AppUser;
+		DROP TABLE dbo.Roles;
+	END
+
+	IF OBJECT_ID('dbo.Users','U') IS NOT NULL
+	BEGIN
+		DROP TABLE dbo.Users;
+	END
+
+	IF OBJECT_ID('dbo.UserRoles','U') IS NOT NULL
+	BEGIN
+		DROP TABLE dbo.UserRoles;
 	END
 END
 
@@ -102,11 +112,45 @@ CREATE TABLE P_Conditions(
 CREATE TABLE P_Types(
 	[Product Type] varchar(50) UNIQUE
 )
-CREATE TABLE AppUser(UserId INTEGER CONSTRAINT PappUserKey PRIMARY KEY IDENTITY(1,1),
-	UserName varchar(50) UNIQUE,
-	Password varchar(50),
-	IsAdmin bit
-)
+CREATE TABLE [dbo].[Users](
+	[Id] [nvarchar](50) NOT NULL,
+	[Username] [nvarchar](50) NOT NULL,
+	[Email] [nvarchar](50) NOT NULL,
+	[Password] [nvarchar](50) NOT NULL,
+	[Status] [int] NOT NULL DEFAULT(0),
+	[CreatedOnDate] [datetime] NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_CreatedOnDate]  DEFAULT (getdate()) FOR [CreatedOnDate]
+GO
+
+CREATE TABLE [dbo].[Roles](
+	[Id] [nvarchar](50) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[UserRoles](
+	[UserRoleID] [nvarchar](50) NOT NULL,
+	[UserID] [nvarchar](50) NOT NULL,
+	[RoleID] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_UserRoles] PRIMARY KEY CLUSTERED 
+(
+	[UserRoleID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
 
 ALTER TABLE Inventory
 ADD FOREIGN KEY(Category)

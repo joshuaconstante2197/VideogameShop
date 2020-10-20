@@ -1,18 +1,22 @@
 ﻿@model VideogameShop.Library.Models.AppUser
 
 @{
-    ViewData["Title"] = "AddorEdit";
+    ViewData["Title"] = "User Registration";
 }
 
-<h1>AddorEdit</h1>
+<h1>AddOrEdit</h1>
 
-<h4>AppUser</h4>
+<h4>User Registration</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddorEdit">
+        <form asp-action="AddOrEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
                 <input asp-for="UserName" class="form-control" />
@@ -40,8 +44,4 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-    
 
