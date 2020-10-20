@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\VideogameShop.Library\\VideogameShop.Library.csproj": {}
+    "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\VideogameShop.Library\\VideogameShop.Library.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\VideogameShop.Library\\VideogameShop.Library.csproj": {
+    "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\VideogameShop.Library\\VideogameShop.Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\VideogameShop.Library\\VideogameShop.Library.csproj",
+        "projectUniqueName": "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\VideogameShop.Library\\VideogameShop.Library.csproj",
         "projectName": "VideogameShop.Library",
-        "projectPath": "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\VideogameShop.Library\\VideogameShop.Library.csproj",
-        "packagesPath": "C:\\Users\\joshu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\VideogameShop.Library\\obj\\",
+        "projectPath": "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\VideogameShop.Library\\VideogameShop.Library.csproj",
+        "packagesPath": "C:\\Users\\Ibiley Uniforms\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\VideogameShop.Library\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\joshu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ibiley Uniforms\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -50,6 +50,14 @@
               "target": "Package",
               "version": "[1.50.4, )"
             },
+            "Microsoft.AspNet.Identity.Core": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            },
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.3, )"
@@ -70,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -4,7 +4,12 @@ using System.Text;
 
 namespace VideogameShop.Library.Utilities
 {
-    class Enums
+    public enum EnumUserStatus
     {
+        Pending = 0,
+        Active,
+        LockedOut,
+        Closed,
+        Banned
     }
 }
