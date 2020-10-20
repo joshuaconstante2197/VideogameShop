@@ -1,10 +1,35 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using VideogameShopLibrary;
 
 namespace VideogameShop.Library.Data
 {
-    class SqlHelper
+    public class SqlHelper
     {
+        public static T GetRecord<T>(string spName, List<ParameterInfo> parameters)
+        {
+            T objRecord = default(T);
+
+            using(SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                sqlCon.Open();
+                DynamicParameters p = new DynamicParameters();
+                foreach (var param in parameters)
+                {
+                    p.Add("@" + param.ParameterName, param.ParameterValue);
+                }
+
+                objRecord = SqlMapper.Query<T>(sqlCon, spName, p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                sqlCon.Close();
+            }
+            return objRecord;
+        }
     }
 }

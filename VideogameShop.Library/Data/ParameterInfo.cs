@@ -4,7 +4,9 @@ using System.Text;
 
 namespace VideogameShop.Library.Data
 {
-    class ParameterInfo
+    public class ParameterInfo
     {
+        public string ParameterName { get; set; }
+        public object ParameterValue { get; set; }
     }
 }
