@@ -1,4 +1,5 @@
-﻿@using VideogameShopLibrary.CVS_Models
+﻿@using Microsoft.AspNetCore.Http
+@using VideogameShopLibrary.CVS_Models
 @model List<Product>
 @{
     ViewData["Title"] = "Index";
@@ -43,22 +44,27 @@
     </tbody>
 
 </table>
-@using (Html.BeginForm("Upload", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+@if (ViewBag.IsAuthorized)
 {
-    <div class="input-group w-50 mb-2">
+    @using (Html.BeginForm("Upload", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="input-group w-50 mb-2">
 
-        <div class="custom-file">
-            <label for="file" class="custom-file-label">Upload File:</label>
-            <input type="file" name="file" id="file" class="custom-file-input" />
+            <div class="custom-file">
+                <label for="file" class="custom-file-label">Upload File:</label>
+                <input type="file" name="file" id="file" class="custom-file-input" />
+            </div>
+
+            <div class="input-group-append">
+                <input type="submit" value="Upload" class="input-group-text" />
+            </div>
+
         </div>
 
-        <div class="input-group-append">
-            <input type="submit" value="Upload" class="input-group-text" />
-        </div>
-
-    </div>
-
+    }
 }
+
 <div class="input-group mb-2">
     <a class="btn btn-success" href="@Url.Action("Create", "Product")">Add a New Product</a>
 </div>

@@ -12,7 +12,7 @@ namespace VideogameShop.Web.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            p
+            
         }
         public DbSet<Order> Order { get; set; }
     }

@@ -12,6 +12,7 @@ using VideogameShop.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace VideogameShop.Web
 {
@@ -34,7 +35,7 @@ namespace VideogameShop.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
         
         public static string ConnectionString

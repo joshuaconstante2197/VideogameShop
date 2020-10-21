@@ -1335,10 +1335,15 @@ C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.We
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\User\AddOrEdit.cshtml.g.cs
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\bin\Debug\netcoreapp3.1\EntityFramework.dll
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\bin\Debug\netcoreapp3.1\Microsoft.AspNet.Identity.Core.dll
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\bin\Debug\netcoreapp3.1\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\VideogameShop.Web.csproj.CoreCompileInputs.cache
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\VideogameShop.Web.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\VideogameShop.Web.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\bin\Debug\netcoreapp3.1\Dapper.dll
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Login\Index.cshtml.g.cs
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Member\Index.cshtml.g.cs

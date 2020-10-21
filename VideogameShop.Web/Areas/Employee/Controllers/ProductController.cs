@@ -7,25 +7,33 @@ using VideogameShopLibrary;
 using VideogameShopLibrary.CVS_Models;
 using VideogameShopLibrary.Services;
 using System.IO;
+using VideogameShop.Library.Utilities;
 
 namespace VideogameShop.Web.Controllers
 {
     [Area("Employee")]
     public class ProductController : Controller
     {
+        
         // GET: ProductController
-       
+
 
         [HttpGet]
         public ActionResult Index()
         {
             var Products = DisplayDbData.DisplayInventory(new List<Product>());
+            ViewBag.IsAuthorized = Utils.IfUserAuthenticated(HttpContext);
             if(TempData["rowsAffected"] != null)
             {
                 ViewBag.Message = TempData["rowsAffected"].ToString();
             }
 
             return View(Products);
+        }
+        public void getContext(HttpContext context)
+        {
+            var host = $"{context.Request.Scheme}://{context.Request.Host}";
+
         }
 
         //ProductController/Upload
