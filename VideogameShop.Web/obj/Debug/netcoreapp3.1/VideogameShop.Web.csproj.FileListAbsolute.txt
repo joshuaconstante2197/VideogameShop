@@ -1317,7 +1317,6 @@ C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.We
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Product\Index.cshtml.g.cs
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\_ViewImports.cshtml.g.cs
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\_ViewStart.cshtml.g.cs
-C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
@@ -1334,4 +1333,7 @@ C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.We
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\VideogameShop.Web.pdb
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\VideogameShop.Web.genruntimeconfig.cache
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Order\CreateFromProduct.cshtml.g.cs
-C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\User\AddorEdit.cshtml.g.cs
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Account\Register.cshtml.g.cs
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Account\Login.cshtml.g.cs
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Administration\CreateRole.cshtml.g.cs
+C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Employee\Views\Administration\ListRoles.cshtml.g.cs

@@ -11,13 +11,16 @@ using VideogameShopLibrary.CVS_Models;
 using VideogameShop.Library.Services;
 using System.Reflection;
 using VideogameShopLibrary.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
     [Area("Employee")]
+    [Authorize]
     public class OrderController : Controller
     {
-        
+        [HttpGet]
+        [AllowAnonymous]
         // GET: OrderController
         public ActionResult Index(DateTime fromDate, DateTime toDate)
         {
@@ -49,7 +52,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
 
         
 
-     
+        
         // GET: OrderController/Upload
         public ActionResult Upload()
         {
@@ -77,6 +80,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         // POST: OrderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult Create(Order order)
         {
             var insert = new InventoryManagementService();
@@ -117,6 +121,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
 
         }
         //to place order directly from a product
+
         public ActionResult CreateFromProduct(int Id)
         {
             Product product = new Product();
@@ -146,51 +151,11 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             return PartialView();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+
+
+        
        
 
-
-        // GET: OrderController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: OrderController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: OrderController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: OrderController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

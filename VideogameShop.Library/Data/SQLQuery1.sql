@@ -59,7 +59,6 @@ IF DB_ID('VideoGame_Shop') IS NULL
 		CREATE DATABASE VideoGame_Shop
 	END
 
-
 USE Videogame_Shop
 GO
 

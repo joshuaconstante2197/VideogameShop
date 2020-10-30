@@ -8,7 +8,6 @@ namespace VideogameShop.Library.Models
 {
     public class AppUser
     {
-        public int UserId { get; set; }
 
         [Required(ErrorMessage ="This field is required.")]
         public string UserName { get; set; }
@@ -23,6 +22,7 @@ namespace VideogameShop.Library.Models
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
-        public bool IsAdmin { get; set; }
+        [Required(ErrorMessage = "This field is required.")]
+        public string Role { get; set; }
     }
 }

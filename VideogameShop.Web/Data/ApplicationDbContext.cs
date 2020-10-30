@@ -13,6 +13,5 @@ namespace VideogameShop.Web.Data
             : base(options)
         {
         }
-        public DbSet<Order> Order { get; set; }
     }
 }
