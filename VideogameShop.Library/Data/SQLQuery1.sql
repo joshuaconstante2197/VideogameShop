@@ -104,7 +104,7 @@ CREATE TABLE P_Types(
 CREATE TABLE AppUser(UserId INTEGER CONSTRAINT PappUserKey PRIMARY KEY IDENTITY(1,1),
 	UserName varchar(50) UNIQUE,
 	Password varchar(50),
-	IsAdmin bit
+	Role varchar(50)
 )
 
 ALTER TABLE Inventory

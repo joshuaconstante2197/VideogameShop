@@ -48,7 +48,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 foreach (var error in result.Errors)
@@ -61,18 +61,18 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
-                    if(string.IsNullOrEmpty(returnUrl))
+                    if (string.IsNullOrEmpty(returnUrl))
                     {
-                         return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home");
                     }
                     return RedirectToAction(returnUrl);
                 }
-                
+
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempr");
             }
 
@@ -87,7 +87,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+
 
     }
 }

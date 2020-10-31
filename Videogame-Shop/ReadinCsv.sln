@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadinCsv", "ReadinCsv.cspr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideogameShop.Library", "..\VideogameShop.Library\VideogameShop.Library.csproj", "{B860628C-F104-40FC-BB4C-3FE43056E38E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideogameShop.Web", "..\VideogameShop.Web\VideogameShop.Web.csproj", "{C67015AC-20D7-465A-A50D-2363AF5019A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideogameShop.Web", "..\VideogameShop.Web\VideogameShop.Web.csproj", "{C67015AC-20D7-465A-A50D-2363AF5019A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
