@@ -1,121 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using VideogameShop.Library.DAL;
-using VideogameShop.Library.Entities;
-using VideogameShop.Library.Utilities;
-using System.Security.Principal;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
-    private ApplicationSignInManager _signInManager;
-    private ApplicationUserManager _userManager;
-    public ApplicationSignInManager SignInManager
+    public class LoginController : Controller
     {
-        get
+        public IActionResult Index()
         {
-            return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-        }
-        private set
-        {
-            _signInManager = value;
+            return View();
         }
     }
-
-    public ApplicationUserManager UserManager
-    {
-        get
-        {
-            return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        }
-        private set
-        {
-            _userManager = value;
-        }
-    }
-
-    public ActionResult Logout()
-    {
-        SignInManager.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-        return RedirectToAction("Index", "Home");
-    }
-
-    // GET: Login
-    [AllowAnonymous]
-    public ActionResult Index(string returnUrl)
-    {
-        ViewBag.ReturnUrl = returnUrl;
-        return View();
-    }
-
-    [HttpPost]
-    [AllowAnonymous]
-    [ValidateAntiForgeryToken]
-    public async Task<ActionResult> Index(LoginInfo objLogin, string returnUrl)
-    {
-        if (ModelState.IsValid)
-        {
-            ApplicationUser oUser = await SignInManager.UserManager.FindByNameAsync(objLogin.UserName);
-            if (oUser != null && oUser.Password == objLogin.Password)
-            {
-                switch (oUser.Status)
-                {
-                    case EnumUserStatus.Pending:
-                        ModelState.AddModelError("", "Error: User account has not been verified.");
-                        break;
-                    case EnumUserStatus.Active:
-                        SignInManager.SignIn(oUser, false, false);
-                        IList<string> roleList = UserRoleController.GetUserRoles(oUser.Id);
-                        foreach (string role in roleList)
-                        {
-                            UserManager.AddToRole(oUser.Id, role);
-                        }
-
-                        //if no return url provided then redirect page based on role
-                        if (string.IsNullOrEmpty(returnUrl))
-                        {
-                            if (roleList.IndexOf("Administrator") >= 0)
-                            {
-                                return RedirectToAction("Index", "Admin");
-                            }
-                            else
-                            {
-                                return RedirectToAction("Index", "Member");
-                            }
-                        }
-                        return RedirectToLocal(returnUrl);
-
-                    case EnumUserStatus.Banned:
-                        ModelState.AddModelError("", "Error: User account has been banned.");
-                        break;
-                    case EnumUserStatus.LockedOut:
-                        ModelState.AddModelError("", "Error: User account has been locked out due to multiple login tries.");
-                        break;
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("", "Error: Invalid login details.");
-            }
-        }
-        return View(objLogin);
-    }
-
-    private ActionResult RedirectToLocal(string returnUrl)
-    {
-        if (Url.IsLocalUrl(returnUrl))
-        {
-            return Redirect(returnUrl);
-        }
-        return RedirectToAction("Index", "Home");
-    }
-}
 }
