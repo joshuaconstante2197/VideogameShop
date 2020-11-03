@@ -70,7 +70,8 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             var model = new EditRoleViewModel
             {
                 Id = role.Id,
-                RoleName = role.Name
+                RoleName = role.Name,
+                Users = new List<string>()
             };
             foreach (var user in userManager.Users)
             {

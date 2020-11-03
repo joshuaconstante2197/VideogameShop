@@ -43,18 +43,36 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = model.UserName };
-                var result = await userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
+                var resultUser = await userManager.CreateAsync(user, model.Password);
+                IdentityResult resultRole; 
+                if (resultUser.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    var role = await roleManager.FindByNameAsync(model.Role);
+
+                    if (role != null)
+                    {
+                        resultRole = await userManager.AddToRoleAsync(user, model.Role);
+
+                        if (resultRole.Succeeded)
+                        {
+                            await signInManager.SignInAsync(user, isPersistent: false);
+                            return RedirectToAction("Index", "Home");
+                        }
+
+                        foreach (var error in resultRole.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+
+                    }
                 }
 
-                foreach (var error in result.Errors)
+                foreach (var error in resultUser.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
+
+                
             }
             return View();
         }
