@@ -7,3 +7,12 @@ C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Li
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.csproj.CoreCompileInputs.cache
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.dll
 C:\Users\joshu\source\repos\joshuaconstante2197\Videogame-Shopv\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.pdb
+C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\VideogameShop.Library\bin\Debug\netcoreapp3.1\VideogameShop.Library.deps.json
+C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\VideogameShop.Library\bin\Debug\netcoreapp3.1\VideogameShop.Library.dll
+C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\VideogameShop.Library\bin\Debug\netcoreapp3.1\VideogameShop.Library.pdb
+C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.csprojAssemblyReference.cache
+C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.AssemblyInfoInputs.cache
+C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.AssemblyInfo.cs
+C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.csproj.CoreCompileInputs.cache
+C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.dll
+C:\Users\Ibiley Uniforms\source\repos\joshuaconstante2197\VideogameShop.Library\obj\Debug\netcoreapp3.1\VideogameShop.Library.pdb

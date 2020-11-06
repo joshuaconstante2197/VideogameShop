@@ -84,11 +84,14 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                 var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    if (string.IsNullOrEmpty(returnUrl))
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return RedirectToAction(returnUrl);
+                    }
+                    else
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                    return RedirectToAction(returnUrl);
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempr");

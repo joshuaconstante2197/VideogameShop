@@ -6,8 +6,9 @@ namespace VideogameShop.Library.Services
 {
     public class CreditCardValidationService
     {
-        public bool Validate(long dCard)
+        public bool Validate(string card)
         {
+            var dCard = long.Parse(card);
             int remainder0;
             int remainder1;
             int total;

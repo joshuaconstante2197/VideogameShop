@@ -31,6 +31,7 @@ namespace VideogameShopLibrary.CVS_Models
 
 
         [ChoCSVRecordField(5)]
+        [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
         public decimal Total { get; set; }
 
         [ChoCSVRecordField(6, FieldName = "Customer Name")]
@@ -53,7 +54,7 @@ namespace VideogameShopLibrary.CVS_Models
         public string CreditCardName { get; set; }
 
         [ChoCSVRecordField(11, FieldName ="Credit Card Number")]
-        public long CreditCardNumber { get; set; }
+        public string CreditCardNumber { get; set; }
 
         [ChoCSVRecordField(12,FieldName ="Expiration Date")]
         [DataType(DataType.Date)]

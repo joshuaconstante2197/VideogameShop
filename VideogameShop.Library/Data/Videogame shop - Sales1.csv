@@ -1,6 +1,6 @@
 Product,Quantity,Condition,Date,Total,Customer Name,Customer Phone,Email,Sale Type,Credit Card Name,Credit Card Number,Expiration Date,Security Code
-Smash Bros,3,New,1-Jan-20,1099,John Smith,555555,test@gmail.com,Credit,John Smith,5105110000000000,7/6/2024,345
-Headsets,5,New,1-Feb-20,49,Katie Green,44444,test@gmail.com,Credit,Katie Green,4111111111111110,5/21/2023,123
-Smash Bros,6,Used,1-Mar-20,800,Julian Moore,44444,test@gmail.com,Credit,Julian Moore,4012888888881880,7/7/2023,476
+Smash Bros,3,New,1-Jan-20,1099,John Smith,555555,test@gmail.com,Credit,John Smith,5105105105105100,7/6/2024,345
+Headsets,5,New,1-Feb-20,49,Katie Green,44444,test@gmail.com,Credit,Katie Green,4111111111111111,5/21/2023,123
+Smash Bros,6,Used,1-Mar-20,800,Julian Moore,44444,test@gmail.com,Credit,Julian Moore,4012888888881881,7/7/2023,476
 Ghost of Tsushima,1,New,1-Apr-20,40,Berthrand Rusell,5153552121,test@gmail.com,Cash,,,,
 Forza,2,Used,1-May-20,80,Neil Gaiman,5123121315,test@gmail.com,Cash,,,,

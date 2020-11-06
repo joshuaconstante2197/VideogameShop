@@ -12,7 +12,8 @@ create procedure dbo.spCreateCreditCardOrder
 		@Email varchar(50), 
 		@SaleType varchar(10),
 		@CreditCardName varchar(50),
-		@CreditCardNumber bigint,
+		@CreditCardNumber varchar(4),
+		@EncryptedCreditCardNumber varchar(50),
 		@ExpirationDate date,
 		@SecurityCode varchar(5)
 as
@@ -28,7 +29,8 @@ begin
 						Email, 
 						SaleType,
                         CreditCardName, 
-						CreditCardNumber, 
+						CreditCardNumber,
+						EncryptedCreditCardNumber,
 						ExpirationDate, 
 						SecurityCode)
 		values(@Product, 
@@ -42,6 +44,7 @@ begin
 				@SaleType,
 				@CreditCardName,
 				@CreditCardNumber,
+				@EncryptedCreditCardNumber,
 				@ExpirationDate,
 				@SecurityCode);
 		UPDATE Inventory SET AvailableUnits = AvailableUnits - @Quantity WHERE GameTitle = @Product;

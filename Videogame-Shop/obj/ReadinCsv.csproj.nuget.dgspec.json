@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\Videogame-Shop\\ReadinCsv.csproj": {}
+    "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\Videogame-Shop\\ReadinCsv.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\Videogame-Shop\\ReadinCsv.csproj": {
+    "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\Videogame-Shop\\ReadinCsv.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\Videogame-Shop\\ReadinCsv.csproj",
+        "projectUniqueName": "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\Videogame-Shop\\ReadinCsv.csproj",
         "projectName": "ReadinCsv",
-        "projectPath": "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\Videogame-Shop\\ReadinCsv.csproj",
-        "packagesPath": "C:\\Users\\joshu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\Videogame-Shop\\obj\\",
+        "projectPath": "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\Videogame-Shop\\ReadinCsv.csproj",
+        "packagesPath": "C:\\Users\\Ibiley Uniforms\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\Videogame-Shop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\joshu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ibiley Uniforms\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -27,8 +27,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\VideogameShop.Library\\VideogameShop.Library.csproj": {
-                "projectPath": "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\VideogameShop.Library\\VideogameShop.Library.csproj"
+              "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\VideogameShop.Library\\VideogameShop.Library.csproj": {
+                "projectPath": "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\VideogameShop.Library\\VideogameShop.Library.csproj"
               }
             }
           }
@@ -56,21 +56,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\VideogameShop.Library\\VideogameShop.Library.csproj": {
+    "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\VideogameShop.Library\\VideogameShop.Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\VideogameShop.Library\\VideogameShop.Library.csproj",
+        "projectUniqueName": "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\VideogameShop.Library\\VideogameShop.Library.csproj",
         "projectName": "VideogameShop.Library",
-        "projectPath": "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\VideogameShop.Library\\VideogameShop.Library.csproj",
-        "packagesPath": "C:\\Users\\joshu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joshu\\source\\repos\\joshuaconstante2197\\Videogame-Shopv\\VideogameShop.Library\\obj\\",
+        "projectPath": "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\VideogameShop.Library\\VideogameShop.Library.csproj",
+        "packagesPath": "C:\\Users\\Ibiley Uniforms\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ibiley Uniforms\\source\\repos\\joshuaconstante2197\\VideogameShop.Library\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\joshu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ibiley Uniforms\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -122,7 +122,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

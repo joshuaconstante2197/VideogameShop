@@ -8,7 +8,7 @@ create procedure dbo.spCreateCashOrder
 		@Date date, 
 		@Total money, 
 		@CustomerName varchar(50),
-		@CustomerName varchar(30), 
+		@CustomerPhoneNumber varchar(30), 
 		@Email varchar(50), 
 		@SaleType varchar(10)
 as
@@ -20,7 +20,7 @@ begin
 						Date, 
 						Total, 
 						CustomerName, 
-						CustomerName,
+						CustomerPhoneNumber,
 						Email, 
 						SaleType)
 		values(@Product, 
@@ -29,7 +29,7 @@ begin
 				@Date, 
 				@Total, 
 				@CustomerName,
-				@CustomerName, 
+				@CustomerPhoneNumber, 
 				@Email, 
 				@SaleType);
 		UPDATE Inventory SET AvailableUnits = AvailableUnits - @Quantity WHERE GameTitle = @Product;

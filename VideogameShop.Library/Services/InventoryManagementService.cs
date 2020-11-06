@@ -125,11 +125,26 @@ namespace VideogameShopLibrary
                 //check if its credit to insert credit card fields
                 if(order.SaleType == "Credit")
                 {
-                     sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, CustomerName, CustomerPhoneNumber ,Email, SaleType," +
-                                   "CreditCardName, CreditCardNumber, ExpirationDate, SecurityCode)" +
+                    var validateCc = new CreditCardValidationService();
+                    //check if credit card is valid to start insert
+                    if(validateCc.Validate(order.CreditCardNumber))
+                    {
+                        //encrypt credit card
+                        var ccEncrypted = CcOperation.Encrypt(Config.Key, order.CreditCardNumber);
+                        //displayig only last 4 digits so save them as a string 
+                        var lastFourDigits = order.CreditCardNumber.Substring(order.CreditCardNumber.Length - 4, 4);
+
+                        sql = "INSERT INTO Sales(Product, Quantity, Condition, Date, Total, CustomerName, CustomerPhoneNumber ,Email, SaleType," +
+                                   "CreditCardName, CreditCardNumber, EncryptedCreditCardNumber, ExpirationDate, SecurityCode)" +
                                   $"VALUES ('{order.Product}', {order.Quantity}, '{order.Condition}', '{order.Date}', {order.Total}," +
                                   $"'{order.CustomerName}', '{order.CustomerPhoneNumber}', '{order.Email}','{order.SaleType}'," +
-                                  $"'{order.CreditCardName}', {order.CreditCardNumber}, '{order.ExpirationDate}', {order.SecurityCode})";
+                                  $"'{order.CreditCardName}', '{lastFourDigits}', '{ccEncrypted}', '{order.ExpirationDate}', {order.SecurityCode})";
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                   
                 }
                 //if not credit then insert only order information
                 else
@@ -221,10 +236,12 @@ namespace VideogameShopLibrary
         public bool CreateCreditCardOrder(Order order)
         {
             CreditCardValidationService card = new CreditCardValidationService();
-            var lastFourDigits = order.CreditCardNumber.ToString().Substring(order.CreditCardNumber.ToString().Length - 4, 4);
 
             if(card.Validate(order.CreditCardNumber))
             {
+                var ccEncrypted = CcOperation.Encrypt(Config.Key, order.CreditCardNumber);
+                var lastFourDigits = order.CreditCardNumber.Substring(order.CreditCardNumber.Length - 4, 4);
+
                 using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
                 {
                     sqlCon.Open();
@@ -243,7 +260,8 @@ namespace VideogameShopLibrary
                         cmd.Parameters.Add(new SqlParameter("@Email", order.Email));
                         cmd.Parameters.Add(new SqlParameter("@SaleType", order.SaleType));
                         cmd.Parameters.Add(new SqlParameter("@CreditCardName", order.CreditCardName));
-                        cmd.Parameters.Add(new SqlParameter("@CreditCardNumber", order.CreditCardNumber));
+                        cmd.Parameters.Add(new SqlParameter("@CreditCardNumber", lastFourDigits));
+                        cmd.Parameters.Add(new SqlParameter("@EncryptedCreditCardNumber", ccEncrypted));
                         cmd.Parameters.Add(new SqlParameter("@ExpirationDate", order.ExpirationDate));
                         cmd.Parameters.Add(new SqlParameter("@SecurityCode", order.SecurityCode));
 

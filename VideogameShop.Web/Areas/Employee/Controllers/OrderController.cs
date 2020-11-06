@@ -71,7 +71,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             }
 
         }
-
+        [AllowAnonymous]
         public ActionResult Create()
         {
             return View(new Order());
@@ -80,6 +80,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         // POST: OrderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
 
         public ActionResult Create(Order order)
         {
@@ -135,7 +136,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                     {
                         while (reader.Read())
                         { 
-                            product.GameTitle = reader.GetValue(reader.GetOrdinal("Game Title")).ToString();
+                            product.GameTitle = reader.GetValue(reader.GetOrdinal("GameTitle")).ToString();
                             product.Condition = reader.GetValue(reader.GetOrdinal("Condition")).ToString();
                             product.Price = Convert.ToDecimal(reader.GetValue(reader.GetOrdinal("Price")));
                         }
