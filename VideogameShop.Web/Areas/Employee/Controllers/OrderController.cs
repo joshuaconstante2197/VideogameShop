@@ -129,7 +129,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
             {
                 sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("SELECT [Game Title],Condition, Price FROM Inventory WHERE productId = @productId", sqlCon);
+                SqlCommand cmd = new SqlCommand("SELECT GameTitle,Condition, Price FROM Inventory WHERE productId = @productId", sqlCon);
                 cmd.Parameters.AddWithValue("@productId", Id);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {

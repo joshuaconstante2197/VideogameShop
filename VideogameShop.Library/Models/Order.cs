@@ -38,7 +38,7 @@ namespace VideogameShopLibrary.CVS_Models
 
 
         [ChoCSVRecordField(7, FieldName = "Customer Phone")]
-        public string CustomerPhone { get; set; }
+        public string CustomerPhoneNumber { get; set; }
 
         [ChoCSVRecordField(8)]
         public string Email { get; set; }

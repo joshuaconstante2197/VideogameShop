@@ -63,14 +63,14 @@ USE Videogame_Shop
 GO
 
 CREATE TABLE Inventory (productId INTEGER CONSTRAINT PproductKey PRIMARY KEY IDENTITY(1,1), 
-	[Game Title] varchar(50), 
+	GameTitle varchar(50), 
 	Category varchar(50), 
 	Platform varchar(50), 
-	[Available Units] int,
+	AvailableUnits int,
 	Cost money, 
 	Price money, 
 	Condition varchar(50), 
-	[Product Type] varchar(50)
+	ProductType varchar(50)
 )
 
 CREATE TABLE Sales (orderId INTEGER CONSTRAINT PsalesKey PRIMARY KEY IDENTITY(1,1),
@@ -79,14 +79,15 @@ CREATE TABLE Sales (orderId INTEGER CONSTRAINT PsalesKey PRIMARY KEY IDENTITY(1,
 	Condition varchar(50), 
 	Date date, 
 	Total money, 
-	[Customer Name] varchar(50), 
-	[Customer Phone] varchar(30), 
+	CustomerName varchar(50), 
+	CustomerPhoneNumber varchar(30), 
 	Email varchar(50),
-	[Sale Type] varchar(10), 
-	[Credit Card Name] varchar(50), 
-	[Credit Card Number] bigint, 
-	[Expiration Date] date,
-	[Security Code] varchar(5)
+	SaleType varchar(10), 
+	CreditCardName varchar(50), 
+	CreditCardNumber varchar(4),
+	EncryptedCreditCardNumber varchar(50),
+	ExpirationDate date,
+	SecurityCode varchar(5)
 )
 
 CREATE TABLE P_Categories(
@@ -99,7 +100,7 @@ CREATE TABLE P_Conditions(
 	Condition varchar(50) UNIQUE, 
 )
 CREATE TABLE P_Types(
-	[Product Type] varchar(50) UNIQUE
+	ProductType varchar(50) UNIQUE
 )
 CREATE TABLE AppUser(UserId INTEGER CONSTRAINT PappUserKey PRIMARY KEY IDENTITY(1,1),
 	UserName varchar(50) UNIQUE,
@@ -123,6 +124,6 @@ REFERENCES P_Conditions(Condition)
 ON DELETE NO ACTION;
 
 ALTER TABLE Inventory
-ADD FOREIGN KEY([Product Type])
-REFERENCES P_Types([Product Type])
+ADD FOREIGN KEY(ProductType)
+REFERENCES P_Types(ProductType)
 ON DELETE NO ACTION;
