@@ -1,6 +1,0 @@
-10/3/2020 11:06:21 PM ==> Missing 'productId' CSV column in CSV file.
-10/3/2020 11:08:24 PM ==> Missing 'productId' CSV column in CSV file.
-10/3/2020 11:09:33 PM ==> Missing 'productId' CSV column in CSV file.
-10/3/2020 11:11:36 PM ==> Missing 'GameTitle' CSV column in CSV file.
-10/3/2020 11:28:44 PM ==> The INSERT statement conflicted with the FOREIGN KEY constraint "FK__Inventory__Categ__2DD1C37F". The conflict occurred in database "Videogame_Shop", table "dbo.P_Categories", column 'Category'.
-The statement has been terminated.
