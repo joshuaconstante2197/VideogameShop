@@ -1,0 +1,8 @@
+9/6/2020 11:36:15 AM ==> Invalid column name 'Quantity'.
+There are more columns in the INSERT statement than values specified in the VALUES clause. The number of values in the VALUES clause must match the number of columns specified in the INSERT statement.
+9/6/2020 11:36:48 AM ==> Invalid column name 'Quantity'.
+9/6/2020 2:21:08 PM ==> Missing 'Type of Sale' CSV column in CSV file.
+9/6/2020 2:27:13 PM ==> Missing 'Type of Sale' CSV column in CSV file.
+9/6/2020 2:28:16 PM ==> Missing 'Name on Credit Card' CSV column in CSV file.
+9/6/2020 3:25:46 PM ==> Cannot insert the value NULL into column 'orderId', table 'Videogame_Shop.dbo.Sales'; column does not allow nulls. INSERT fails.
+The statement has been terminated.

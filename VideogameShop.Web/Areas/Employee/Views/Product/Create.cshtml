@@ -1,0 +1,94 @@
+﻿@model VideogameShopLibrary.CVS_Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GameTitle" class="control-label"></label>
+                <input asp-for="GameTitle" class="form-control" />
+                <span asp-validation-for="GameTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" class="form-control" required>
+                    @foreach (var item in ViewBag.ProductCharacteristics.Category)
+                    {
+                        <option>@item</option>
+                    }
+                </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Platform" class="control-label"></label>
+                <select asp-for="Platform" class="form-control" required>
+                    @foreach (var item in ViewBag.ProductCharacteristics.Platform)
+                    {
+                        <option>@item</option>
+                    }
+                </select>
+                <span asp-validation-for="Platform" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AvailableUnits" class="control-label"></label>
+                <input asp-for="AvailableUnits" class="form-control" />
+                <span asp-validation-for="AvailableUnits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label"></label>
+                <input asp-for="Cost" class="form-control" />
+                <span asp-validation-for="Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Condition" class="control-label"></label>
+                <select asp-for="Condition" class="form-control" required>
+                    @foreach (var item in ViewBag.ProductCharacteristics.Condition)
+                    {
+                        <option>@item</option>
+                    }
+                </select>
+                <span asp-validation-for="Condition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductType" class="control-label">Product Type</label>
+                <select asp-for="ProductType" class="form-control" required>
+                    @foreach (var item in ViewBag.ProductCharacteristics.ProductType)
+                    {
+                        <option>@item</option>
+                    }
+                </select>
+                <span asp-validation-for="ProductType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+    window.onload = function(){
+        alert("@ViewBag.Message");
+    </script>
+
+}
+

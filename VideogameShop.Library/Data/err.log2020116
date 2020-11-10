@@ -1,0 +1,12 @@
+11/6/2020 8:34:32 AM ==> Invalid column name 'CustomerName'.
+Invalid column name 'CustomerPhoneNumber'.
+Invalid column name 'SaleType'.
+Invalid column name 'CreditCardName'.
+Invalid column name 'CreditCardNumber'.
+Invalid column name 'ExpirationDate'.
+Invalid column name 'SecurityCode'.
+11/6/2020 8:36:54 AM ==> Arithmetic overflow error converting numeric to data type varchar.
+The statement has been terminated.
+11/6/2020 3:52:59 PM ==> Could not find stored procedure 'spCreateCreditCardOrder'.
+11/6/2020 3:53:49 PM ==> Could not find stored procedure 'spCreateCreditCardOrder'.
+11/6/2020 3:56:39 PM ==> Could not find stored procedure 'spCreateCashOrder'.

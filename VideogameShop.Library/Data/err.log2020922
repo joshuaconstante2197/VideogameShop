@@ -1,0 +1,6 @@
+9/22/2020 8:28:00 PM ==> The length of the parameter '@CreditCardName, @CreditCardNumber, @ExpirationDate, @SecurityCode, @CreditCardName, @CreditCardNumber, @ExpirationDate, @SecurityCode' exceeds the limit of 128 characters.
+9/22/2020 8:29:38 PM ==> The length of the parameter '@CreditCardName, @CreditCardNumber, @ExpirationDate, @SecurityCode, @CreditCardName, @CreditCardNumber, @ExpirationDate, @SecurityCode' exceeds the limit of 128 characters.
+9/22/2020 8:35:11 PM ==> The length of the parameter '@CreditCardName, @CreditCardNumber, @ExpirationDate, @SecurityCode, @CreditCardName, @CreditCardNumber, @ExpirationDate, @SecurityCode' exceeds the limit of 128 characters.
+9/22/2020 8:59:47 PM ==> Could not find stored procedure 'CreateCashOrder'.
+9/22/2020 9:00:22 PM ==> Could not find stored procedure 'CreateCashOrder'.
+9/22/2020 9:03:10 PM ==> Procedure or function 'spCreateCashOrder' expects parameter '@Product', which was not supplied.

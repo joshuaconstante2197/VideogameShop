@@ -1,0 +1,2 @@
+9/8/2020 9:29:01 PM ==> The INSERT statement conflicted with the FOREIGN KEY constraint "FK__Inventory__Categ__2FCF1A8A". The conflict occurred in database "Videogame_Shop", table "dbo.Product_Char", column 'Category'.
+The statement has been terminated.
