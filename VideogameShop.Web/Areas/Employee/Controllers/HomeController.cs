@@ -12,6 +12,7 @@ namespace VideogameShop.Web.Controllers
 {
     [Area("Employee")]
     [AllowAnonymous]
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
     public class HomeController : Controller
     {

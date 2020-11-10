@@ -2,11 +2,22 @@
 for details on configuring this project to bundle and minify static web assets. */
 body {
     color: #212529;
+    background-color: antiquewhite;
+    background-image: url(../lib/images/homeBackground.jpg);
+    background-size: cover;
+}
+
+.navbar {
+    background-color: rgb(202,198,195);
 }
 a.navbar-brand {
   white-space: normal;
   text-align: left;
   word-break: break-all;
+}
+.footer {
+    color: white;
+    background-color: rgb(202,198,195);
 }
 
 /* Provide sufficient contrast against white background */

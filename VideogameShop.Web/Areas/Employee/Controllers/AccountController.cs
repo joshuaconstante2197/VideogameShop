@@ -94,7 +94,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                     }
                 }
 
-                ModelState.AddModelError(string.Empty, "Invalid Login Attempr");
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
             }
 
             return View(model);
