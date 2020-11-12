@@ -1,14 +1,11 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-html,body{
-    margin:0;
-    height:100%;
-}
+
+
 body {
     color: #212529;
     background-color: antiquewhite;
     margin:0;
-    min-height:100%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../lib/images/homeBackground.jpg);
     background-size: cover;
 }
@@ -19,7 +16,7 @@ body {
     height: 100%
 }
 #homeCards{
-    height:90%;
+    height:95%;
 }
 
 
@@ -41,11 +38,7 @@ a.navbar-brand {
     background-color: rgb(202,223,195);
 }
 
-#cardBottom
-{
-    position:absolute;
-    bottom:0;
-}
+
 
 /* Provide sufficient contrast against white background */
 a {
