@@ -24,7 +24,7 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item dropdown text-black-50">
-                            <a class="nav-link dropdown-toggle btn btn-outline-danger border-0" href="#" id="navbarDropDownMenuProduct" role="button" data-toggle="dropdown" aria-haspopup="true">
+                            <a class="nav-link dropdown-toggle btn btn-outline-success border-0" href="#" id="navbarDropDownMenuProduct" role="button" data-toggle="dropdown" aria-haspopup="true">
                                 Inventory Management
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuProduct">
@@ -33,7 +33,7 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown ml-1">
-                            <a class="nav-link dropdown-toggle btn btn-outline-danger border-0" href="#" id="navbarDropDownMenuOrder" role="button" data-toggle="dropdown" aria-haspopup="true">
+                            <a class="nav-link dropdown-toggle btn btn-outline-success border-0" href="#" id="navbarDropDownMenuOrder" role="button" data-toggle="dropdown" aria-haspopup="true">
                                 Order Management
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuOrder">
@@ -46,13 +46,13 @@
             </div>
         </nav>
     </header>
-    <div id="window">
-        <div class="container">
-            <main role="main" class="pb-3">
+    
+        <div class="container" id="window">
+            <main role="main" id="main">
                 @RenderBody()
             </main>
         </div>
-    </div>
+    
     
 
     <footer class=" footer ">
