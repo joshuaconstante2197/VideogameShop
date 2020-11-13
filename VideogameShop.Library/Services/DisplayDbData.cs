@@ -171,7 +171,7 @@ namespace VideogameShopLibrary.Services
                     {
                         while (reader.Read())
                         {
-                            productCharacteristics.ProductType.Add(reader.GetValue(reader.GetOrdinal("Product Type")).ToString());
+                            productCharacteristics.ProductType.Add(reader.GetValue(reader.GetOrdinal("ProductType")).ToString());
                         }
                     }
                 }

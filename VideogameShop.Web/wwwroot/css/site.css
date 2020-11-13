@@ -1,7 +1,7 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-
+/*Styling for the home page*/
 body {
     color: #212529;
     background-color: antiquewhite;
@@ -33,9 +33,33 @@ a.navbar-brand {
 .card {
     background-color: rgb(202,223,195);
 }
-
-
-
+/*Styling for the tables*/
+#dataTable_wrapper {
+    background-color: #F5F5DC;
+    border-radius: 5px;
+}
+/*#dataTable thead tr th{
+    background-color:white;
+}
+#dataTable_info {
+    background-color: #F5F5DC;
+    padding-bottom:5px;
+}
+#dataTable_previous {
+    background-color: #F5F5DC;
+    padding-bottom: 5px;
+}
+#dataTable_next {
+    background-color: #F5F5DC;
+    padding-bottom: 5px;
+}
+.dataTables_filter {
+    background-color: #F5F5DC;
+    margin-bottom: 10px;
+}
+.dataTables_length {
+    background-color: #F5F5DC;
+}*/
 /* Provide sufficient contrast against white background */
 a {
     color: #0366d6;

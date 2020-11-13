@@ -7,7 +7,6 @@ const numberFormatter = new Intl.NumberFormat('en-Us', {
 });
 // Write your JavaScript code.
 $(document).ready(function () {
-    console.log("ready")
     $('#dataTable').DataTable();
 
 });
