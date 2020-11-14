@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "Index";
 }
+@section Styles {
+    <link href="@Url.Content("~/css/orders.css")" rel="stylesheet" type="text/css" />
+}
 @using (Html.BeginForm())
 {
     <table class="table table-borderless">

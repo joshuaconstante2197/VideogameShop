@@ -8,3 +8,11 @@
 11/13/2020 9:39:24 AM ==> Procedure or function 'spCreateCashOrder' expects parameter '@Product', which was not supplied.
 11/13/2020 9:41:13 AM ==> Procedure or function 'spCreateCashOrder' expects parameter '@Product', which was not supplied.
 11/13/2020 9:45:01 AM ==> Procedure or function 'spCreateCashOrder' expects parameter '@Product', which was not supplied.
+11/13/2020 8:51:57 PM ==> Procedure or function 'spCreateCashOrder' expects parameter '@Product', which was not supplied.
+11/13/2020 8:52:49 PM ==> Procedure or function 'spCreateCashOrder' expects parameter '@Product', which was not supplied.
+11/13/2020 8:55:14 PM ==> Procedure or function 'spCreateCreditCardOrder' expects parameter '@Product', which was not supplied.
+11/13/2020 8:56:04 PM ==> Incorrect syntax near '('.
+11/13/2020 8:56:19 PM ==> Incorrect syntax near '('.
+11/13/2020 8:56:26 PM ==> Incorrect syntax near '('.
+11/13/2020 9:07:32 PM ==> Incorrect syntax near '('.
+11/13/2020 9:09:43 PM ==> Incorrect syntax near '('.

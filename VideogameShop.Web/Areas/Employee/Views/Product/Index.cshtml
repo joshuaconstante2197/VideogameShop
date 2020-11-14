@@ -54,8 +54,8 @@
         <div class="input-group w-50 mb-2">
 
             <div class="custom-file">
-                <label for="file" class="custom-file-label">Upload File:</label>
-                <input type="file" name="file" id="file" class="custom-file-input" />
+                <label for="file" class="custom-file-label" id="fileLabel">Upload File:</label>
+                <input type="file" name="file" id="fileInput" onchange="displayName()" class="custom-file-input" value="thisasasdas" />
             </div>
 
             <div class="input-group-append">
@@ -70,8 +70,6 @@
     <a class="btn btn-success" href="@Url.Action("Create", "Product")">Add a New Product</a>
 </div>
 
-
-
 <script src="~/js/productChecker.js" asp-append-version="true"></script>
 <hr />
 @if (ViewBag.Message != null)
@@ -80,7 +78,17 @@
         window.onload = function () {
             alert("@ViewBag.Message");
         }
+
+
     </script>
 
 }
+<script>
+    function displayName() {
+        var fileInput = document.getElementById("fileInput");
+        var fileLabel = document.getElementById("fileLabel")
+        var fName = String(fileInput.value);
+        fileLabel.innerHTML = fName.substring(fName.lastIndexOf("\\") + 1, fName.length);
+    }
+</script>
 

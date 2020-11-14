@@ -126,22 +126,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         public ActionResult CreateFromProduct(int Id)
         {
             Product product = new Product();
-            List<string> p = new List<string>();
-            using (SqlConnection sqlCon = new SqlConnection(Startup.GetConnectionString()))
-            {
-                sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("SELECT GameTitle,Condition, Price FROM Inventory WHERE productId = @productId", sqlCon);
-                cmd.Parameters.AddWithValue("@productId", Id);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        { 
-                            product.GameTitle = reader.GetValue(reader.GetOrdinal("GameTitle")).ToString();
-                            product.Condition = reader.GetValue(reader.GetOrdinal("Condition")).ToString();
-                            product.Price = Convert.ToDecimal(reader.GetValue(reader.GetOrdinal("Price")));
-                        }
-                    }
-            }
+            DisplayDbData.GetProductById(product, Id);
             ViewBag.Product = product;
             return View();
 

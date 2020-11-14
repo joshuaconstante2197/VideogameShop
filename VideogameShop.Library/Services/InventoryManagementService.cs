@@ -200,21 +200,21 @@ namespace VideogameShopLibrary
                 
             }
         }
-        public bool UpdateProductById(Product product )
+        public bool UpdateProductById(Product product)
         {
             using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
             {
                 sqlCon.Open();
                 {
-                    var sql = $"UPDATE Inventory SET (GameTitle = '{product.GameTitle}'," +
-                            $"Category = '{product.Category}'," +
+                    var sql = $"UPDATE Inventory SET GameTitle = '{product.GameTitle}', " +
+                            $"Category = '{product.Category}', " +
                             $"Platform = '{product.Platform}', " +
                             $"AvailableUnits = {product.AvailableUnits}, " +
                             $"Cost = {product.Cost}, " +
                             $"Price = {product.Price}, " +
                             $"Condition = '{product.Condition}', " +
-                            $"ProductType = '{product.ProductType}'" +
-                            $"WHERE productId = {product.productId})";
+                            $"ProductType = '{product.ProductType}' " +
+                            $"WHERE productId = {product.productId}";
                     try
                     {
                         SqlCommand sqlCmd = new SqlCommand(sql, sqlCon);

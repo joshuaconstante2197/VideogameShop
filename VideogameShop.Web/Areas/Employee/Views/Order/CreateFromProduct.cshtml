@@ -1,4 +1,7 @@
 ﻿@model VideogameShopLibrary.CVS_Models.Order
+@{
+    var product = ViewBag.product;
+}
 
 
 <h4>Order</h4>
@@ -9,7 +12,7 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Product" class="control-label"></label>
-                <input class="form-control" value="@ViewBag.Product.GameTitle" />
+                <input asp-for="Product" class="form-control" value="@product.GameTitle" />
                 <span asp-validation-for="Product" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -19,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Condition" class="control-label"></label>
-                <input asp-for="Condition" class="form-control" value="@ViewBag.Product.Condition" readonly="readonly"/>
+                <input asp-for="Condition" class="form-control" value="@product.Condition" readonly="readonly"/>
                 <span asp-validation-for="Condition" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -79,7 +82,7 @@
     function total() {
         var quantity = document.getElementById("Quantity");
         var total = document.getElementById("Total");
-        var result = (@ViewBag.Product.Price * quantity.value);
+        var result = (@product.Price * quantity.value);
         total.value = (result);
     }
 </script>
