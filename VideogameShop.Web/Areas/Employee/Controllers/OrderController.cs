@@ -19,6 +19,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
     [Authorize]
     public class OrderController : Controller
     {
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpGet]
         [AllowAnonymous]
         // GET: OrderController
@@ -49,10 +50,6 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             return View(orders);
             
         }
-
-        
-
-        
         // GET: OrderController/Upload
         public ActionResult Upload()
         {

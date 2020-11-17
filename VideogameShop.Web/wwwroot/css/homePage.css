@@ -1,0 +1,9 @@
+﻿body {
+
+    color: #212529;
+    background-color: antiquewhite;
+    margin: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../lib/images/homeBackground.jpg);
+    background-size: cover;
+    padding: 0;
+}
