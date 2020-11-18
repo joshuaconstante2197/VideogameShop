@@ -9,20 +9,24 @@
 
 @using (Html.BeginForm())
 {
-    <table class="table table-borderless">
-        <tr class="row">Filter Criteria</tr>
-        <tr class="row">
-            <td class="col-2">From Date:</td>
-            <td class="col-4">@Html.TextBox("fromDate", null, new { type = "date" })</td>
-        </tr>
-        <tr class="row">
-            <td class="col-2">To Date:</td>
-            <td class="col-2">@Html.TextBox("toDate", null, new { type = "date" })</td>
-        </tr>
-        <tr>
-            <td class="row"><input type="submit" /></td>
-        </tr>
+    <table class="table table-bordered" style="max-width:500px">
+        <thead>
+            <tr>
+                <th colspan="2">Filter Criteria </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="background-color:lightgrey">From Date:</td>
+                <td class=" d-flex align-content-center" style="background-color:lightgrey">@Html.TextBox("fromDate", null, new { type = "date" })</td>
+            </tr>
+            <tr>
+                <td>To Date:</td>
+                <td class=" d-flex align-content-center">@Html.TextBox("toDate", null, new { type = "date" })</td>
+            </tr>
+        </tbody>
     </table>
+    <input class="btn btn-success" type="submit" />
 }
 
 
@@ -51,7 +55,7 @@
                 <td>@Model[i].Product </td>
                 <td>@Model[i].Quantity</td>
                 <td>@Model[i].Condition</td>
-                <td style="display:inline-block">@Model[i].Date.ToString("dd-MM-yyyy")</td>
+                <td>@Model[i].Date.ToString("dd-MM-yyyy")</td>
                 <td>@Model[i].Total.ToString("C2")</td>
                 <td>@Model[i].CustomerName</td>
                 <td>@Model[i].CustomerPhoneNumber</td>
@@ -67,8 +71,8 @@
     </tbody>
 </table>
 
-<a type="button" class="btn btn-info" href="@Url.Action("Upload","Order")">Update Sales from File</a>
-<a href="@Url.Action("Create","Order")">Add a new order</a>
+<a type="button" class="btn btn-info mr-3" href="@Url.Action("Upload","Order")">Update Sales from File</a>
+<a type="button" class="btn btn-success" href="@Url.Action("Create","Order")">Add a new order</a>
 
 <hr />
 @if (ViewBag.Message != null)

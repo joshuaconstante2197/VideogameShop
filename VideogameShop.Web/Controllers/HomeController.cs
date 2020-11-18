@@ -10,7 +10,7 @@ using VideogameShop.Web.Models;
 
 namespace VideogameShop.Web.Controllers
 {
-    [Area("Employee")]
+    
     [AllowAnonymous]
 
     public class HomeController : Controller

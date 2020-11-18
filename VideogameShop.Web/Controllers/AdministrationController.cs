@@ -10,7 +10,7 @@ using VideogameShop.Web.Areas.Employee.ViewModels;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
-    [Area("Employee")]
+    
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;

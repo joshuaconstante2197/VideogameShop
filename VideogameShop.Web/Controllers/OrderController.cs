@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
-    [Area("Employee")]
+    
     [Authorize]
     public class OrderController : Controller
     {

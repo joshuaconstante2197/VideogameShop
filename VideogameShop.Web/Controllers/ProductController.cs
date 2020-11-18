@@ -10,7 +10,7 @@ using System.IO;
 
 namespace VideogameShop.Web.Controllers
 {
-    [Area("Employee")]
+    
     public class ProductController : Controller
     {
         // GET: ProductController
