@@ -1,67 +1,15 @@
 IF DB_ID('VideoGame_Shop') IS NOT NULL
 BEGIN
-USE VideoGame_Shop
-	IF  OBJECT_ID('dbo.Inventory','U') IS NOT NULL 
-		BEGIN
-		   DROP TABLE dbo.Inventory;
-		END
-
-	IF OBJECT_ID('dbo.Sales','U') IS NOT NULL 
-		BEGIN
-			DROP TABLE dbo.Sales;
-		END
-
-	IF OBJECT_ID('dbo.P_Platforms','U') IS NOT NULL 
-		BEGIN
-		   DROP TABLE dbo.P_Platforms;
-		END
-
-	IF OBJECT_ID('dbo.P_Categories','U') IS NOT NULL 
-		BEGIN
-		   DROP TABLE dbo.P_Categories;
-		END
-
-	IF OBJECT_ID('dbo.P_Conditions','U') IS NOT NULL 
-	BEGIN
-		DROP TABLE dbo.P_Conditions;
-	END
-
-	IF OBJECT_ID('dbo.P_Types','U') IS NOT NULL 
-	BEGIN
-		DROP TABLE dbo.P_Types;
-	END
-
-	IF OBJECT_ID('dbo.AppUser','U') IS NOT NULL
-	BEGIN
-		DROP TABLE dbo.AppUser;
-	END
-END
-
-IF EXISTS ( SELECT * 
-            FROM   sysobjects 
-            WHERE  id = object_id(N'dbo.spCreateCashOrder') 
-                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
-BEGIN
-	DROP PROCEDURE dbo.spCreateCashOrder;
-END
-
-IF EXISTS ( SELECT * 
-            FROM   sysobjects 
-            WHERE  id = object_id(N'dbo.spCreateCreditCardOrder') 
-                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
-BEGIN
-	DROP PROCEDURE dbo.spCreateCreditCardOrder;
+	DROP DATABASE VideoGame_Shop
 END
 
 IF DB_ID('VideoGame_Shop') IS NULL
-
-	BEGIN
-		CREATE DATABASE VideoGame_Shop
-	END
+BEGIN
+	CREATE DATABASE VideoGame_Shop
+END
 
 USE Videogame_Shop
 GO
-
 CREATE TABLE Inventory (productId INTEGER CONSTRAINT PproductKey PRIMARY KEY IDENTITY(1,1), 
 	GameTitle varchar(50), 
 	Category varchar(50), 
@@ -127,3 +75,6 @@ ALTER TABLE Inventory
 ADD FOREIGN KEY(ProductType)
 REFERENCES P_Types(ProductType)
 ON DELETE NO ACTION;
+
+
+
