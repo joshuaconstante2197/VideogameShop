@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VideogameShop.Library.Models;
-using VideogameShop.Web.Areas.Employee.ViewModels;
+using VideogameShop.Library.Services.Authentication;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
@@ -14,21 +14,15 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
     public class AccountController : Controller
     {
 
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-                                RoleManager<IdentityRole> roleManager)
-        {
-            this.roleManager = roleManager;
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-        }
-
+        
         [HttpGet]
         public IActionResult Register()
         {
-            ViewBag.Roles = roleManager.Roles;
+            var roles = new ProcessAccountData().GetRoles();
+            if(roles.Count > 0)
+            {
+                ViewBag.Roles = roles;
+            }
             return View();
         }
 

@@ -1,11 +1,16 @@
+use [master];
 IF DB_ID('VideoGame_Shop') IS NOT NULL
 BEGIN
-	DROP DATABASE VideoGame_Shop
+	ALTER DATABASE VideoGame_Shop SET OFFLINE WITH ROLLBACK IMMEDIATE;
+	ALTER DATABASE VideoGame_Shop SET ONLINE;
+	DROP DATABASE VideoGame_Shop;
 END
+
 IF DB_ID('VideoGame_Shop') IS NULL
 BEGIN
 	CREATE DATABASE VideoGame_Shop
 END
+
 USE Videogame_Shop
 GO
 CREATE TABLE Inventory (productId INTEGER CONSTRAINT PproductKey PRIMARY KEY IDENTITY(1,1), 
@@ -50,6 +55,14 @@ CREATE TABLE AppUser(UserId INTEGER CONSTRAINT PappUserKey PRIMARY KEY IDENTITY(
 	UserName varchar(50) UNIQUE,
 	Password varchar(50),
 	Role varchar(50)
+)
+CREATE TABLE Role(RoleId INTEGER CONSTRAINT ProleKey PRIMARY KEY IDENTITY(1,1),
+	RoleName varchar(50) UNIQUE
+)
+CREATE TABLE UserRole(UserId int,
+FOREIGN KEY(UserId) REFERENCES AppUser(UserId),
+RoleId int,
+FOREIGN KEY(RoleId) REFERENCES Role(RoleId)
 )
 ALTER TABLE Inventory
 ADD FOREIGN KEY(Category)
