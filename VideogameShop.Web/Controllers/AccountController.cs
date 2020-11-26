@@ -32,7 +32,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Register(AppUser model)
+        public IActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
