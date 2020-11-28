@@ -31,6 +31,26 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Login(AppUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                var loginUser = new ProcessAccountData();
+                if (loginUser.Login(user))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("All", "Invalid Email or Password");
+                    return View();
+                }
+            }
+            else return View();
+        }
+
         [HttpPost]
         public IActionResult Register(RegisterModel model)
         {
@@ -48,9 +68,6 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             }
             return View();
         }
-        
-
-
 
     }
 }

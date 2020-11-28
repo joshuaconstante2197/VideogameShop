@@ -31,15 +31,7 @@ namespace VideogameShop.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            {
-                options.Password.RequiredLength = 5;
-                options.Password.RequiredUniqueChars = 0;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-            }).AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -50,7 +42,7 @@ namespace VideogameShop.Web
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
 
-                options.LoginPath = "/Employee/Account/Login";
+                options.LoginPath = "/Account/Login";
                 options.SlidingExpiration = true;
             });
         }
