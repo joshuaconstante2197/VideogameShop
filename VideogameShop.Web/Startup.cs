@@ -1,18 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using VideogameShop.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Authorization;
 
 namespace VideogameShop.Web
 {
@@ -36,15 +30,15 @@ namespace VideogameShop.Web
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
-            services.ConfigureApplicationCookie(options =>
+            
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
             {
-                // Cookie settings
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
-
-                options.LoginPath = "/Account/Login";
-                options.SlidingExpiration = true;
+                options.Cookie.IsEssential = true;
             });
+            services.AddMvc();
         }
         
         public static string ConnectionString
@@ -89,7 +83,7 @@ namespace VideogameShop.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

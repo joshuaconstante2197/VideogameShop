@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VideogameShop.Library.Models;
@@ -40,6 +41,9 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                 var loginUser = new ProcessAccountData();
                 if (loginUser.Login(user))
                 {
+                    HttpContext.Session.SetString("UserName", user.UserName);
+                    HttpContext.Session.SetString("Role", user.Role);
+                    Response.Cookies.Append("LastLoggedInTime", DateTime.Now.ToString());
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -59,6 +63,8 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                 var user = new ProcessAccountData();
                 if(user.Register(model))
                 {
+                    
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -67,6 +73,13 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                 }
             }
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
     }
