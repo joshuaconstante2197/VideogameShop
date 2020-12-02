@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VideogameShop.Library.Models;
 using VideogameShop.Library.Services.Authentication;
+using VideogameShop.Library.Services.Authorization;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
@@ -19,7 +20,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            var roles = new ProcessAccountData().GetRoles();
+            var roles = new ManageRoles().GetRoles(new Role());
             if(roles.Count > 0)
             {
                 ViewBag.Roles = roles;
@@ -43,7 +44,6 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                 {
                     HttpContext.Session.SetString("UserName", user.UserName);
                     HttpContext.Session.SetString("Role", user.Role);
-                    Response.Cookies.Append("LastLoggedInTime", DateTime.Now.ToString());
                     return RedirectToAction("Index", "Home");
                 }
                 else

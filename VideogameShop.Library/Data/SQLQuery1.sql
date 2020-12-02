@@ -167,3 +167,7 @@ begin
 				@SecurityCode);
 		UPDATE Inventory SET AvailableUnits = AvailableUnits - @Quantity WHERE GameTitle = @Product;
 end
+
+Go
+INSERT INTO Role(RoleName) VALUES('admin'),('employee');
+

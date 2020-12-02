@@ -1,6 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
-@model IEnumerable<IdentityRole>
-
+﻿@using VideogameShop.Library.Models
+@model List<Role>
 
 @{
     ViewData["Title"] = "All Roles";
@@ -18,7 +17,7 @@
 
                 <div class="card col-lg-3" style="padding:0; margin-right:3rem">
                     <div class="card-header">
-                        Role Name : @role.Name
+                        Role Name : @role.RoleName
                     </div>
                     <div class="card-body">
 
