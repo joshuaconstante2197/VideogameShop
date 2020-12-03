@@ -20,7 +20,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            var roles = new ManageRoles().GetRoles(new Role());
+            var roles = new ManageRoles().GetRoles();
             if(roles.Count > 0)
             {
                 ViewBag.Roles = roles;

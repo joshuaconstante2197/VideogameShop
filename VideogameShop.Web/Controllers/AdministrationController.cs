@@ -46,7 +46,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         [HttpGet]
         public IActionResult ListRoles()
         {
-            var roles = new ManageRoles().GetRoles(new Role());
+            var roles = new ManageRoles().GetRoles();
             return View(roles);
         }
 

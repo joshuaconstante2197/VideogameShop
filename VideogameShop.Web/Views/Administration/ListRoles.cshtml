@@ -15,16 +15,13 @@
             @foreach (var role in Model)
             {
 
-                <div class="card col-lg-3" style="padding:0; margin-right:3rem">
+                <div class="card col-lg-3 bg-light" style="padding:0; margin-right:3rem">
                     <div class="card-header">
                         Role Name : @role.RoleName
                     </div>
                     <div class="card-body">
-
-                    </div>
-                    <div class="card-footer">
-                        <a class="btn btn-primary" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id">Edit</a>
-                        <a class="btn btn-danger" asp-action="DeleteRole" asp-controller="Administration" asp-route-id="@role.Id">Delete</a>
+                        <a class="btn btn-primary" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.RoleId">Edit</a>
+                        <a class="btn btn-danger" asp-action="DeleteRole" asp-controller="Administration" asp-route-id="@role.RoleId">Delete</a>
                     </div>
                 </div>
 
