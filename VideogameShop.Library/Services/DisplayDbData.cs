@@ -110,7 +110,7 @@ namespace VideogameShopLibrary.Services
                             for (int i = 0; i < reader.FieldCount; i++)
                             {
                                 //remove white spaces to match the Product model field names
-                                var str = reader.GetName(i).Replace(" ", "");
+                                var str = reader.GetName(i);
                                 PropertyInfo propertyInfo = product.GetType().GetProperty(str);
                                 //check if row is empty
                                 if (propertyInfo != null && !reader.IsDBNull(i))

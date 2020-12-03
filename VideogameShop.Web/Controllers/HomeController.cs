@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using VideogameShop.Web.Models;
@@ -24,6 +25,11 @@ namespace VideogameShop.Web.Controllers
 
         public IActionResult Index()
         {
+            if(HttpContext.Session.GetString("UserName") != null)
+            {
+                ViewBag.UserName = HttpContext.Session.GetString("UserName");
+                ViewBag.Role = HttpContext.Session.GetString("Role");
+            }
             return View();
         }
 

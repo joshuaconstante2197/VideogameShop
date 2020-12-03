@@ -1,20 +1,14 @@
 use [master];
 IF DB_ID('VideoGame_Shop') IS NOT NULL
 BEGIN
-<<<<<<< HEAD
-	DROP DATABASE VideoGame_Shop
-=======
 	ALTER DATABASE VideoGame_Shop SET OFFLINE WITH ROLLBACK IMMEDIATE;
 	ALTER DATABASE VideoGame_Shop SET ONLINE;
 	DROP DATABASE VideoGame_Shop;
->>>>>>> b828e25707054c08ab8f4e86ee3a0f033203694b
 END
-
 IF DB_ID('VideoGame_Shop') IS NULL
 BEGIN
 	CREATE DATABASE VideoGame_Shop
 END
-
 USE Videogame_Shop
 GO
 CREATE TABLE Inventory (productId INTEGER CONSTRAINT PproductKey PRIMARY KEY IDENTITY(1,1), 
@@ -63,11 +57,10 @@ CREATE TABLE AppUser(UserId INTEGER CONSTRAINT PappUserKey PRIMARY KEY IDENTITY(
 CREATE TABLE Role(RoleId INTEGER CONSTRAINT ProleKey PRIMARY KEY IDENTITY(1,1),
 	RoleName varchar(50) UNIQUE
 )
-
 CREATE TABLE UserRole(UserId int,
-FOREIGN KEY(UserId) REFERENCES AppUser(UserId),
 RoleId int,
-FOREIGN KEY(RoleId) REFERENCES Role(RoleId)
+FOREIGN KEY (UserId) REFERENCES AppUser(UserId),
+FOREIGN KEY (RoleId) REFERENCES Role(RoleId)
 )
 ALTER TABLE Inventory
 ADD FOREIGN KEY(Category)
@@ -172,12 +165,3 @@ begin
 				@SecurityCode);
 		UPDATE Inventory SET AvailableUnits = AvailableUnits - @Quantity WHERE GameTitle = @Product;
 end
-
-<<<<<<< HEAD
-
-
-=======
-Go
-INSERT INTO Role(RoleName) VALUES('admin'),('employee');
->>>>>>> b828e25707054c08ab8f4e86ee3a0f033203694b
-
