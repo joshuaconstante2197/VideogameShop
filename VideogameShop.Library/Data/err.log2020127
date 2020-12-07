@@ -1,0 +1,6 @@
+12/7/2020 9:22:08 AM ==> Violation of UNIQUE KEY constraint 'UQ__Role__8A2B6160269EE601'. Cannot insert duplicate key in object 'dbo.Role'. The duplicate key value is (Accountant).
+The statement has been terminated.
+12/7/2020 9:22:46 AM ==> Violation of UNIQUE KEY constraint 'UQ__Role__8A2B6160269EE601'. Cannot insert duplicate key in object 'dbo.Role'. The duplicate key value is (Accountant).
+The statement has been terminated.
+12/7/2020 9:22:51 AM ==> Violation of UNIQUE KEY constraint 'UQ__Role__8A2B6160269EE601'. Cannot insert duplicate key in object 'dbo.Role'. The duplicate key value is (Accountant).
+The statement has been terminated.

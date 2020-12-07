@@ -32,6 +32,28 @@ namespace VideogameShop.Library.Services.Authorization
                 }
             }
         }
+        public bool CheckIfRoleExist(Role role)
+        {
+            var sql = $"SELECT RoleName From Role WHERE RoleName = '{role.RoleName}'";
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                sqlCon.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, sqlCon))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
         public List<Role> GetRoles()
         {
             var listOfRoles = new List<Role>();

@@ -19,7 +19,7 @@ namespace VideogameShopLibrary
             string sYear = DateTime.Now.Year.ToString();
             string sMonth = DateTime.Now.Month.ToString();
             string sDay = DateTime.Now.Day.ToString();
-            sErrorTime = sYear + sMonth + sDay;
+            sErrorTime = sYear + "-" + sMonth + "-" + sDay;
         }
         public void ErrorLog(string sPathName, string err)
         {

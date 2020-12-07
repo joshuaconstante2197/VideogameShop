@@ -1,7 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
-@inject RoleManager<IdentityRole> RoleManager
+﻿@using Microsoft.AspNetCore.Http
 @using VideogameShopLibrary.CVS_Models
 @model List<Product>
 @{
@@ -47,7 +44,7 @@
     </tbody>
 
 </table>
-@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+@if (Context.Session.GetString("Role") == "admin")
 {
     @using (Html.BeginForm("Upload", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
