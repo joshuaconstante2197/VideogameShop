@@ -87,32 +87,43 @@ namespace VideogameShop.Library.Services.Authorization
             }
             return listOfRoles;
         }
-        public bool GetRoleById(string id)
+        public Role GetRoleById(string id)
         {
-            var sql = $"SELECT 1 FROM Role WHERE RoleId = {id}";
+            var role = new Role();
+            var sql = $"SELECT * FROM Role WHERE RoleId = {id}";
             using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
             {
                 sqlCon.Open();
-                using (SqlCommand cmd = new SqlCommand(sql,sqlCon))
+                using (SqlCommand cmd = new SqlCommand(sql, sqlCon))
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if(reader.FieldCount > 0)
+                        while (reader.Read())
                         {
-                            return true;
+                            for (int i = 0; i < reader.FieldCount; i++)
+                            {
+                                var str = reader.GetName(i);
+
+                                PropertyInfo propertyInfo = role.GetType().GetProperty(str);
+                                if (propertyInfo != null && !reader.IsDBNull(i))
+                                {
+                                    propertyInfo.SetValue(role, reader.GetValue(i), null);
+                                }
+                                else
+                                {
+                                    throw new Exception("Role not found");
+                                }
+                            }
                         }
-                        else
-                        {
-                            return false;
-                        }
+                        return role;
                     }
+
                 }
-                
             }
         }
         public bool EditRoleById(Role role)
         {
-            var sql = $"UPDATE Role SET (RoleName = '{role.RoleName}') WHERE RoleId = {role.RoleId}";
+            var sql = $"UPDATE Role SET RoleName = '{role.RoleName}' WHERE RoleId = {role.RoleId}";
             using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
             {
                 sqlCon.Open();
