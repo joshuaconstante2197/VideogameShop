@@ -1,13 +1,11 @@
 use [master];
 IF DB_ID('VideoGame_Shop') IS NOT NULL
 BEGIN
-<<<<<<< HEAD
-	DROP DATABASE VideoGame_Shop
-=======
+
 	ALTER DATABASE VideoGame_Shop SET OFFLINE WITH ROLLBACK IMMEDIATE;
 	ALTER DATABASE VideoGame_Shop SET ONLINE;
 	DROP DATABASE VideoGame_Shop;
->>>>>>> b828e25707054c08ab8f4e86ee3a0f033203694b
+
 END
 
 IF DB_ID('VideoGame_Shop') IS NULL
@@ -65,9 +63,9 @@ CREATE TABLE Role(RoleId INTEGER CONSTRAINT ProleKey PRIMARY KEY IDENTITY(1,1),
 )
 
 CREATE TABLE UserRole(UserId int,
-FOREIGN KEY(UserId) REFERENCES AppUser(UserId),
+FOREIGN KEY(UserId) REFERENCES AppUser(UserId) ON DELETE CASCADE,
 RoleId int,
-FOREIGN KEY(RoleId) REFERENCES Role(RoleId)
+FOREIGN KEY(RoleId) REFERENCES Role(RoleId) ON DELETE CASCADE
 )
 ALTER TABLE Inventory
 ADD FOREIGN KEY(Category)
@@ -173,11 +171,10 @@ begin
 		UPDATE Inventory SET AvailableUnits = AvailableUnits - @Quantity WHERE GameTitle = @Product;
 end
 
-<<<<<<< HEAD
 
 
-=======
+
 Go
 INSERT INTO Role(RoleName) VALUES('admin'),('employee');
->>>>>>> b828e25707054c08ab8f4e86ee3a0f033203694b
+
 

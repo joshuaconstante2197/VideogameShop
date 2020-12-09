@@ -16,7 +16,21 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
     public class AccountController : Controller
     {
 
-        
+        private bool Authenticate(AppUser user)
+        {
+            var loginUser = new ProcessAccountData();
+            if (loginUser.Login(user))
+            {
+                HttpContext.Session.SetString("UserName", user.UserName);
+                HttpContext.Session.SetString("Role", user.Role);
+                return true;
+            }
+            else
+            {
+                ModelState.AddModelError("All", "Invalid Email or Password");
+                return false;
+            }
+        }
         [HttpGet]
         public IActionResult Register()
         {
@@ -39,11 +53,8 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         {
             if (ModelState.IsValid)
             {
-                var loginUser = new ProcessAccountData();
-                if (loginUser.Login(user))
+                if(Authenticate(user))
                 {
-                    HttpContext.Session.SetString("UserName", user.UserName);
-                    HttpContext.Session.SetString("Role", user.Role);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -60,16 +71,17 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ProcessAccountData();
-                if(user.Register(model))
+                var newUser = new ProcessAccountData();
+                if(newUser.Register(model))
                 {
-                    
-
+                    var user = new AppUser { UserName = model.UserName, Role = model.Role, Password = model.Password };
+                    Authenticate(user);
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Order");
+                    ModelState.AddModelError("All", "Invalid Email or Password");
+                    return View();
                 }
             }
             return View();
