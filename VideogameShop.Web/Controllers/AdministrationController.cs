@@ -30,13 +30,21 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             if (ModelState.IsValid)
             {
                 var newRole = new ManageRoles();
-                if(newRole.AddRole(role))
+                if(!newRole.CheckIfRoleExist(role))
                 {
-                    return RedirectToAction("Administration","ListRoles");
+                    if (newRole.AddRole(role))
+                    {
+                        return RedirectToAction("ListRoles", "Administration");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("All", "Add role attempt unsuscessfull, please try again or refer to the error log");
+                        return View();
+                    }
                 }
                 else
                 {
-                    ViewBag.Message = "Add role attempt unsuscessfull, please try again or refer to the error log";
+                    ModelState.AddModelError("All","Role already exists, please enter a new role.");
                     return View();
                 }
             }
@@ -53,9 +61,9 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         [HttpGet]
         public IActionResult EditRole(string id)
         {
-            var roleToEdit = new ManageRoles();
-            
-            if (!roleToEdit.GetRoleById(id))
+            var finder = new ManageRoles();
+            var roleToEdit = finder.GetRoleById(id);
+            if (roleToEdit == null)
             {
                 ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
                 return View("Error");
@@ -69,11 +77,11 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             var editRole = new ManageRoles();
             if(editRole.EditRoleById(role))
             {
-                return RedirectToAction("Administration", "ListRoles");
+                return RedirectToAction("ListRoles", "Administration");
             }
             else
             {
-                ViewBag.Message = "Edit role attempt unsuscessfull, please try again or refer to the error log";
+                ModelState.AddModelError("All", "Edit role unsusccesful");
                 return View();
             }
         }
