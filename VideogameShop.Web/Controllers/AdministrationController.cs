@@ -87,40 +87,23 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             }
         }
 
-        //[HttpGet]
-        //public IActionResult EditUserInRole(string roleId)
-        //{
-        //    ViewBag.roleId = roleId;
+        [HttpGet]
+        public IActionResult EditUserInRole(string id)
+        {
+            ViewBag.roleId = id;
 
-        //    var role = new ManageRoles().GetRoleById(roleId);
-        //    if (role == null)
-        //    {
-        //        ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-        //        return View("Error");
-        //    }
+            var finder = new ManageRoles();
+            var role = finder.GetRoleById(id);
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
+                return View("Error");
+            }
 
-        //    var model = new List<AppUser>();
+            var usersInRole = finder.GetUsersInRole(id);
 
-        //    foreach (var user in model)
-        //    {
-        //        var userRoleViewModel = new UserRoleViewModel
-        //        {
-        //            UserId = user.Id,
-        //            UserName = user.UserName
-        //        };
-        //        if (await userManager.IsInRoleAsync(user, role.Name))
-        //        {
-        //            userRoleViewModel.IsSelected = true;
-        //        }
-        //        else
-        //        {
-        //            userRoleViewModel.IsSelected = false;
-        //        }
-
-        //        model.Add(userRoleViewModel);
-        //    }
-        //    return View(model);
-        //}
+            return View(usersInRole);
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> EditUserInRole(List<UserRoleViewModel> model, string roleId)

@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "EditRole";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<AppUser> usersInRole = ViewBag.UsersInRole;
+    List<UserRoleViewModel> usersInRole = ViewBag.UsersInRole;
 }
 
 <h1>Edit Role</h1>
@@ -27,7 +27,7 @@
         </form>
     </div>
 </div>
-<div class="card">
+<div class="card bg-light">
     <div class="card-header">
         <h3>Users in this Role</h3>
     </div>
@@ -46,7 +46,7 @@
 
     </div>
     <div class="card-footer">
-        <a asp-action="EditUserInRole" asp-controller="Administration" asp-route-roleId="@Model.RoleId" class="btn btn-primary">Add or Remove Users from this Role</a>
+        <a class="btn btn-primary" asp-action="EditUserInRole" asp-controller="Administration" asp-route-id="@Model.RoleId" >Add or Remove Users from this Role</a>
     </div>
 </div>
 

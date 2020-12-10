@@ -143,10 +143,10 @@ namespace VideogameShop.Library.Services.Authorization
 
             }
         }
-        public List<AppUser> GetUsersInRole(string id)
+        public List<UserRoleViewModel> GetUsersInRole(string id)
         {
             var sql = $"SELECT AppUser.UserId, AppUser.UserName FROM AppUser INNER JOIN UserRole On UserRole.RoleId = {id}";
-            var users = new List<AppUser>();
+            var users = new List<UserRoleViewModel>();
             using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
             {
                 sqlCon.Open();
@@ -156,7 +156,7 @@ namespace VideogameShop.Library.Services.Authorization
                     {
                         while (reader.Read())
                         {
-                            var user = new AppUser();
+                            var user = new UserRoleViewModel();
                             for (int i = 0; i < reader.FieldCount; i++)
                             {
                                 var str = reader.GetName(i);
