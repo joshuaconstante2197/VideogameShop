@@ -143,6 +143,43 @@ namespace VideogameShop.Library.Services.Authorization
 
             }
         }
+        public List<AppUser> GetUsersInRole(string id)
+        {
+            var sql = $"SELECT AppUser.UserId, AppUser.UserName FROM AppUser INNER JOIN UserRole On UserRole.RoleId = {id}";
+            var users = new List<AppUser>();
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                sqlCon.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, sqlCon))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var user = new AppUser();
+                            for (int i = 0; i < reader.FieldCount; i++)
+                            {
+                                var str = reader.GetName(i);
+
+                                PropertyInfo propertyInfo = user.GetType().GetProperty(str);
+                                if (propertyInfo != null && !reader.IsDBNull(i))
+                                {
+                                    propertyInfo.SetValue(user, reader.GetValue(i), null);
+                                }
+                                else
+                                {
+                                    throw new Exception("User in role not found");
+                                }
+                            }
+                            users.Add(user);
+                        }
+                        return users;
+                    }
+
+                }
+
+            }
+        }
 
     }
 }

@@ -63,12 +63,13 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         {
             var finder = new ManageRoles();
             var roleToEdit = finder.GetRoleById(id);
+            
             if (roleToEdit == null)
             {
                 ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
                 return View("Error");
             }
-           
+            ViewBag.UsersInRole = finder.GetUsersInRole(id);
             return View(roleToEdit);
         }
         [HttpPost]

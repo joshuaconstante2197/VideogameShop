@@ -8,6 +8,7 @@ namespace VideogameShop.Library.Models
 {
     public class AppUser
     {
+        public int UserId { get; set; }
         [Required]
         public string UserName { get; set; }
 

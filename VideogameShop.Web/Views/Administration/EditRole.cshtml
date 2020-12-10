@@ -1,8 +1,10 @@
-﻿@model VideogameShop.Library.Models.Role
+﻿@using VideogameShop.Library.Models
+@model VideogameShop.Library.Models.Role
 
 @{
     ViewData["Title"] = "EditRole";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<AppUser> usersInRole = ViewBag.UsersInRole;
 }
 
 <h1>Edit Role</h1>
@@ -29,12 +31,12 @@
     <div class="card-header">
         <h3>Users in this Role</h3>
     </div>
-    @*<div class="card-body">
-        @if (Model.Users != null && Model.Users.Any())
+    <div class="card-body">
+        @if (usersInRole != null && usersInRole.Any())
         {
-            foreach (var user in Model.Users)
+            foreach (var user in usersInRole)
             {
-                <h5 class="card-tile">@user</h5>
+                <h5 class="card-tile">@user.UserName</h5>
             }
         }
         else
@@ -44,8 +46,8 @@
 
     </div>
     <div class="card-footer">
-        <a asp-action="EditUserInRole" asp-controller="Administration" asp-route-roleId="@Model.Id" class="btn btn-primary">Add or Remove Users from this Role</a>
-    </div>*@
+        <a asp-action="EditUserInRole" asp-controller="Administration" asp-route-roleId="@Model.RoleId" class="btn btn-primary">Add or Remove Users from this Role</a>
+    </div>
 </div>
 
 
