@@ -129,6 +129,49 @@ namespace VideogameShop.Library.Services.Authentication
 
             return savedPasswordHash;
         }
+        //returns bool property true if the user has the same role name passed to the method
+        public List<UserRoleViewModel> GetUsersByRole(Role role)
+        {
+            var sql = "SELECT * FROM AppUser";
+            var users = new List<UserRoleViewModel>();
+
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                sqlCon.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, sqlCon))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var user = new UserRoleViewModel();
+                            if (reader.GetValue(reader.GetOrdinal("Role")).ToString() == role.RoleName)
+                            {
+                                user.IsSelected = true;
+                            }
+                            for (int i = 0; i < reader.FieldCount; i++)
+                            {
+                                var str = reader.GetName(i);
+
+                                PropertyInfo propertyInfo = user.GetType().GetProperty(str);
+                                if (propertyInfo != null && !reader.IsDBNull(i))
+                                {
+                                    propertyInfo.SetValue(user, reader.GetValue(i), null);
+                                }
+                                else
+                                {
+                                    var Err = new CreateLogFiles();
+                                    Err.ErrorLog(Config.PathToData + "err.log", $"User property not found {propertyInfo}");
+                                    throw new Exception($"Error occurred while getting users, please refer to error log");
+                                }
+                            }
+                            users.Add(user);
+                        }
+                    }
+                }
+            }
+            return users;
+        }
         
         
     }

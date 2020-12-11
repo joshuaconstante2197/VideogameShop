@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VideogameShop.Library.Models;
+using VideogameShop.Library.Services.Authentication;
 using VideogameShop.Library.Services.Authorization;
 using VideogameShop.Web.Areas.Employee.ViewModels;
 
@@ -90,7 +91,6 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         [HttpGet]
         public IActionResult EditUserInRole(string id)
         {
-            ViewBag.roleId = id;
 
             var finder = new ManageRoles();
             var role = finder.GetRoleById(id);
@@ -99,10 +99,11 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                 ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
                 return View("Error");
             }
+            ViewBag.Role = role;
 
-            var usersInRole = finder.GetUsersInRole(id);
+            var users = new ProcessAccountData().GetUsersByRole(role);
 
-            return View(usersInRole);
+            return View(users);
         }
 
         //[HttpPost]
