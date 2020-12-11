@@ -145,7 +145,7 @@ namespace VideogameShop.Library.Services.Authorization
         }
         public List<UserRoleViewModel> GetUsersInRole(string id)
         {
-            var sql = $"SELECT AppUser.UserId, AppUser.UserName FROM AppUser INNER JOIN UserRole On UserRole.RoleId = {id}";
+            var sql = $"SELECT AppUser.UserId, AppUser.UserName FROM AppUser JOIN UserRole ON AppUser.UserId = UserRole.UserId WHERE RoleId = {id}";
             var users = new List<UserRoleViewModel>();
             using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
             {

@@ -132,7 +132,7 @@ namespace VideogameShop.Library.Services.Authentication
         //returns bool property true if the user has the same role name passed to the method
         public List<UserRoleViewModel> GetUsersByRole(Role role)
         {
-            var sql = "SELECT * FROM AppUser";
+            var sql = "SELECT UserId, UserName, Role FROM AppUser";
             var users = new List<UserRoleViewModel>();
 
             using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
@@ -145,10 +145,7 @@ namespace VideogameShop.Library.Services.Authentication
                         while (reader.Read())
                         {
                             var user = new UserRoleViewModel();
-                            if (reader.GetValue(reader.GetOrdinal("Role")).ToString() == role.RoleName)
-                            {
-                                user.IsSelected = true;
-                            }
+                            
                             for (int i = 0; i < reader.FieldCount; i++)
                             {
                                 var str = reader.GetName(i);
@@ -164,6 +161,10 @@ namespace VideogameShop.Library.Services.Authentication
                                     Err.ErrorLog(Config.PathToData + "err.log", $"User property not found {propertyInfo}");
                                     throw new Exception($"Error occurred while getting users, please refer to error log");
                                 }
+                            }
+                            if (user.Role == role.RoleName)
+                            {
+                                user.IsSelected = true;
                             }
                             users.Add(user);
                         }
