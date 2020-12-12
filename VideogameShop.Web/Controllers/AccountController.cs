@@ -16,9 +16,9 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
     public class AccountController : Controller
     {
 
-        private bool Authenticate(AppUser user)
+        private bool Authenticate(LoginModel user)
         {
-            var loginUser = new ProcessAccountData();
+            var loginUser = new UserManager();
             if (loginUser.Login(user))
             {
                 HttpContext.Session.SetString("UserName", user.UserName);
@@ -49,7 +49,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(AppUser user)
+        public IActionResult Login(LoginModel user)
         {
             if (ModelState.IsValid)
             {
@@ -71,10 +71,10 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newUser = new ProcessAccountData();
+                var newUser = new UserManager();
                 if(newUser.Register(model))
                 {
-                    var user = new AppUser { UserName = model.UserName, Role = model.Role, Password = model.Password };
+                    var user = new LoginModel { UserName = model.UserName, Role = model.Role, Password = model.Password };
                     Authenticate(user);
                     return RedirectToAction("Index", "Home");
                 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VideogameShop.Library.Models
 {
-    public class AppUser
+    public class LoginModel
     {
         public int UserId { get; set; }
         [Required]

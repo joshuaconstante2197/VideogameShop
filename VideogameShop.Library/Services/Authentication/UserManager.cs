@@ -10,7 +10,7 @@ using VideogameShopLibrary;
 
 namespace VideogameShop.Library.Services.Authentication
 {
-    public class ProcessAccountData
+    public class UserManager
     {
         
 
@@ -59,7 +59,7 @@ namespace VideogameShop.Library.Services.Authentication
                 }
             }
         }
-        public bool Login(AppUser user)
+        public bool Login(LoginModel user)
         {
             
             var sql = $"SELECT * FROM AppUser WHERE UserName = '{user.UserName}'";
@@ -130,10 +130,10 @@ namespace VideogameShop.Library.Services.Authentication
             return savedPasswordHash;
         }
         //returns bool property true if the user has the same role name passed to the method
-        public List<UserRoleViewModel> GetUsersByRole(Role role)
+        public List<UserRoleModel> GetUsersByRole(Role role)
         {
             var sql = "SELECT UserId, UserName, Role FROM AppUser";
-            var users = new List<UserRoleViewModel>();
+            var users = new List<UserRoleModel>();
 
             using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
             {
@@ -144,7 +144,7 @@ namespace VideogameShop.Library.Services.Authentication
                     {
                         while (reader.Read())
                         {
-                            var user = new UserRoleViewModel();
+                            var user = new UserRoleModel();
                             
                             for (int i = 0; i < reader.FieldCount; i++)
                             {
@@ -173,7 +173,42 @@ namespace VideogameShop.Library.Services.Authentication
             }
             return users;
         }
-        
-        
+
+        public UserRoleModel GetUserById(string id)
+        {
+            var sql = $"SELECT * FROM AppUser WHERE UserId = {id}";
+            var user = new UserRoleModel();
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, sqlCon))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            for (int i = 0; i < reader.FieldCount; i++)
+                            {
+                                var str = reader.GetName(i);
+
+                                PropertyInfo propertyInfo = user.GetType().GetProperty(str);
+                                if (propertyInfo != null && !reader.IsDBNull(i))
+                                {
+                                    propertyInfo.SetValue(user, reader.GetValue(i), null);
+                                }
+                                else
+                                {
+                                    var Err = new CreateLogFiles();
+                                    Err.ErrorLog(Config.PathToData + "err.log", $"User property not found {propertyInfo}");
+                                    throw new Exception($"Error occurred while getting users, please refer to error log");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return user;
+        }
+
+
     }
 }

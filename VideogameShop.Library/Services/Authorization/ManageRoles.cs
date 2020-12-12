@@ -143,10 +143,10 @@ namespace VideogameShop.Library.Services.Authorization
 
             }
         }
-        public List<UserRoleViewModel> GetUsersInRole(string id)
+        public List<UserRoleModel> GetUsersInRole(string id)
         {
             var sql = $"SELECT AppUser.UserId, AppUser.UserName FROM AppUser JOIN UserRole ON AppUser.UserId = UserRole.UserId WHERE RoleId = {id}";
-            var users = new List<UserRoleViewModel>();
+            var users = new List<UserRoleModel>();
             using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
             {
                 sqlCon.Open();
@@ -156,7 +156,7 @@ namespace VideogameShop.Library.Services.Authorization
                     {
                         while (reader.Read())
                         {
-                            var user = new UserRoleViewModel();
+                            var user = new UserRoleModel();
                             for (int i = 0; i < reader.FieldCount; i++)
                             {
                                 var str = reader.GetName(i);
@@ -178,6 +178,49 @@ namespace VideogameShop.Library.Services.Authorization
 
                 }
 
+            }
+        }
+
+        public bool AddUserToRole(UserRoleModel user, Role role)
+        {
+            var sql = $"UPDATE AppUser SET Role = '{role.RoleName}' WHERE UserId = {user.UserId}";
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                sqlCon.Open();
+                SqlCommand cmd = new SqlCommand(sql, sqlCon);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    var Err = new CreateLogFiles();
+                    Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
+                    return false;
+                    throw;
+                }
+            }
+        }
+        public bool RemoveUserFromRole(UserRoleModel user, Role role)
+        {
+            var sql = $"UPDATE AppUser SET Role = null WHERE UserId = {user.UserId}";
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                sqlCon.Open();
+                SqlCommand cmd = new SqlCommand(sql, sqlCon);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    var Err = new CreateLogFiles();
+                    Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
+                    return false;
+                    throw;
+                }
             }
         }
 
