@@ -1,5 +1,5 @@
 ﻿@using VideogameShop.Library.Models
-@model List<UserRoleViewModel>
+@model List<UserRoleModel>
 
 @{ 
     ViewData["Title"] = "EditUserInRole";
@@ -25,7 +25,7 @@
             }
         </div>
         <div class="card-footer">
-            <input type="submit" value="Update" class="btn btn-primary" />
+            <input asp-action="EditUserInRole" asp-route-id="@role.RoleId" type="submit" value="Update" class="btn btn-primary" />
             <a asp-action="EditRole" asp-route-id="@role.RoleId" class="btn btn-primary">Cancel</a>
         </div>
     </div>

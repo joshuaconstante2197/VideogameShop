@@ -174,12 +174,13 @@ namespace VideogameShop.Library.Services.Authentication
             return users;
         }
 
-        public UserRoleModel GetUserById(string id)
+        public UserRoleModel GetUserById(int id)    
         {
-            var sql = $"SELECT * FROM AppUser WHERE UserId = {id}";
+            var sql = $"SELECT UserId, UserName, Role FROM AppUser WHERE UserId = {id}";
             var user = new UserRoleModel();
-            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString)) 
             {
+                sqlCon.Open();
                 using (SqlCommand cmd = new SqlCommand(sql, sqlCon))
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())

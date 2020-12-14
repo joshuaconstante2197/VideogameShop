@@ -57,7 +57,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditRole(string id)
+        public IActionResult EditRole(int id)
         {
             var finder = new ManageRoles();
             var roleToEdit = finder.GetRoleById(id);
@@ -86,7 +86,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditUserInRole(string id)
+        public IActionResult EditUserInRole(int id)
         {
 
             var finder = new ManageRoles();
@@ -103,52 +103,48 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             return View(users);
         }
 
-        //[HttpPost]
-        //public IActionResult EditUserInRole(List<UserRoleModel> model, string roleId)
-        //{
-        //    var role = new ManageRoles().GetRoleById(roleId);
-        //    if (role == null)
-        //    {
-        //        ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-        //        return View("Error");
-        //    }
+        [HttpPost]
+        public IActionResult EditUserInRole(List<UserRoleModel> model, int id)
+        {
+            var role = new ManageRoles().GetRoleById(id);
+            var result = new ManageRoles();
+            
+            if (role.RoleName == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
+                return View("Error");
+            }
 
-        //    for (int i = 0; i < model.Count; i++)
-        //    {
-        //        var user = new UserManager().GetUserById(model[i].UserId);
+            for (int i = 0; i < model.Count; i++)
+            {
+                var user = new UserManager().GetUserById(model[i].UserId);
 
-        //        if (!string.IsNullOrEmpty(user.Role))
-        //        {
-        //            if (model[i].IsSelected && !(user.Role == role.RoleName))
-        //            {
-        //                result = await userManager.AddToRoleAsync(user, role.Name);
-        //            }
-        //            else if (!model[i].IsSelected && (user.Role == role.RoleName))
-        //            {
-        //                result = await userManager.RemoveFromRoleAsync(user, role.Name);
-        //            }
-        //            else
-        //            {
-        //                continue;
-        //            }
-        //        }
-                
-                
-        //        else
-        //        {
-        //            continue;
-        //        }
+                if (!string.IsNullOrEmpty(user.Role))
+                {
+                    if (model[i].IsSelected && (user.Role != role.RoleName))
+                    {
+                        result.RemoveUserFromRole(user);
+                        result.AddUserToRole(user, role);
 
-        //        if (result.Succeeded)
-        //        {
-        //            if (i < (model.Count - 1))
-        //                continue;
-        //            else
-        //                return RedirectToAction("EditRole", new { id = roleId });
-        //        }
-        //    }
-        //    return RedirectToAction("EditRole", new { id = roleId });
-        //}
+                    }
+                    else if (!model[i].IsSelected && (user.Role == role.RoleName))
+                    {
+                        result.RemoveUserFromRole(user);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                else
+                {
+                    continue;
+                }
+
+            }
+            return RedirectToAction("EditRole", new { id = id });
+        }
 
     }
 }
