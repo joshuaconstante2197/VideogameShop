@@ -15,7 +15,6 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
 
     public class AccountController : Controller
     {
-
         private bool Authenticate(LoginModel user)
         {
             var loginUser = new UserManager();
@@ -91,6 +90,25 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public IActionResult PopulateDbWithUsers()
+        {
+            var populate = new UserManager();
+            var newAdmin = new RegisterModel { UserName = "admin", Password = "admin1", Role = "admin" };
+            var newUser = new RegisterModel { UserName = "employee", Password = "employee1", Role = "employe" };
+            try
+            {
+                populate.Register(newAdmin);
+                populate.Register(newUser);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Couldn't populate database" + ex;
+                return View("Error");
+                throw;
+            }
             return RedirectToAction("Index", "Home");
         }
 

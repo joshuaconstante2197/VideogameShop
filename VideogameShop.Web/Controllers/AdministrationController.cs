@@ -125,11 +125,13 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                     {
                         result.RemoveUserFromRole(user);
                         result.AddUserToRole(user, role);
+                        continue;
 
                     }
                     else if (!model[i].IsSelected && (user.Role == role.RoleName))
                     {
                         result.RemoveUserFromRole(user);
+                        continue;
                     }
                     else
                     {
@@ -139,6 +141,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
 
                 else
                 {
+                    result.AddUserToRole(user, role);
                     continue;
                 }
 

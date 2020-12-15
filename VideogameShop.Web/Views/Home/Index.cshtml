@@ -37,8 +37,16 @@
                 <h5 class="card-title" id="cardText">Using Identity Framework</h5>
                 <p class="card-text text-justify"><strong>User: </strong>admin</p>
                 <p class="card-text text-justify"><strong>Password: </strong>admin1.</p>
-
-                <a asp-action="Login" asp-controller="Account" class="btn btn-info">Login</a>
+                @if (ViewBag.UsersInDb != null)
+                {
+                    <a asp-action="Login" asp-controller="Account" class="btn btn-info">Login</a>
+                }
+                else
+                {
+                    <form class="form-inline" asp-action="PopulateDbWithUsers" asp-controller="Account">
+                        <button type="submit" class="btn btn-info"> Populate database with users</button>
+                    </form>
+                }
             </div>
         </div>
     </div>

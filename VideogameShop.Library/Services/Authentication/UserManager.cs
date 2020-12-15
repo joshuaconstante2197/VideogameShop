@@ -155,6 +155,10 @@ namespace VideogameShop.Library.Services.Authentication
                                 {
                                     propertyInfo.SetValue(user, reader.GetValue(i), null);
                                 }
+                                else if (reader.IsDBNull(i))
+                                {
+                                    propertyInfo.SetValue(user, string.Empty, null);
+                                }
                                 else
                                 {
                                     var Err = new CreateLogFiles();
@@ -196,6 +200,10 @@ namespace VideogameShop.Library.Services.Authentication
                                 {
                                     propertyInfo.SetValue(user, reader.GetValue(i), null);
                                 }
+                                else if (reader.IsDBNull(i))
+                                {
+                                    propertyInfo.SetValue(user, string.Empty, null);
+                                }
                                 else
                                 {
                                     var Err = new CreateLogFiles();
@@ -209,7 +217,28 @@ namespace VideogameShop.Library.Services.Authentication
             }
             return user;
         }
-
-
+        public bool CheckIfDbHasUsers()
+        {
+            var sql = "SELECT * FROM AppUser";
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                sqlCon.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, sqlCon))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+            
     }
 }
