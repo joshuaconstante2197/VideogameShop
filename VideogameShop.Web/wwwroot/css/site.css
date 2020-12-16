@@ -17,8 +17,9 @@ body {
 }
 
 .navbar {
-    background-color: rgb(202,223,195);
-    background: -webkit-linear-gradient(top, #f9fcea 0%,#f5f9d3 50%,#f2f7cf 51%,#f7fcd6 100%);
+    color:white;
+    background: -webkit-linear-gradient(to right, #ed213a, #93291e); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ed213a, #93291e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 a.navbar-brand {
@@ -101,5 +102,5 @@ body {
     width: 100%;
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
-    background: -webkit-linear-gradient(top, #f9fcea 0%,#f5f9d3 50%,#f2f7cf 51%,#f7fcd6 100%);
+    background: linear-gradient(to right, #ed213a, #93291e); /* Chrome 10-25, Safari 5.1-6 */
 }

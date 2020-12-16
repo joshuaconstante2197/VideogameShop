@@ -11,7 +11,7 @@
             <div class="card-body">
                 <h5 class="card-title" id="cardText">From a CSV file or individually</h5>
                 <p class="card-text">Using ADO.net data acces and Cinchoo ETL framework.</p>
-                <a asp-controller="Product" asp-action="Index" class="btn btn-info">Products List</a>
+                <a asp-controller="Product" asp-action="Index" class="btn btn-danger">Products List</a>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <div class="card-body">
                 <h5 class="card-title" id="cardText">From a CSV file or individually</h5>
                 <p class="card-text">Using Lunh algorithm and credit card encryption.</p>
-                <a asp-controller="Order" asp-action="Index" class="btn btn-info">Orders List</a>
+                <a asp-controller="Order" asp-action="Index" class="btn btn-danger">Orders List</a>
             </div>
         </div>
     </div>
@@ -34,17 +34,17 @@
         <div class="card mb-5 " style="max-width: 25rem;min-height:20%;">
             <div class="card-header">Manage Users and Roles</div>
             <div class="card-body ">
-                <h5 class="card-title" id="cardText">Using Identity Framework</h5>
-                <p class="card-text text-justify"><strong>User: </strong>admin</p>
+                <h5 class="card-title" id="cardText">With implemented encryption</h5>
+                <p class="card-text text-justify mb-0"><strong>User: </strong>admin</p>
                 <p class="card-text text-justify"><strong>Password: </strong>admin1.</p>
                 @if (ViewBag.UsersInDb != null)
                 {
-                    <a asp-action="Login" asp-controller="Account" class="btn btn-info">Login</a>
+                    <a asp-action="Login" asp-controller="Account" class="btn btn-danger">Login</a>
                 }
                 else
                 {
                     <form class="form-inline" asp-action="PopulateDbWithUsers" asp-controller="Account">
-                        <button type="submit" class="btn btn-info"> Populate database with users</button>
+                        <button type="submit" class="btn btn-danger"> Populate database with users</button>
                     </form>
                 }
             </div>
