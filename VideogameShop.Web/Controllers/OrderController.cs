@@ -54,7 +54,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             try
             {
                 var uploadOrder = new InventoryManagementService();
-                uploadOrder.SaveCsvOrders(Config.PathToSalesFile);
+                uploadOrder.SaveCsvOrders(Config.PathToSalesFileWeb);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
