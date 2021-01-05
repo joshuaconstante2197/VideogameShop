@@ -16,12 +16,10 @@ using Microsoft.AspNetCore.Authorization;
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
     
-    [Authorize]
     public class OrderController : Controller
     {
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpGet]
-        [AllowAnonymous]
         // GET: OrderController
         public ActionResult Index(DateTime fromDate, DateTime toDate)
         {
@@ -68,7 +66,6 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             }
 
         }
-        [AllowAnonymous]
         public ActionResult Create()
         {
             return View(new Order());
@@ -77,7 +74,6 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         // POST: OrderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AllowAnonymous]
 
         public ActionResult Create(Order order)
         {
