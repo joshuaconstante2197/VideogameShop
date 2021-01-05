@@ -97,7 +97,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         {
             var populate = new UserManager();
             var newAdmin = new RegisterModel { UserName = "admin", Password = "admin1", Role = "admin" };
-            var newUser = new RegisterModel { UserName = "employee", Password = "employee1", Role = "employe" };
+            var newUser = new RegisterModel { UserName = "employee", Password = "employee1", Role = "employee" };
             try
             {
                 populate.Register(newAdmin);

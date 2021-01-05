@@ -1,0 +1,2 @@
+1/5/2021 8:51:54 AM ==> The INSERT statement conflicted with the FOREIGN KEY constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.Role", column 'RoleName'.
+The statement has been terminated.
