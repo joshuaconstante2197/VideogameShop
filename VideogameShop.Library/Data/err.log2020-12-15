@@ -1,4 +1,0 @@
-12/15/2020 3:56:03 PM ==> User property not found System.String Role
-12/15/2020 4:03:59 PM ==> User property not found System.String Role
-12/15/2020 5:18:17 PM ==> The INSERT statement conflicted with the FOREIGN KEY constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.Role", column 'RoleName'.
-The statement has been terminated.

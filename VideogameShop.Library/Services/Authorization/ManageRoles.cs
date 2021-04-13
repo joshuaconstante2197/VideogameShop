@@ -223,6 +223,27 @@ namespace VideogameShop.Library.Services.Authorization
                 }
             }
         }
+        public bool DeleteRoleById(Role role)
+        {
+            var sql = $"DELETE FROM Role WHERE RoleId = {role.RoleId}";
+            using (SqlConnection sqlCon = new SqlConnection(Config.ConnString))
+            {
+                sqlCon.Open();
+                SqlCommand cmd = new SqlCommand(sql, sqlCon);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    var Err = new CreateLogFiles();
+                    Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
+                    return false;
+                    throw;
+                }
+            }
+        }
 
     }
 }

@@ -148,6 +148,36 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             }
             return RedirectToAction("EditRole", new { id = id });
         }
+        [HttpGet]
+        public IActionResult DeleteRole(int id)
+        {
+            var finder = new ManageRoles();
+            var roleToDelete = finder.GetRoleById(id);
+
+            if (roleToDelete == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
+                return View("Error");
+            }
+            ViewBag.UsersInRole = finder.GetUsersInRole(id);
+            return View(roleToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteRole(Role role)
+        {
+            var deleteRole = new ManageRoles();
+            if (deleteRole.DeleteRoleById(role))
+            {
+                return RedirectToAction("ListRoles", "Administration");
+            }
+            else
+            {
+                ModelState.AddModelError("All", "Edit role unsusccesful");
+                return View();
+            }
+        }
+
 
     }
 }
