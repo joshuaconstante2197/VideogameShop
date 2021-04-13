@@ -12,6 +12,7 @@ using VideogameShop.Library.Services;
 using System.Reflection;
 using VideogameShopLibrary.Services;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
@@ -49,20 +50,43 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
             
         }
         // GET: OrderController/Upload
-        public ActionResult Upload()
+        public async System.Threading.Tasks.Task<ActionResult> UploadAsync(IFormFile file)
         {
-            try
+            if (file != null && file.Length > 0)
+                try
+                {
+                    var filePath = Path.GetTempFileName();
+                    var uploadOrder = new InventoryManagementService();
+                    int rowsAffected = 0;
+                    FileStream stream = null;
+                    using (stream = System.IO.File.Create(filePath))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    rowsAffected = uploadOrder.SaveCsvOrders(stream.Name);
+                    if (rowsAffected > 0)
+                    {
+                        TempData["rowsAffected"] = rowsAffected == 1 ? "1 row was affected" : $"{rowsAffected} rows were affected";
+                    }
+                    else
+                    {
+                        TempData["rowsAffected"] = "0 rows were affected";
+                    }
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    var Err = new CreateLogFiles();
+                    Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
+                    Console.WriteLine("Fatal error : " + ex.Message + ", please find a complete error at ErrorLog file");
+                    throw;
+                }
+            else
             {
-                var uploadOrder = new InventoryManagementService();
-                uploadOrder.SaveCsvOrders(Config.PathToSalesFile);
+                ViewBag.Message = "Unable to upload file";
                 return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                var Err = new CreateLogFiles();
-                Err.ErrorLog(Config.PathToData + "err.log", ex.Message);
-                Console.WriteLine("Fatal error : " + ex.Message + ", please find a complete error at ErrorLog file");
-                throw;
             }
 
         }

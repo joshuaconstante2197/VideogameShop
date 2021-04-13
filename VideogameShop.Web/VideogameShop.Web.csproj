@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-VideogameShop.Web-0D412F5E-ABB3-434A-8EAB-2EF26ED2AB02</UserSecretsId>
+    <StartupObject>VideogameShop.Web.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

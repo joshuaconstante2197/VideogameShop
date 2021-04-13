@@ -101,17 +101,17 @@ namespace VideogameShopLibrary
                     rowsAffected += cmd.ExecuteNonQuery();
                 }
             }
-            Console.WriteLine(rowsAffected + " rows were affected");
             return rowsAffected;
         }
 
         /// <summary>
-        /// Saves Sales CSV data into database, removes 1 item from inventory where Game Title matches
+        /// Saves Sales CSV data into database, removes 1 item from inventory where Game Title matches, returns number of rows affected by querie
         /// </summary>
-        public void SaveCsvOrders(string inputFileName)
+        public int SaveCsvOrders(string inputFileName)
         {
 
             SqlCommand cmd;
+            int rowsAffected = 0;
 
 
             //insert each item to database
@@ -159,7 +159,7 @@ namespace VideogameShopLibrary
                 {
                     sqlConnection.Open();
                     cmd = new SqlCommand(sql, sqlConnection);
-                    cmd.ExecuteNonQuery();
+                    rowsAffected += cmd.ExecuteNonQuery();
                 }
 
                 //Removes 1 from inventory where Game Title matches 
@@ -169,9 +169,12 @@ namespace VideogameShopLibrary
                 {
                     sqlConnection.Open();
                     cmd = new SqlCommand(sql2, sqlConnection);
-                    cmd.ExecuteNonQuery();
+                    rowsAffected += cmd.ExecuteNonQuery();
                 }
+
             }
+            return rowsAffected;
+
         }
 
         //method to create a new product
