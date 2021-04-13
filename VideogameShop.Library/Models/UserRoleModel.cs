@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace VideogameShop.Web.Areas.Employee.ViewModels
+namespace VideogameShop.Library.Models
 {
-    public class UserRoleViewModel
+    public class UserRoleModel
     {
-        public string UserId { get; set; }
+        public int UserId { get; set; }
         public string UserName { get; set; }
+        public string Role { get; set; }
         public bool IsSelected { get; set; }
     }
 }

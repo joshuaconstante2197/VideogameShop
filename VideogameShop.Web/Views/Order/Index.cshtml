@@ -1,4 +1,5 @@
 ﻿@using VideogameShopLibrary.CVS_Models
+@using Microsoft.AspNetCore.Http
 @section Styles {
     <link href="@Url.Content("~/css/orders.css")" rel="stylesheet" type="text/css" />
 }
@@ -70,8 +71,25 @@
         }
     </tbody>
 </table>
+@if (Context.Session.GetString("Role") == "admin")
+{
+    @using (Html.BeginForm("Upload", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="input-group w-50 mb-2">
 
-<a type="button" class="btn btn-info mr-3" href="@Url.Action("Upload","Order")">Update Sales from File</a>
+            <div class="custom-file">
+                <label for="file" class="custom-file-label" id="fileLabel">Upload File:</label>
+                <input type="file" name="file" id="fileInput" onchange="displayName()" class="custom-file-input" />
+            </div>
+
+            <div class="input-group-append">
+                <input type="submit" value="Upload" class="input-group-text" />
+            </div>
+
+        </div>
+
+    }
+}
 <a type="button" class="btn btn-success" href="@Url.Action("Create","Order")">Add a new order</a>
 
 <hr />

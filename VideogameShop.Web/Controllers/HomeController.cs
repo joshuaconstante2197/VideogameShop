@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using VideogameShop.Library.Services.Authentication;
 using VideogameShop.Web.Models;
 
 namespace VideogameShop.Web.Controllers
@@ -24,6 +26,16 @@ namespace VideogameShop.Web.Controllers
 
         public IActionResult Index()
         {
+            var users = new UserManager();
+            if(HttpContext.Session.GetString("UserName") != null)
+            {
+                ViewBag.UserName = HttpContext.Session.GetString("UserName");
+                ViewBag.Role = HttpContext.Session.GetString("Role");
+            }
+            if (users.CheckIfDbHasUsers())
+            {
+                ViewBag.UsersInDb = 1;
+            }
             return View();
         }
 

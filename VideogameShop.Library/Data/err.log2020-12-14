@@ -1,0 +1,38 @@
+12/14/2020 12:54:12 PM ==> Invalid column name 'Role'.
+12/14/2020 12:54:29 PM ==> Invalid column name 'Role'.
+12/14/2020 12:54:40 PM ==> Invalid column name 'Role'.
+12/14/2020 1:06:00 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 1:06:35 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 1:56:54 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 1:57:59 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 2:01:11 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 2:04:36 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 2:04:47 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 2:05:06 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 2:07:23 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 2:07:45 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 2:10:13 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 2:13:46 PM ==> The UPDATE statement conflicted with the REFERENCE constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.AppUser", column 'Role'.
+The statement has been terminated.
+12/14/2020 2:19:39 PM ==> User property not found 
+12/14/2020 2:23:31 PM ==> The UPDATE statement conflicted with the FOREIGN KEY constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.Role", column 'RoleName'.
+The statement has been terminated.
+12/14/2020 2:23:31 PM ==> The UPDATE statement conflicted with the FOREIGN KEY constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.Role", column 'RoleName'.
+The statement has been terminated.
+12/14/2020 2:25:53 PM ==> The UPDATE statement conflicted with the FOREIGN KEY constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.Role", column 'RoleName'.
+The statement has been terminated.
+12/14/2020 2:25:53 PM ==> The UPDATE statement conflicted with the FOREIGN KEY constraint "FK__AppUser__Role__3A81B327". The conflict occurred in database "VideoGame_Shop", table "dbo.Role", column 'RoleName'.
+The statement has been terminated.
+12/14/2020 2:26:02 PM ==> User property not found System.String Role
+12/14/2020 2:53:07 PM ==> User property not found System.String Role

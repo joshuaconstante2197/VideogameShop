@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VideogameShop.Library.Models;
+using VideogameShop.Library.Services.Authentication;
+using VideogameShop.Library.Services.Authorization;
 using VideogameShop.Web.Areas.Employee.ViewModels;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
@@ -13,15 +15,7 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
     
     public class AdministrationController : Controller
     {
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<IdentityUser> userManager;
-
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
-        {
-            this.roleManager = roleManager;
-            this.userManager = userManager;
-        }
-
+        
         [HttpGet]
         public IActionResult CreateRole()
         {
@@ -29,133 +23,130 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRole(CreateRole model)
+        public IActionResult CreateRole(Role role)
         {
             if (ModelState.IsValid)
             {
-                IdentityRole identityRole = new IdentityRole
+                var newRole = new ManageRoles();
+                if(!newRole.CheckIfRoleExist(role))
                 {
-                    Name = model.RoleName
-                };
-
-                IdentityResult result = await roleManager.CreateAsync(identityRole);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("ListRoles", "Administration");
+                    if (newRole.AddRole(role))
+                    {
+                        return RedirectToAction("ListRoles", "Administration");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("All", "Add role attempt unsuscessfull, please try again or refer to the error log");
+                        return View();
+                    }
                 }
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError("", error.Description);
+                    ModelState.AddModelError("All","Role already exists, please enter a new role.");
+                    return View();
                 }
             }
-            return View(model);
+            return View();
         }
+
         [HttpGet]
         public IActionResult ListRoles()
         {
-            var roles = roleManager.Roles;
+            var roles = new ManageRoles().GetRoles();
             return View(roles);
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditRole(string id)
+        public IActionResult EditRole(int id)
         {
-            var role = await roleManager.FindByIdAsync(id);
+            var finder = new ManageRoles();
+            var roleToEdit = finder.GetRoleById(id);
+            
+            if (roleToEdit == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
+                return View("Error");
+            }
+            ViewBag.UsersInRole = finder.GetUsersInRole(id);
+            return View(roleToEdit);
+        }
+        [HttpPost]
+        public IActionResult EditRole(Role role)
+        {
+            var editRole = new ManageRoles();
+            if(editRole.EditRoleById(role))
+            {
+                return RedirectToAction("ListRoles", "Administration");
+            }
+            else
+            {
+                ModelState.AddModelError("All", "Edit role unsusccesful");
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult EditUserInRole(int id)
+        {
+
+            var finder = new ManageRoles();
+            var role = finder.GetRoleById(id);
             if (role == null)
             {
                 ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
                 return View("Error");
             }
-            var model = new EditRoleViewModel
-            {
-                Id = role.Id,
-                RoleName = role.Name,
-                Users = new List<string>()
-            };
-            foreach (var user in userManager.Users)
-            {
-                if (await userManager.IsInRoleAsync(user, role.Name))
-                {
-                    model.Users.Add(user.UserName);
-                }
-            }
-            return View(model);
-        }
+            ViewBag.Role = role;
 
-        [HttpGet]
-        public async Task<IActionResult> EditUserInRole(string roleId)
-        {
-            ViewBag.roleId = roleId;
+            var users = new UserManager().GetUsersByRole(role);
 
-            var role = await roleManager.FindByIdAsync(roleId);
-            if (role == null)
-            {
-                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-                return View("Error");
-            }
-
-            var model = new List<UserRoleViewModel>();
-
-            foreach (var user in userManager.Users)
-            {
-                var userRoleViewModel = new UserRoleViewModel
-                {
-                    UserId = user.Id,
-                    UserName = user.UserName
-                };
-                if (await userManager.IsInRoleAsync(user, role.Name))
-                {
-                    userRoleViewModel.IsSelected = true;
-                }
-                else
-                {
-                    userRoleViewModel.IsSelected = false;
-                }
-
-                model.Add(userRoleViewModel);
-            }
-            return View(model);
+            return View(users);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditUserInRole(List<UserRoleViewModel> model, string roleId)
+        public IActionResult EditUserInRole(List<UserRoleModel> model, int id)
         {
-            var role = await roleManager.FindByIdAsync(roleId);
-            if (role == null)
+            var role = new ManageRoles().GetRoleById(id);
+            var result = new ManageRoles();
+            
+            if (role.RoleName == null)
             {
-                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
                 return View("Error");
             }
 
             for (int i = 0; i < model.Count; i++)
             {
-                var user = await userManager.FindByIdAsync(model[i].UserId);
+                var user = new UserManager().GetUserById(model[i].UserId);
 
-                IdentityResult result = null;
+                if (!string.IsNullOrEmpty(user.Role))
+                {
+                    if (model[i].IsSelected && (user.Role != role.RoleName))
+                    {
+                        result.RemoveUserFromRole(user);
+                        result.AddUserToRole(user, role);
+                        continue;
 
-                if(model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
-                {
-                   result = await userManager.AddToRoleAsync(user, role.Name);
+                    }
+                    else if (!model[i].IsSelected && (user.Role == role.RoleName))
+                    {
+                        result.RemoveUserFromRole(user);
+                        continue;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
-                else if(!model[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))
-                {
-                    result = await userManager.RemoveFromRoleAsync(user, role.Name);
-                }
+
                 else
                 {
+                    result.AddUserToRole(user, role);
                     continue;
                 }
 
-                if(result.Succeeded)
-                {
-                    if (i < (model.Count - 1))
-                        continue;
-                    else
-                        return RedirectToAction("EditRole", new { id = roleId });
-                }
             }
-            return RedirectToAction("EditRole", new { id = roleId });
+            return RedirectToAction("EditRole", new { id = id });
         }
 
     }

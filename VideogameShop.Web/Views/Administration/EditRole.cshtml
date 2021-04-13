@@ -1,8 +1,10 @@
-﻿@model VideogameShop.Web.Areas.Employee.ViewModels.EditRoleViewModel
+﻿@using VideogameShop.Library.Models
+@model VideogameShop.Library.Models.Role
 
 @{
     ViewData["Title"] = "EditRole";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<UserRoleModel> usersInRole = ViewBag.UsersInRole;
 }
 
 <h1>Edit Role</h1>
@@ -12,16 +14,24 @@
     <div class="col-md-4">
         <form asp-action="EditRole">
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" disabled class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RoleName" class="control-label"></label>
-                <input asp-for="RoleName" class="form-control" />
-                <span asp-validation-for="RoleName" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="RoleId" />
+            @if (Model.RoleName == "admin")
+            {
+                <div class="form-group">
+                    <label asp-for="RoleName" class="control-label"></label>
+                    <input asp-for="RoleName" class="form-control" readonly />
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="RoleName" class="control-label"></label>
+                    <input asp-for="RoleName" class="form-control" />
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-action="ListRoles" class="btn btn-primary">Cancel</a>
@@ -29,16 +39,16 @@
         </form>
     </div>
 </div>
-<div class="card">
+<div class="card bg-light">
     <div class="card-header">
         <h3>Users in this Role</h3>
     </div>
     <div class="card-body">
-        @if (Model.Users != null && Model.Users.Any())
+        @if (usersInRole != null && usersInRole.Any())
         {
-            foreach (var user in Model.Users)
+            foreach (var user in usersInRole)
             {
-                <h5 class="card-tile">@user</h5>
+                <h5 class="card-tile">@user.UserName</h5>
             }
         }
         else
@@ -48,7 +58,7 @@
 
     </div>
     <div class="card-footer">
-        <a asp-action="EditUserInRole" asp-controller="Administration" asp-route-roleId="@Model.Id" class="btn btn-primary">Add or Remove Users from this Role</a>
+        <a class="btn btn-primary" asp-action="EditUserInRole" asp-controller="Administration" asp-route-id="@Model.RoleId" >Add or Remove Users from this Role</a>
     </div>
 </div>
 

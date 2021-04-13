@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VideogameShop.Library.Models;
-using VideogameShop.Web.Areas.Employee.ViewModels;
+using VideogameShop.Library.Services.Authentication;
+using VideogameShop.Library.Services.Authorization;
 
 namespace VideogameShop.Web.Areas.Employee.Controllers
 {
@@ -13,22 +15,29 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
 
     public class AccountController : Controller
     {
-
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-                                RoleManager<IdentityRole> roleManager)
+        private bool Authenticate(LoginModel user)
         {
-            this.roleManager = roleManager;
-            this.userManager = userManager;
-            this.signInManager = signInManager;
+            var loginUser = new UserManager();
+            if (loginUser.Login(user))
+            {
+                HttpContext.Session.SetString("UserName", user.UserName);
+                HttpContext.Session.SetString("Role", user.Role);
+                return true;
+            }
+            else
+            {
+                ModelState.AddModelError("All", "Invalid Email or Password");
+                return false;
+            }
         }
-
         [HttpGet]
         public IActionResult Register()
         {
-            ViewBag.Roles = roleManager.Roles;
+            var roles = new ManageRoles().GetRoles();
+            if(roles.Count > 0)
+            {
+                ViewBag.Roles = roles;
+            }
             return View();
         }
 
@@ -37,78 +46,71 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public async Task<IActionResult> Register(AppUser model)
+        public IActionResult Login(LoginModel user)
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.UserName };
-                var resultUser = await userManager.CreateAsync(user, model.Password);
-                IdentityResult resultRole; 
-                if (resultUser.Succeeded)
+                if(Authenticate(user))
                 {
-                    var role = await roleManager.FindByNameAsync(model.Role);
-
-                    if (role != null)
-                    {
-                        resultRole = await userManager.AddToRoleAsync(user, model.Role);
-
-                        if (resultRole.Succeeded)
-                        {
-                            await signInManager.SignInAsync(user, isPersistent: false);
-                            return RedirectToAction("Index", "Home");
-                        }
-
-                        foreach (var error in resultRole.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
-
-                    }
+                    return RedirectToAction("Index", "Home");
                 }
-
-                foreach (var error in resultUser.Errors)
+                else
                 {
-                    ModelState.AddModelError("", error.Description);
+                    ModelState.AddModelError("All", "Invalid Email or Password");
+                    return View();
                 }
+            }
+            else return View();
+        }
 
-                
+        [HttpPost]
+        public IActionResult Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var newUser = new UserManager();
+                if(newUser.Register(model))
+                {
+                    var user = new LoginModel { UserName = model.UserName, Role = model.Role, Password = model.Password };
+                    Authenticate(user);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("All", "Invalid Email or Password");
+                    return View();
+                }
             }
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
-                if (result.Succeeded)
-                {
-                    if (!string.IsNullOrEmpty(returnUrl))
-                    {
-                        return RedirectToAction(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-
-                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
-            }
-
-            return View(model);
-
-        }
 
         [HttpPost]
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
-            await signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
-
-
+        [HttpPost]
+        public IActionResult PopulateDbWithUsers()
+        {
+            var populate = new UserManager();
+            var newAdmin = new RegisterModel { UserName = "admin", Password = "admin1", Role = "admin" };
+            var newUser = new RegisterModel { UserName = "employee", Password = "employee1", Role = "employee" };
+            try
+            {
+                populate.Register(newAdmin);
+                populate.Register(newUser);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Couldn't populate database" + ex;
+                return View("Error");
+                throw;
+            }
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 }

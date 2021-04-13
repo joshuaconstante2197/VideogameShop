@@ -1,0 +1,2 @@
+11/26/2020 8:54:29 AM ==> Violation of UNIQUE KEY constraint 'UQ__AppUser__C9F2845618CE904E'. Cannot insert duplicate key in object 'dbo.AppUser'. The duplicate key value is (admin).
+The statement has been terminated.

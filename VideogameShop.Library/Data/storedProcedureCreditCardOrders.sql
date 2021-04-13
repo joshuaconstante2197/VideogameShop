@@ -1,18 +1,14 @@
 use [master];
 IF DB_ID('VideoGame_Shop') IS NOT NULL
 BEGIN
-
 	ALTER DATABASE VideoGame_Shop SET OFFLINE WITH ROLLBACK IMMEDIATE;
 	ALTER DATABASE VideoGame_Shop SET ONLINE;
 	DROP DATABASE VideoGame_Shop;
-
 END
-
 IF DB_ID('VideoGame_Shop') IS NULL
 BEGIN
 	CREATE DATABASE VideoGame_Shop
 END
-
 USE Videogame_Shop
 GO
 CREATE TABLE Inventory (productId INTEGER CONSTRAINT PproductKey PRIMARY KEY IDENTITY(1,1), 
@@ -61,11 +57,10 @@ CREATE TABLE AppUser(UserId INTEGER CONSTRAINT PappUserKey PRIMARY KEY IDENTITY(
 CREATE TABLE Role(RoleId INTEGER CONSTRAINT ProleKey PRIMARY KEY IDENTITY(1,1),
 	RoleName varchar(50) UNIQUE
 )
-
 CREATE TABLE UserRole(UserId int,
-FOREIGN KEY(UserId) REFERENCES AppUser(UserId) ON DELETE CASCADE,
 RoleId int,
-FOREIGN KEY(RoleId) REFERENCES Role(RoleId) ON DELETE CASCADE
+FOREIGN KEY (UserId) REFERENCES AppUser(UserId) ON DELETE CASCADE,
+FOREIGN KEY (RoleId) REFERENCES Role(RoleId) ON DELETE CASCADE
 )
 ALTER TABLE Inventory
 ADD FOREIGN KEY(Category)
@@ -83,10 +78,6 @@ ALTER TABLE Inventory
 ADD FOREIGN KEY(ProductType)
 REFERENCES P_Types(ProductType)
 ON DELETE NO ACTION;
-ALTER TABLE AppUser
-ADD FOREIGN KEY(Role)
-REFERENCES Role(RoleName)
-ON DELETE SET NULL;
 
 GO
 
@@ -174,11 +165,3 @@ begin
 				@SecurityCode);
 		UPDATE Inventory SET AvailableUnits = AvailableUnits - @Quantity WHERE GameTitle = @Product;
 end
-
-
-
-
-Go
-INSERT INTO Role(RoleName) VALUES('admin'),('employee');
-
-

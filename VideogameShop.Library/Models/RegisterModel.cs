@@ -6,7 +6,7 @@ using System.Text;
 
 namespace VideogameShop.Library.Models
 {
-    public class AppUser
+    public class RegisterModel
     {
 
         [Required(ErrorMessage ="This field is required.")]

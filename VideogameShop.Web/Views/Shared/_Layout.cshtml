@@ -14,10 +14,10 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-light box-shadow mb-3" >
+        <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-light box-shadow mb-3 " >
             <div class="container">
                 <a class="navbar-brand " asp-area="" asp-controller="Home" asp-action="Index">Videogame Shop</a>
-                <button class="navbar-toggler btn-outline-success" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler btn-outline-dark" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -25,16 +25,16 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item dropdown text-black-50">
-                            <a class="nav-link dropdown-toggle btn btn-outline-success border-0" href="#" id="navbarDropDownMenuProduct" role="button" data-toggle="dropdown" aria-haspopup="true">
+                            <a class="nav-link dropdown-toggle btn btn-outline-dark border-0 text-light" href="#" id="navbarDropDownMenuProduct" role="button" data-toggle="dropdown" aria-haspopup="true">
                                 Inventory Management
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuProduct">
-                                <a class="dropdown-item" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Product" asp-action="Create">Add new product</a>
+                                <a class="dropdown-item" asp-controller="Product" asp-action="Index">Product</a>
+                                <a class="dropdown-item" asp-controller="Product" asp-action="Create">Add new product</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown ml-1">
-                            <a class="nav-link dropdown-toggle btn btn-outline-success border-0" href="#" id="navbarDropDownMenuOrder" role="button" data-toggle="dropdown" aria-haspopup="true">
+                            <a class="nav-link dropdown-toggle btn btn-outline-dark border-0 text-light" href="#" id="navbarDropDownMenuOrder" role="button" data-toggle="dropdown" aria-haspopup="true">
                                 Order Management
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuOrder">
@@ -54,7 +54,7 @@
     
     
 
-    <footer class=" footer ">
+    <footer class="footer text-light">
         <div class="container">
             &copy; 2020 - Videogame Shop - JConstante 
         </div>

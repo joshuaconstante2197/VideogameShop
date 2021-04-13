@@ -5,8 +5,10 @@ using System.Text;
 
 namespace VideogameShop.Library.Models
 {
-    public class CreateRole
+    public class Role
     {
+        public int RoleId { get; set; }
+
         [Required]
         public string RoleName { get; set; }
     }
