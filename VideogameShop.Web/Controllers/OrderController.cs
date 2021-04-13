@@ -85,7 +85,12 @@ namespace VideogameShop.Web.Areas.Employee.Controllers
                 }
             else
             {
+<<<<<<< HEAD
                 ViewBag.Message = "Unable to upload file";
+=======
+                var uploadOrder = new InventoryManagementService();
+                uploadOrder.SaveCsvOrders(Config.PathToSalesFileWeb);
+>>>>>>> 09738bb3e345b6158cc9ac22db4545b9de6be6e0
                 return RedirectToAction(nameof(Index));
             }
 
